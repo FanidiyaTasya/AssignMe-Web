@@ -331,6 +331,25 @@ section {
     margin: 0;
     margin-top: 12px;
 }
+.masuk{
+    display:grid;
+    grid-template-columns: 66% auto;
+    padding: 4em 1em;
+    display:grid;
+    list-style-type:none;
+    margin:10px;padding:10px;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    margin-right: 15px;  
+    margin-top: -25px;
+    border-radius: 15px;
+}
+
+#masuk li a{
+ position: relative;
+ padding: 40px;
+ border-radius: 10px;   
+}
 /* --------- 2.2 Logo ---------- */
 
 #logo {

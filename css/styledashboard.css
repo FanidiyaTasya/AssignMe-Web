@@ -102,6 +102,123 @@ h5,
 h6 {
   font-size: inherit;
   font-weight: inherit;
+
+
+
+}
+.popup {
+    display: none;
+    position: fixed;  
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 100px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.popup ul {                          
+     display: flex;
+     flex-direction: column;
+   
+
+  }
+  .popup h1{
+  font-size: large;
+  color: black;
+  font-weight: bold;
+}
+.popup img{
+  position: relative;
+ bottom: 80px;
+  left: 230px;
+
+  width: 20px;
+  height: 20px;
+}
+.popup input{
+  border: 0;
+  margin: 15px;
+  background: none;
+  display: block;
+  align-self: center;
+  text-align: left;
+  border: 1px solid #0000005e;
+  padding: 14px 40px;
+  outline: none;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+li {
+    margin: 10px 0;
+}
+
+.chart-container#blur.active{
+filter: blur(20px);
+pointer-events: none;
+}
+
+
+.chart-container {
+ padding-top: 50px; 
+  width: 400px; /* Lebar chart container */
+  height: 600px; /* Tinggi chart container */
+  margin: 20px; /* Margin untuk penempatan chart container */
+  position: relative; /* Position harus diatur agar elemen chart bisa ditempatkan di dalamnya */
+  left: 400px;
+  text-align: center; /* Menengahkan gambar secara horizontal */
+}
+
+.chart-container img {
+  max-width: 100%; /* Agar gambar tidak melebihi lebar container */
+  max-height: 100%; /* Agar gambar tidak melebihi tinggi container */
+  vertical-align: middle; /* Menengahkan gambar secara vertikal */
+}
+
+.button1 {
+  padding-top: 20px;
+  background-color: #314b94; /* Green */
+  border: none;
+  color: white;
+  padding: 13px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  border-radius: 5px;
+}
+.button2 {
+  padding-top: 20px;
+  background-color: none;
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 13px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  border-radius: 5px;
+}
+
+
+.button1 {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button2:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 /*
@@ -225,17 +342,7 @@ select {
 2. Remove default button styles.
 */
 
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
+
 
 /*
 Use the modern Firefox focus style for all focusable elements.
@@ -275,12 +382,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 2. Correct the outline style in Safari.
 */
 
-[type='search'] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
-}
+
 
 /*
 Remove the inner padding in Chrome and Safari on macOS.
@@ -406,19 +508,7 @@ Make sure disabled buttons don't get the pointer cursor.
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
 
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block;
-  /* 1 */
-  vertical-align: middle;
-  /* 2 */
-}
+
 
 /*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)

@@ -1,0 +1,143 @@
+*{ 
+    /* pakai font ini di semua page */
+    font-family: 'Poppins', sans-serif; 
+}
+
+.common {
+    height: 100vh;
+}
+
+.common-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.common-container {
+    display: flex;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.common-left {
+    flex: 1;
+    padding: 20px;
+}
+
+.common-form {
+    padding: 20px;
+}
+
+.header h1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 48px;
+    color: black;
+}
+
+.header p {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #737373;
+    margin-bottom: 22px;
+}
+
+.common-form label {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+    margin-top: 20px;
+}
+
+.common-form input {
+    background: white;
+    border: 1px solid #BCBCBC;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.common-form #confirm-password {
+    margin-bottom: 10px;
+}
+
+.common-form a {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #737373;
+    margin: 20px 0;
+    display: block;
+    text-align: right;
+}
+
+.common-form .common-button {
+    width: 100%;
+    height: 42px;
+    background: #363F71;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    margin-top: 10px; 
+}
+
+/* Gaya saat tombol dihover */
+.common-button:hover {
+    background-color: #B4B6B9;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.common-form .common-button-google {
+    width: 100%;
+    height: 42px;
+    background-color: white;
+    border: 1px solid #BCBCBC;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin: 10px 0 20px 0;
+}
+
+.common-button-google:hover {
+    background-color: #B4B6B9;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.common-form span {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: #737373;
+}
+
+.common-form span a {
+    font-weight: 600;
+}
+
+.common-right {
+    flex: 1;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    display: flex; /* pakai flexbox */
+    justify-content: center; /* Menengahkan secara horizontal */
+    align-items: center; /* Menengahkan secara vertikal */
+  }
+  
+  .common-right img {
+    width: 100%; /* u/ memastikan gambar ga melebihi lebar elemen .login-right */
+    height: auto; /* Menjaga aspek rasio gambar */
+    object-fit: cover; /* Properti object-fit untuk menghindari pemotongan gambar */
+  }
