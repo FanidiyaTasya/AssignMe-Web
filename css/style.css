@@ -29,7 +29,10 @@
 /*------------------------------------------------------------------------------------------*/
 /* 1. Defaults & Reset of specific styles across browsers */
 /*------------------------------------------------------------------------------------------*/
-
+*{ 
+    /* pakai font ini di semua page */
+    font-family: 'Poppins', sans-serif; 
+}
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -330,6 +333,25 @@ section {
     position: absolute;
     margin: 0;
     margin-top: 12px;
+}
+.masuk{
+    display:grid;
+    grid-template-columns: 66% auto;
+    padding: 4em 1em;
+    display:grid;
+    list-style-type:none;
+    margin:10px;padding:10px;
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    margin-right: 15px;  
+    margin-top: -25px;
+    border-radius: 15px;
+}
+
+#masuk li a{
+ position: relative;
+ padding: 40px;
+ border-radius: 10px;   
 }
 /* --------- 2.2 Logo ---------- */
 
@@ -769,7 +791,10 @@ h6 {
     padding-top: 0;
 }
 .section-heading h1 {
-color: #363F71;
+    color: #363F71;
+}
+.section-heading h2 {
+    color: #363F71;
 
 }
 .section-heading h3 {
