@@ -10,3 +10,4 @@ openButton.addEventListener('click', () => {
 closeButton.addEventListener('click', () => {
     popupMenu.style.display = 'none';
 });
+
