@@ -29,7 +29,10 @@
 /*------------------------------------------------------------------------------------------*/
 /* 1. Defaults & Reset of specific styles across browsers */
 /*------------------------------------------------------------------------------------------*/
-
+*{ 
+    /* pakai font ini di semua page */
+    font-family: 'Poppins', sans-serif; 
+}
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -788,7 +791,10 @@ h6 {
     padding-top: 0;
 }
 .section-heading h1 {
-color: #363F71;
+    color: #363F71;
+}
+.section-heading h2 {
+    color: #363F71;
 
 }
 .section-heading h3 {
