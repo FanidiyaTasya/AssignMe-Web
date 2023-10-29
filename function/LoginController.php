@@ -32,7 +32,7 @@ class LoginController extends Users {
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['Password'] = $row['Password'];
 
-            header('Location: pages/dashboard.html');
+            header('Location: dashboard.html');
             exit();
 
         } else {

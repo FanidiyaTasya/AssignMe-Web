@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-require_once __DIR__ . ('\function\LoginController.php');
+require_once __DIR__ . ('\..\function\LoginController.php');
 
 if (isset($_POST['submit'])) {
     $login = new LoginController;
@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
     <!-- STYLE -->
-    <link rel="stylesheet" href="css/login-regist-style.css">
+    <link rel="stylesheet" href="../assets/css/login-regist-style.css">
     
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +59,7 @@ if (isset($_POST['submit'])) {
                         
                         <button class="common-button" type="submit" name="submit">Sign In</button>
                         <button class="common-button-google" >
-                            <img src="assets/img/google.png" width="20" height="20" alt="">  Sign In With Google</button>
+                            <img src="../assets/img/google.png" width="20" height="20" alt="">  Sign In With Google</button>
                         
                         <div class="text-center">
                             <span class="d-inline">Don't have an account? <a href="Register.php" class="d-inline text-decoration-none">Sign Up</a></span>
@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
 
                 </div>
                 <div class="common-right">
-                    <img src="assets/img/login.png" alt="">
+                    <img src="../assets/img/login.png" alt="">
                 </div>
             </div>
         </div>
