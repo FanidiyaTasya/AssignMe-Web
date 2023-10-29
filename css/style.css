@@ -29,10 +29,7 @@
 /*------------------------------------------------------------------------------------------*/
 /* 1. Defaults & Reset of specific styles across browsers */
 /*------------------------------------------------------------------------------------------*/
-*{ 
-    /* pakai font ini di semua page */
-    font-family: 'Poppins', sans-serif; 
-}
+
 *, *:before, *:after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -791,10 +788,7 @@ h6 {
     padding-top: 0;
 }
 .section-heading h1 {
-    color: #363F71;
-}
-.section-heading h2 {
-    color: #363F71;
+color: #363F71;
 
 }
 .section-heading h3 {
@@ -2391,6 +2385,51 @@ blockquote {
 
 }
 
+/* Style untuk navbar */
 
 
+.dalemkelas{
+    background-color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.dalemkelas ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
+    text-align: center;
+}
+
+.dalemkelas li {
+    margin-right: 20px;
+    display: inline;
+    margin: 0 20px; /* Jarak di sekitar item navbar */
+}
+
+.dalemkelas a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.dalemkelas a:hover {
+    color: #1b1b77; /* Warna saat hover */
+}
+
+.add {
+    position: relative;
+    left: 30px;
+    margin-top: 50px;
+}
+.dalemkelas button{
+    background-color:white;
+    position: relative;
+    right: 550px;
+    border-radius: 10px;
+}
+.container1{
+    position: relative;
+    margin-top: -130px;
+}
