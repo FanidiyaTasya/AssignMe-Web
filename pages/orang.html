@@ -6,78 +6,61 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-    <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-          <div class="col-12">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-              <div class="container-fluid">
-                <h3 class="card-title"> nama kelas secara otomatis</h3>
-                <div class="dalemkelas">
-                  <ul class="mx-auto"> <!-- Tambahkan kelas mx-auto ke <ul> -->
-                      <li><a href="tugas.html">Tugas</a></li>
-                      <li><a href="orang.html">Orang</a></li>
-                      <li><a href="nilai.html">Nilai</a></li>
-                  </ul>
-                </div>
-                <div class="ml-auto"> <!-- Tombol Keluar akan ada di sini -->
-                  <button class="btn btn-danger">Keluar</button>
-                </div>
-              </div>
-            </nav>
-            <!-- End Navbar -->
-          </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <h3 class="navbar-brand">Nama Kelas Secara Otomatis</h3>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="tugas.html">Tugas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="orang.html">Orang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-dark" href="nilai.html">Nilai</a>
+          </li>
+        </ul>
+        <div class="ml-auto">
+          <a href="dashboard.html" class="btn btn-danger">Keluar</a>
         </div>
       </div>
+    </div>
+  </nav>
 
-      <div class="container">
-        <h1>Daftar pengajar</h1>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">TaskId</th>
-              <th scope="col">username</th>
-              <th scope="col">email</th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Task 1</td>
-              <td>Description of Task 1</td>
-             
-            </tr>
-           
-          </tbody>
-        </table>
+  <div class="container">
+    <h2 class="mt-4">Daftar untuk Guru</h2>
+    
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-group">
+          <li class="list-group-item">sandika galih</li>
+          <!-- Anda dapat menambahkan lebih banyak grup di sini -->
+        </ul>
       </div>
-
-      <div class="container">
-        <h1>Daftar siswa</h1>
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">TaskId</th>
-              <th scope="col">username</th>
-              <th scope="col">email</th>
-             
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Task 1</td>
-              <td>Description of Task 1</td>
-             
-            </tr>
-           
-          </tbody>
-        </table>
+   
+    </div>
+  </div>
+  
+  <div class="container">
+    <h2 class="mt-4">Daftar untuk siswa</h2>
+    
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-group">
+          <li class="list-group-item">ihsan</li>
+          <li class="list-group-item">arya</li>
+          <li class="list-group-item">udin</li>
+          <!-- Anda dapat menambahkan lebih banyak grup di sini -->
+        </ul>
       </div>
-
-
-
+   
+    </div>
+  </div>
+  
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
