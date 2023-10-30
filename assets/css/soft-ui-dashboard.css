@@ -21695,7 +21695,8 @@ hr.horizontal.gray-light {
 }
 
 .navbar-main {
-  transition: box-shadow 0.25s ease-in, background-color 0.25s ease-in;
+  transition: box-shadow 0.25s ease-in, background-color  0.25s ease-in;
+  background-color: #363F71;
 }
 
 .navbar-main.fixed-top {
