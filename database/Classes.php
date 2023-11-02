@@ -5,9 +5,14 @@ class Classes extends Connect {
     protected $sql;
     protected $result;
 
-    public function InsertClass($className, $desc, $classCode, $userId) {
-        $this->sql = "INSERT INTO classes (ClassName, Description, ClassCode, UserId) VALUES ('$className', '$desc', '$classCode', '$userId')";
-        echo $this->sql;
+    public function InsertClass($className, $subject, $desc, $classCode, $userId) {
+        $this->sql = "INSERT INTO classes (ClassName, SubjectName, Description, ClassCode, UserId) VALUES ('$className', '$subject', '$desc', '$classCode', '$userId')";
+        return $this->getResult();
+    }
+
+    public function InsertUserClasses($userId, $classId, $role) {
+        $this->sql = "INSERT INTO user_classes (UserId, ClassId, Role) VALUES ('$userId', '$classId', '$role')";
+        // var_dump($this->sql);
         return $this->getResult();
     }
 
@@ -16,8 +21,8 @@ class Classes extends Connect {
         return $this->getResult();
     }
 
-    public function EditClass($classId, $className, $desc, $classCode, $userId) {
-        $this->sql = "UPDATE classes SET ClassName='$className', Description='$desc', ClassCode='$classCode', UserId='$userId' WHERE ClassId=$classId";
+    public function EditClass($classId, $className, $subject, $desc, $classCode, $userId) {
+        $this->sql = "UPDATE classes SET ClassName='$className', SubjectName='$subject', Description='$desc', ClassCode='$classCode', UserId='$userId' WHERE ClassId='$classId'";
         return $this->getResult();
     }
 

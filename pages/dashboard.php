@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -157,6 +155,7 @@
    
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
@@ -200,6 +199,8 @@
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
+
+              <!-- DROPDOWN -->
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
@@ -283,32 +284,46 @@
     </div>
     </div>
   
-    <!-- from Buat Kelas -->
+    <!-- FROMM BUAT KELAS -->
+    <?php
+    require_once __DIR__ . ('\..\function\ClassController.php');
+
+    $classController = new ClassController();
+
+    if (isset($_POST['action']) && $_POST['action'] == 'create') {
+        $className = $_POST['classname'];
+        $subject = $_POST['subject'];
+        $desc = $_POST['description']; 
+        $userId = $_SESSION['UserId'];
+
+        $message = $classController->createClass($className, $subject, $desc, $userId);
+    }
+    ?>
     <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="buatKelasModalLabel">Buat Kelas Baru</h5>
+            <h5 class="modal-title" id="buatKelasModalLabel">Create Class</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
           <div class="modal-body">
-            <form>
+            <form method="POST">
               <div class="form-group">
-                <label for="namaKelas">Class Name</label>
-                <input type="text" class="form-control" id="namaKelas" placeholder="Enter Class Name" required>
+                <label for="classname">Class Name</label>
+                <input type="text" class="form-control" id="classname" placeholder="Enter Class Name" required>
               </div>
 
               <div class="form-group">
                 <label for="subject">Subject Name</label>
-                <input type="text" class="form-control" id="subject" placeholder="Enter Subject Name">
+                <input type="text" class="form-control" id="subject" placeholder="Enter Subject Name" required>
               </div>
 
               <div class="form-group">
-                <label for="deskripsi">Description (Optional)</label>
-                <textarea class="form-control" id="deskripsiKelas" placeholder="Enter Description"></textarea>
+                <label for="description">Description (Optional)</label>
+                <textarea class="form-control" id="description" placeholder="Enter Description"></textarea>
               </div>
 
               <div class="modal-footer">
