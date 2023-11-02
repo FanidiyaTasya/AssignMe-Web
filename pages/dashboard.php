@@ -338,9 +338,11 @@
 
 
      <!-- Tampilan kelas di sini -->
+     <!-- BUAT BIAR INI BERULANG KALAU SUDAH BUAT KELAS -->
    <div class="col-md-9">
-
     <div class="row">
+
+         <!-- KELAS -->
       <div class="col-md-3">
         <div class="card mb-4">
           <div class="card-body">
@@ -363,11 +365,39 @@
 
             <h4><a href="tambahtugas.html" class="card-title">Kelas 1</a></h4>
             <p><a href="tambahtugas.html" class="card-text">Matematika</a></p>
-
           </div>
         </div>
       </div>
+
+      <div class="col-md-3">
+        <div class="card mb-4">
+          <div class="card-body">
+
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li>
+                  <a href="#" data-toggle="modal" data-target="#editKelasModal"  class="dropdown-item text-left text-dark">Edit</a>
+                </li>
+                <li>
+                  <a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark"  >Hapus</a>
+                </li>
+                <li>
+                  <a href="#" data-toggle="modal" data-target="" class="dropdown-item text-left text-dark">Arsipkan</a>
+                </li>
+              </ul>
+            </div>
+
+            <h4><a href="tambahtugas.html" class="card-title">Kelas 1</a></h4>
+            <p><a href="tambahtugas.html" class="card-text">Matematika</a></p>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    
 
 <!-- Hapus Kelas -->
 <div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel" aria-hidden="true">
