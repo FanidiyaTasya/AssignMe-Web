@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>AssignMe</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-  <title>AssignMe</title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -27,7 +25,7 @@
     
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="dashboard.html" target="_blank">
+      <a class="navbar-brand m-0" href="Dashboard.php" target="_blank">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">AssignMe</span>
       </a>
@@ -41,7 +39,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/dashboard.html">
+          <a class="nav-link  active" href="../pages/Dashboard.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -159,14 +157,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
+
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Kelas</li>
-            
           </ol>
           <h6 class="font-weight-bolder mb-0  text-white">Kelas</h6>
         </nav>
+
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
@@ -174,6 +173,7 @@
               <input type="text" class="form-control" placeholder="Type here...">
             </div>
           </div>
+
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
@@ -181,6 +181,7 @@
                 <span class="d-sm-inline d-none">Sign In</span>
               </a>
             </li>
+
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -190,17 +191,18 @@
                 </div>
               </a>
             </li>
+
             <li class="nav-item px-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
+
+            <!-- DROPDOWN NOTIF -->
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
-
-              <!-- DROPDOWN -->
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                 <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
@@ -212,14 +214,12 @@
                         <h6 class="text-sm font-weight-normal mb-1">
                           <span class="font-weight-bold">New message</span> from Laur
                         </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
+                        <p class="text-xs text-secondary mb-0"><i class="fa fa-clock me-1"></i>13 minutes ago</p>
                       </div>
                     </div>
                   </a>
                 </li>
+
                 <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
@@ -230,10 +230,7 @@
                         <h6 class="text-sm font-weight-normal mb-1">
                           <span class="font-weight-bold">New album</span> by Travis Scott
                         </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          1 day
-                        </p>
+                        <p class="text-xs text-secondary mb-0"><i class="fa fa-clock me-1"></i>1 day</p>
                       </div>
                     </div>
                   </a>
@@ -264,6 +261,8 @@
                   </a>
                 </li>
               </ul>
+              <!-- END DROPDOWN -->
+
             </li>
           </ul>
         </div>
@@ -336,69 +335,48 @@
       </div>
     </div>
 
-
      <!-- Tampilan kelas di sini -->
      <!-- BUAT BIAR INI BERULANG KALAU SUDAH BUAT KELAS -->
    <div class="col-md-9">
-    <div class="row">
 
-         <!-- KELAS -->
-      <div class="col-md-3">
+   <div class="row">
+    <!-- KELAS -->
+    <?php
+    require_once __DIR__ . ('\..\function\ClassController.php');
+
+    $classController = new ClassController();
+
+    $message = $classController->getMessage();
+    if (!empty($message)) {
+        echo $message;
+    }
+    $classes = $classController->getClasses();
+
+    while ($row = $classes->fetchArray()) {
+    ?>
+    <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card mb-4">
-          <div class="card-body">
-
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li>
-                  <a href="#" data-toggle="modal" data-target="#editKelasModal"  class="dropdown-item text-left text-dark">Edit</a>
-                </li>
-                <li>
-                  <a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark"  >Hapus</a>
-                </li>
-                <li>
-                  <a href="#" data-toggle="modal" data-target="" class="dropdown-item text-left text-dark">Arsipkan</a>
-                </li>
-              </ul>
+            <div class="card-body">
+                <div class="dropdown float-end">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="dropdown-item text-left text-dark">Edit</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark">Delete</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
+                    </ul>
+                </div>
+                <h4><a href="Class.php?classId=<?php echo $row['ClassId']; ?>" class="card-title"><?php echo $row['ClassName']; ?></a></h4>
+                <p><a href="tambahtugas.html" class="card-text"><?php echo $row['SubjectName']; ?></a></p>
             </div>
-
-            <h4><a href="tambahtugas.html" class="card-title">Kelas 1</a></h4>
-            <p><a href="tambahtugas.html" class="card-text">Matematika</a></p>
-          </div>
         </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="card mb-4">
-          <div class="card-body">
-
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li>
-                  <a href="#" data-toggle="modal" data-target="#editKelasModal"  class="dropdown-item text-left text-dark">Edit</a>
-                </li>
-                <li>
-                  <a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark"  >Hapus</a>
-                </li>
-                <li>
-                  <a href="#" data-toggle="modal" data-target="" class="dropdown-item text-left text-dark">Arsipkan</a>
-                </li>
-              </ul>
-            </div>
-
-            <h4><a href="tambahtugas.html" class="card-title">Kelas 1</a></h4>
-            <p><a href="tambahtugas.html" class="card-text">Matematika</a></p>
-          </div>
-        </div>
-      </div>
-
     </div>
+    <?php
+    }
+    ?>
+</div>
+
 
     
-
 <!-- Hapus Kelas -->
 <div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -527,6 +505,8 @@
       </div>
     </div>
   </div>
+
+
   <!--   Core JS Files   -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -540,7 +520,8 @@
   <script src="../assets/js/plugins/chartjs.min.js"></script>
   <script src="../assets/js/popup.js"></script>
   <script src="../assets/js/skrip.js"></script>
-  <script>
+
+  <!-- <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
@@ -719,10 +700,13 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-  </script>
+  </script> -->
+
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/soft-ui-dashboard.min.js"></script>
+
 </body>
 </html>
