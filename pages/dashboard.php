@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['Email'])) {
+    header('Location: Login.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +63,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Kelas</span>
+            <span class="nav-link-text ms-1">Classes</span>
           </a>
         </li>
 
@@ -161,9 +169,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Kelas</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Classes</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0  text-white">Kelas</h6>
+          <h6 class="font-weight-bolder mb-0  text-white">Classes</h6>
         </nav>
 
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -301,8 +309,9 @@
     <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
+          
           <div class="modal-header">
-            <h5 class="modal-title" id="buatKelasModalLabel">Create Class</h5>
+            <h5 class="modal-title">Create Class</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -312,21 +321,21 @@
             <form method="POST">
               <div class="form-group">
                 <label for="classname">Class Name</label>
-                <input type="text" class="form-control" id="classname" placeholder="Enter Class Name" required>
+                <input type="text" class="form-control" name="classname" id="classname" placeholder="Enter Class Name" required>
               </div>
 
               <div class="form-group">
                 <label for="subject">Subject Name</label>
-                <input type="text" class="form-control" id="subject" placeholder="Enter Subject Name" required>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Enter Subject Name" required>
               </div>
 
               <div class="form-group">
                 <label for="description">Description (Optional)</label>
-                <textarea class="form-control" id="description" placeholder="Enter Description"></textarea>
+                <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
               </div>
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" name="action" value="create">Save</button>
               </div>
             </form>
           </div>
@@ -336,11 +345,8 @@
     </div>
 
      <!-- Tampilan kelas di sini -->
-     <!-- BUAT BIAR INI BERULANG KALAU SUDAH BUAT KELAS -->
    <div class="col-md-9">
-
    <div class="row">
-    <!-- KELAS -->
     <?php
     require_once __DIR__ . ('\..\function\ClassController.php');
 
@@ -370,9 +376,7 @@
             </div>
         </div>
     </div>
-    <?php
-    }
-    ?>
+    <?php } ?>
 </div>
 
 

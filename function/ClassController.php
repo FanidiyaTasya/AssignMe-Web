@@ -16,8 +16,8 @@ class ClassController extends Classes {
                 $role = 'Guru';
                 $this->InsertUserClasses($userId, $classId, $role);
 
-                echo "Class created successfully.";
-                header('Location: Dashboard.php');
+                // echo "Class created successfully.";
+                // header('Location: Dashboard.php');
             } else {
                 echo "Error getting classId.";
             }
