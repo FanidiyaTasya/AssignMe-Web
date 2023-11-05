@@ -277,18 +277,14 @@ if (!isset($_SESSION['Email'])) {
       </div>
     </nav>
     <!-- End Navbar -->
+    
     <div class="container my-4">
       <div class="row">
           <!-- Sidebar -->
           <div class="col-md-2">
-                  <a href="#" class=" ">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">Create Class</button>
-                  </a>
+              <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">Create Class</button>
           </div>
       </div>
-  </div>
-  
-    </div>
     </div>
   
     <!-- FROMM BUAT KELAS -->

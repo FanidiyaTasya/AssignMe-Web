@@ -282,13 +282,13 @@
               <td>File.docx</td>
               <td>
                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editTaskModal">Edit</button>
-      
-                <a  class="btn btn-danger" data-toggle="modal" data-target="#hapusKelasModal">Hapus</a>
+                <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusKelasModal">Hapus</a>
               </td>
             </tr>
-           
           </tbody>
         </table>
+
+
       </div>
       
       <!-- edit tugas -->
