@@ -368,7 +368,7 @@ if (!isset($_SESSION['Email'])) {
                     </ul>
                 </div>
                 <h4><a href="Class.php?classId=<?php echo $row['ClassId']; ?>" class="card-title"><?php echo $row['ClassName']; ?></a></h4>
-                <p><a href="tambahtugas.html" class="card-text"><?php echo $row['SubjectName']; ?></a></p>
+                <p><a href="Class.php?classId=<?php echo $row['ClassId']; ?>" class="card-text"><?php echo $row['SubjectName']; ?></a></p>
             </div>
         </div>
     </div>

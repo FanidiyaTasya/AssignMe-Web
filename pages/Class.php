@@ -197,27 +197,27 @@
    
 
         <!-- TAB LAYOUT -->
-        <div class="tab">
-        <a href="javascript:void(0);" class="tablinks active" onclick="openTab(event, 'ClassWork')">ClassWork</a>
-        <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'People')">People</a>
-        <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Review')">Review</a>
-    </div>
+      <div class="tab ">
+          <a href="javascript:void(0);" class="tablinks active" onclick="openTab(event, 'ClassWork')">ClassWork</a>
+          <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'People')">People</a>
+          <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Review')">Review</a>
+      </div>
 
-    <div id="ClassWork" class="tabcontent">
-    <!-- Content for ClassWork tab -->
-    classwork
-    </div>
+      <div id="ClassWork" class="tabcontent">
+      <!-- Content for ClassWork tab -->
+      classwork
+      </div>
 
-    <div id="People" class="tabcontent">
-    <!-- Content for People tab -->
-    people
-    </div>
+      <div id="People" class="tabcontent">
+      <!-- Content for People tab -->
+      people
+      </div>
 
-    <div id="Review" class="tabcontent">
-    <!-- Content for Review tab -->
-    review
-    </div>
-    <!-- END TAB LAYOUT -->
+      <div id="Review" class="tabcontent">
+      <!-- Content for Review tab -->
+      review
+      </div>
+      <!-- END TAB LAYOUT -->
 
       <!-- Modal -->
       <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
