@@ -206,40 +206,201 @@
 
     <div id="ClassWork" class="tabcontent">
     <!-- Content for ClassWork tab -->
-    <!-- Modal -->
     <div class="row">
-  <div class="col-sm-6">
-    <div class="card card-sm">
-      <div class="card-header">
-        Featured
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+
+       <!--tugas  -->
+     <div class="col-sm-6">
+    <h5>Task</h5>
+  <!--buat tugas -->
+    <div class="container my-4">
+      <div class="row">
+          <div class="col-md-4">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#buattugasModal">Create task</button>
+          </div>
       </div>
     </div>
-  </div>
-  
-  <div class="col-sm-6">
-    <div class="card card-sm">
-      <div class="card-header">
-        Featured
+
+    <div class="modal fade" id="buattugasModal" tabindex="-1" role="dialog" aria-labelledby="buattugasModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <h5 class="modal-title">Create task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form method="POST">
+              <div class="form-group">
+                <label for="classname">Task Name</label>
+                <input type="text" class="form-control" name="classname" id="classname" placeholder="Enter Class Name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description (Optional)</label>
+                <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
+              </div>
+
+              <div class="form-group">
+              <label for="dueDate">Due Date and Time</label>
+              <input type="datetime-local" class="form-control" name="dueDate" id="dueDate" required>
+              </div>
+
+              <div class="form-group">
+              <label for="fileUpload">Unggah Berkas Tugas</label>
+              <input type="file" class="form-control" name="fileUpload" id="fileUpload" required>
+            </div>
+
+
+            
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="action" value="create">Save</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+
+    <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <div class="dropdown" style="position: absolute; top: 10px; right: 10px;">
+      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="fas fa-ellipsis-v"></span>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Menu 1</a>
+        <a class="dropdown-item" href="#">Menu 2</a>
+        <a class="dropdown-item" href="#">Menu 3</a>
       </div>
     </div>
   </div>
 </div>
 
 
+    <div class="mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
 </div>
+
+<div class="mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+
+     <!--materi-->
+    <div class="col-sm-6">
+    <h5>Materials</h5>
+  <!--buat materi -->
+    <div class="container my-4">
+      <div class="row">
+          <div class="col-md-6">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">Create task</button>
+          </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <h5 class="modal-title">Create task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form method="POST">
+              <div class="form-group">
+                <label for="classname">Task Name</label>
+                <input type="text" class="form-control" name="classname" id="classname" placeholder="Enter Class Name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description (Optional)</label>
+                <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
+              </div>
+             
+              <div class="form-group">
+              <label for="fileUpload">Unggah Berkas </label>
+              <input type="file" class="form-control" name="fileUpload" id="fileUpload" required>
+            </div>
+
+
+            
+
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" name="action" value="create">Save</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+
+
+    <div class="mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+  </div>
 
       
     </div>
+
+ 
+
 
     <div id="People" class="tabcontent">
     <!-- Content for People tab -->
@@ -277,7 +438,6 @@
     <div id="Review" class="tabcontent">
     <!-- Content for Review tab -->
     <div class="container mt-5">
-        <h1 class="text-center">Tabel Penilaian Tugas</h1>
         <table class="table">
             <thead>
                 <tr>
