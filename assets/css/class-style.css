@@ -15,7 +15,7 @@
 }
 
 .tab a.active {
-  background-color: #023368;
+  background-color: #000000;
   color: #fff;
 }
 
@@ -23,5 +23,6 @@
   display: none;
   padding: 20px;
   border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
+
