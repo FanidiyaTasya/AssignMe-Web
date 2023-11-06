@@ -20,7 +20,10 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/class-style.css">
-  <!-- JAVA SCRIPT -->
+  <!--   Core JS Files   -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="../assets/js/tab-layout.js"></script>
 </head>
 
@@ -93,7 +96,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Deadline</span>
+            <span class="nav-link-text ms-1">To Review</span>
           </a>
         </li>
 
