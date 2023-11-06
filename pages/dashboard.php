@@ -521,7 +521,7 @@ if (!isset($_SESSION['Email'])) {
   <script src="../assets/js/popup.js"></script>
   <script src="../assets/js/skrip.js"></script>
 
-  <!-- <script>
+  <!-- <sc        ript>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {

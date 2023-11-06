@@ -1,0 +1,30 @@
+/* Style the tab layout */
+.tab {
+  overflow: hidden;
+  background-color: #f2f2f2;
+}
+
+/* Style the tab links */
+.tab a {
+  float: left;
+  display: block;
+  color: #333;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+/* Set the active tab */
+.tab a.active {
+  background-color: #023368; /* Warna latar belakang biru saat diklik */
+  color: #fff; /* Warna teks putih saat diklik */
+}
+
+/* Style the content of each tab (You can add more styles) */
+.tabcontent {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}

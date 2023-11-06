@@ -18,6 +18,9 @@
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/class-style.css">
+  <!-- JAVA SCRIPT -->
+  <script src="../assets/js/tab-layout.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -193,28 +196,28 @@
     <!-- End Navbar -->
    
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            
-                  <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                      <a class="nav-link font-weight-bold text-dark" href="Class.html">Tugas</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link font-weight-bold text-dark" href="orang.html">Orang</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link font-weight-bold text-dark" href="nilai.html">Nilai</a>
-                    </li>
-                  </ul>
+        <!-- TAB LAYOUT -->
+        <div class="tab">
+        <a href="javascript:void(0);" class="tablinks active" onclick="openTab(event, 'ClassWork')">ClassWork</a>
+        <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'People')">People</a>
+        <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Review')">Review</a>
+    </div>
 
-          </div>
-        </div>
-      </nav>
+    <div id="ClassWork" class="tabcontent">
+    <!-- Content for ClassWork tab -->
+    classwork
+    </div>
+
+    <div id="People" class="tabcontent">
+    <!-- Content for People tab -->
+    people
+    </div>
+
+    <div id="Review" class="tabcontent">
+    <!-- Content for Review tab -->
+    review
+    </div>
+    <!-- END TAB LAYOUT -->
 
       <!-- Modal -->
       <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
