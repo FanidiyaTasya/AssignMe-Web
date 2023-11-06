@@ -21,6 +21,14 @@
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/class-style.css">
   <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="../assets/js/popup.js"></script>
+  <script src="../assets/js/skrip.js"></script>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -28,16 +36,15 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
-    id="sidenav-main">
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main">
     <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-        aria-hidden="true" id="iconSidenav"></i>
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="Dashboard.php" target="_blank">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">AssignMe</span>
       </a>
     </div>
+
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto color-blue max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
@@ -71,7 +78,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/deadline.html">
+          <a class="nav-link  " href="../pages/Review.html">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +198,6 @@
         </li>
       </ul>
     </div>
-
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
@@ -200,7 +206,6 @@
     require_once __DIR__ . ('/../function/ClassController.php');
 
     $classController = new ClassController();
-
     if (isset($_GET['classId'])) {
       $classId = $_GET['classId'];
 
@@ -252,30 +257,25 @@
       <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Review')">Review</a>
     </div>
 
-
     <div id="ClassWork" class="tabcontent">
       <!-- Content for ClassWork tab -->
       <div class="row">
-
-        <!--tugas  -->
         <div class="col-sm-6">
           <h5>Task</h5>
-          <!--buat tugas -->
           <div class="container my-4">
             <div class="row">
               <div class="col-md-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#buattugasModal">Create task</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buattugasModal">+ Task</button>
               </div>
             </div>
           </div>
 
-          <div class="modal fade" id="buattugasModal" tabindex="-1" role="dialog" aria-labelledby="buattugasModalLabel"
-            aria-hidden="true">
+          <div class="modal fade" id="buattugasModal" tabindex="-1" role="dialog" aria-labelledby="buattugasModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
                 <div class="modal-header">
-                  <h5 class="modal-title">Create task</h5>
+                  <h5 class="modal-title">Create Task</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -296,17 +296,14 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="dueDate">Due Date and Time</label>
+                      <label for="dueDate">Due Date</label>
                       <input type="datetime-local" class="form-control" name="dueDate" id="dueDate" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="fileUpload">Unggah Berkas Tugas</label>
+                      <label for="fileUpload">Attachment</label>
                       <input type="file" class="form-control" name="fileUpload" id="fileUpload" required>
                     </div>
-
-
-
 
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary" name="action" value="create">Save</button>
@@ -322,8 +319,7 @@
           <div class="card">
             <div class="card-body">
               <div class="dropdown float-end">
-                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                  aria-expanded="false"></button>
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                 <ul class="dropdown-menu">
                   <li><a href="#" data-toggle="modal" data-target="#editKelasModal"
                       class="dropdown-item text-left text-dark">Edit</a></li>
@@ -338,19 +334,16 @@
               <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
           </div>
-
-
         </div>
 
 
         <!--materi-->
         <div class="col-sm-6">
           <h5>Materials</h5>
-          <!--buat materi -->
           <div class="container my-4">
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">Create task</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">+ Materials</button>
               </div>
             </div>
           </div>
@@ -371,23 +364,18 @@
                   <form method="POST">
                     <div class="form-group">
                       <label for="classname">Task Name</label>
-                      <input type="text" class="form-control" name="classname" id="classname"
-                        placeholder="Enter Class Name" required>
+                      <input type="text" class="form-control" name="classname" id="classname" placeholder="Enter Class Name" required>
                     </div>
 
                     <div class="form-group">
                       <label for="description">Description (Optional)</label>
-                      <textarea class="form-control" name="description" id="description"
-                        placeholder="Enter Description"></textarea>
+                      <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
                     </div>
 
                     <div class="form-group">
                       <label for="fileUpload">Unggah Berkas </label>
                       <input type="file" class="form-control" name="fileUpload" id="fileUpload" required>
                     </div>
-
-
-
 
                     <div class="modal-footer">
                       <button type="submit" class="btn btn-primary" name="action" value="create">Save</button>
@@ -399,8 +387,6 @@
             </div>
           </div>
 
-
-         
           <div class="card">
             <div class="card-body">
               <div class="dropdown float-end">
@@ -418,54 +404,39 @@
               <h5 class="card-title">judul materi</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <a href="nama_file_anda.ext" download="nama_file_yang_diinginkan.ext" class="btn btn-primary">Download File</a>
-
             </div>
           </div>
 
-
-
-
         </div>
-
       </div>
-
-
     </div>
-
-
-
 
     <div id="People" class="tabcontent">
       <!-- Content for People tab -->
       <div class="container">
-        <h4 class="mt-4">Daftar Guru</h4>
-
+        <h4 class="mt-4">Teachers</h4>
         <div class="row">
           <div class="col-md-8">
             <ul class="list-group">
               <li class="list-group-item">sandika galih</li>
-              <!-- Anda dapat menambahkan lebih banyak grup di sini -->
             </ul>
           </div>
-
         </div>
       </div>
 
       <div class="container">
-        <h4 class="mt-4">Dafta siswa</h4>
-
+        <h4 class="mt-4">Classmates</h4>
         <div class="row">
           <div class="col-md-8">
             <ul class="list-group">
               <li class="list-group-item">ihsan</li>
               <li class="list-group-item">arya</li>
               <li class="list-group-item">udin</li>
-              <!-- Anda dapat menambahkan lebih banyak grup di sini -->
             </ul>
           </div>
-
         </div>
       </div>
+
     </div>
 
     <div id="Review" class="tabcontent">
@@ -493,16 +464,12 @@
               <td><input type="number" class="form-control" placeholder="0-100"></td>
               <td><button class="btn btn-primary">Simpan</button></td>
             </tr>
-            <!-- Tambahkan baris untuk siswa dan tugas lainnya di sini -->
           </tbody>
         </table>
       </div>
 
     </div>
     <!-- END TAB LAYOUT -->
-
-
-
 
     <!-- Hapus tugas -->
     <div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel"
@@ -515,9 +482,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Apakah Anda yakin ingin menghapus tugas ini?
-          </div>
+          <div class="modal-body">Apakah Anda yakin ingin menghapus tugas ini?</div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
             <a href="#" class="btn btn-danger">Hapus</a>
@@ -528,7 +493,7 @@
 
     <!-- tambah tugas -->
 
-
+    <!-- toggle button -->
     <div class="fixed-plugin">
       <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="fa fa-cog py-2"> </i>
@@ -546,6 +511,7 @@
           </div>
           <!-- End Toggle Button -->
         </div>
+
         <hr class="horizontal dark my-1">
         <div class="card-body pt-sm-3 pt-0">
           <!-- Sidebar Backgrounds -->
@@ -583,8 +549,7 @@
             <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
           </div>
           <hr class="horizontal dark my-sm-4">
-          <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro">Free
-            Download</a>
+          <a class="btn bg-gradient-dark w-100" href="https://www.creative-tim.com/product/soft-ui-dashboard-pro">Free Download</a>
           <a class="btn btn-outline-dark w-100"
             href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard">View documentation</a>
           <div class="w-100 text-center">
@@ -602,202 +567,10 @@
         </div>
       </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
-    <script src="../assets/js/popup.js"></script>
-    <script src="../assets/js/skrip.js"></script>
-    <script>
-      var ctx = document.getElementById("chart-bars").getContext("2d");
-
-      new Chart(ctx, {
-        type: "bar",
-        data: {
-          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [{
-            label: "Sales",
-            tension: 0.4,
-            borderWidth: 0,
-            borderRadius: 4,
-            borderSkipped: false,
-            backgroundColor: "#fff",
-            data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-            maxBarThickness: 6
-          },],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: false,
-                drawOnChartArea: false,
-                drawTicks: false,
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 500,
-                beginAtZero: true,
-                padding: 15,
-                font: {
-                  size: 14,
-                  family: "Open Sans",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-                color: "#fff"
-              },
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: false,
-                drawOnChartArea: false,
-                drawTicks: false
-              },
-              ticks: {
-                display: false
-              },
-            },
-          },
-        },
-      });
-
-
-      var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-      new Chart(ctx2, {
-        type: "line",
-        data: {
-          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [{
-            label: "Mobile apps",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
-
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            fill: true,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-          },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5]
-              },
-              ticks: {
-                display: true,
-                padding: 10,
-                color: '#b2b9bf',
-                font: {
-                  size: 11,
-                  family: "Open Sans",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: false,
-                drawOnChartArea: false,
-                drawTicks: false,
-                borderDash: [5, 5]
-              },
-              ticks: {
-                display: true,
-                color: '#b2b9bf',
-                padding: 20,
-                font: {
-                  size: 11,
-                  family: "Open Sans",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
-          },
-        },
-      });
-    </script>
-    <script>
-      var win = navigator.platform.indexOf('Win') > -1;
-      if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-          damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-      }
-    </script>
+    
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 </body>
-
 </html>

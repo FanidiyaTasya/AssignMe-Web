@@ -1,8 +1,6 @@
 <?php 
 session_start();
-
 require_once __DIR__ . ('\..\function\RegisterController.php');
-
 
 if (isset($_POST['submit'])) {
     $register = new RegisterController;

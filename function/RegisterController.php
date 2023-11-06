@@ -34,7 +34,6 @@ class RegisterController extends Users {
     }
 
     public function isEmailUsed($email) {
-        // Menggunakan metode SQLValidateEmail sesuai kebutuhan Anda untuk memeriksa apakah email sudah digunakan
         $row = $this->SQLValidateEmail($email)->FetchArray();
         return ($row['Email'] == $email);
     }

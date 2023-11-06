@@ -26,11 +26,22 @@ if (!isset($_SESSION['Email'])) {
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+  <!--   Core JS Files   -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="../assets/js/popup.js"></script>
+  <script src="../assets/js/skrip.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
-    
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="Dashboard.php" target="_blank">
@@ -47,7 +58,7 @@ if (!isset($_SESSION['Email'])) {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  active" href="../pages/Dashboard.php">
+          <a class="nav-link active" href="../pages/Dashboard.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -68,7 +79,7 @@ if (!isset($_SESSION['Email'])) {
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/deadline.html">
+          <a class="nav-link  " href="../pages/Review.html">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -112,7 +123,6 @@ if (!isset($_SESSION['Email'])) {
             <span class="nav-link-text ms-1">Archive class</span>
           </a>
         </li>
-        
        
         <li class="nav-item">
           <a class="nav-link  " href="../pages/sign-in.html">
@@ -160,8 +170,8 @@ if (!isset($_SESSION['Email'])) {
     </div>
    
   </aside>
-  <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-    
+
+  <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">  
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
@@ -269,7 +279,7 @@ if (!isset($_SESSION['Email'])) {
                   </a>
                 </li>
               </ul>
-              <!-- END DROPDOWN -->
+              <!-- END DROPDOWN NOTIF -->
 
             </li>
           </ul>
@@ -292,7 +302,6 @@ if (!isset($_SESSION['Email'])) {
     require_once __DIR__ . ('\..\function\ClassController.php');
 
     $classController = new ClassController();
-
     if (isset($_POST['action']) && $_POST['action'] == 'create') {
         $className = $_POST['classname'];
         $subject = $_POST['subject'];
@@ -344,16 +353,11 @@ if (!isset($_SESSION['Email'])) {
    <div class="col-md-9">
    <div class="row">
     <?php
-    require_once __DIR__ . ('\..\function\ClassController.php');
-
-    $classController = new ClassController();
-
     $message = $classController->getMessage();
     if (!empty($message)) {
         echo $message;
     }
     $classes = $classController->getClasses();
-
     while ($row = $classes->fetchArray()) {
     ?>
     <div class="col-sm-4 mb-3 mb-sm-0">
@@ -363,7 +367,6 @@ if (!isset($_SESSION['Email'])) {
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                     <ul class="dropdown-menu">
                         <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="dropdown-item text-left text-dark">Edit</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark">Delete</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
                     </ul>
                 </div>
@@ -373,26 +376,7 @@ if (!isset($_SESSION['Email'])) {
         </div>
     </div>
     <?php } ?>
-</div>
-
-<!-- Hapus Kelas -->
-<div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="hapusKelasModalLabel">Konfirmasi Hapus Kelas</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">Apakah Anda yakin ingin menghapus kelas ini?</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-        <a href="#" class="btn btn-danger">Hapus</a>
-      </div>
     </div>
-  </div>
-</div>
 
 <!-- Edit Kelas -->
 <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
@@ -503,26 +487,10 @@ if (!isset($_SESSION['Email'])) {
     </div>
   </div>
 
-
-  <!--   Core JS Files   -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <script src="../assets/js/popup.js"></script>
-  <script src="../assets/js/skrip.js"></script>
-
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/soft-ui-dashboard.min.js"></script>
-
 </body>
 </html>
