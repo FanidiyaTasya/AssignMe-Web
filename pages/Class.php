@@ -197,138 +197,118 @@
    
 
         <!-- TAB LAYOUT -->
-        <div class="tab">
-        <a href="javascript:void(0);" class="tablinks active" onclick="openTab(event, 'ClassWork')">ClassWork</a>
-        <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'People')">People</a>
-        <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Review')">Review</a>
+    <div class="tab">
+      <a href="javascript:void(0);" class="tablinks active" onclick="openTab(event, 'ClassWork')">ClassWork</a>
+      <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'People')">People</a>
+      <a href="javascript:void(0);" class="tablinks" onclick="openTab(event, 'Review')">Review</a>
     </div>
+
 
     <div id="ClassWork" class="tabcontent">
     <!-- Content for ClassWork tab -->
-    classwork
+    <!-- Modal -->
+    <div class="row">
+  <div class="col-sm-6">
+    <div class="card card-sm">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-sm-6">
+    <div class="card card-sm">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+      
     </div>
 
     <div id="People" class="tabcontent">
     <!-- Content for People tab -->
-    people
+    <div class="container">
+        <h4 class="mt-4">Daftar Guru</h4>
+        
+        <div class="row">
+          <div class="col-md-8">
+            <ul class="list-group">
+              <li class="list-group-item">sandika galih</li>
+              <!-- Anda dapat menambahkan lebih banyak grup di sini -->
+            </ul>
+          </div>
+       
+        </div>
+      </div>
+      
+      <div class="container">
+        <h4 class="mt-4">Dafta siswa</h4>
+        
+        <div class="row">
+          <div class="col-md-8">
+            <ul class="list-group">
+              <li class="list-group-item">ihsan</li>
+              <li class="list-group-item">arya</li>
+              <li class="list-group-item">udin</li>
+              <!-- Anda dapat menambahkan lebih banyak grup di sini -->
+            </ul>
+          </div>
+       
+        </div>
+      </div>
     </div>
 
     <div id="Review" class="tabcontent">
     <!-- Content for Review tab -->
-    review
+    <div class="container mt-5">
+        <h1 class="text-center">Tabel Penilaian Tugas</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nama Siswa</th>
+                    <th scope="col">Nama Tugas</th>
+                    <th scope="col">Nilai Tugas</th>
+                    <th scope="col">Simpan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mahasiswa 1</td>
+                    <td>Tugas 1</td>
+                    <td><input type="number" class="form-control" placeholder="0-100"></td>
+                    <td><button class="btn btn-primary">Simpan</button></td>
+                </tr>
+                <tr>
+                    <td>Mahasiswa 2</td>
+                    <td>Tugas 2</td>
+                    <td><input type="number" class="form-control" placeholder="0-100"></td>
+                    <td><button class="btn btn-primary">Simpan</button></td>
+                </tr>
+                <!-- Tambahkan baris untuk siswa dan tugas lainnya di sini -->
+            </tbody>
+        </table>
+    </div>
+
     </div>
     <!-- END TAB LAYOUT -->
 
-      <!-- Modal -->
-      <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="taskModalLabel">Buat Tugas</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="proses_form.php" method="post">
-                <div class="form-group">
-                  <label for="TaskTitle">TaskTitle:</label>
-                  <input type="text" class="form-control" id="TaskTitle" name="TaskTitle">
-                </div>
-                <div class="form-group">
-                  <label for="TaskDesc">TaskDesc:</label>
-                  <textarea class="form-control" id="TaskDesc" name="TaskDesc" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="DueDate">DueDate:</label>
-                  <input type="date" class="form-control" id="DueDate" name="DueDate">
-                </div>
-                <div class="form-group">
-                  <label for="Attachment">Attachment:</label>
-                  <input type="file" class="form-control-file" id="Attachment" name="Attachment">
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-          </div>
-        </div>
-      </div>
-        
-      <div class="container">
-            <div class="">
-              <button class="btn btn-primary" data-toggle="modal" data-target="#taskModal" style="margin-top: 30px;">+BUAT TUGAS</button>
-            </div>
-          </div>
-       
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th scope="col">TaskId</th>
-              <th scope="col">TaskTitle</th>
-              <th scope="col">TaskDesc</th>
-         
-              <th scope="col">DueDate</th>
-              <th scope="col">Attachment</th>
-              <th scope="col">Opsi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Task 1</td>
-              <td>Description of Task 1</td>
-              <td>2023-10-30</td>
-              <td>2023-11-15</td>
-              <td>File.docx</td>
-              <td>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editTaskModal">Edit</button>
-                <a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapusKelasModal">Hapus</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-
-      </div>
-      
-      <!-- edit tugas -->
-      <div class="modal fade" id="editTaskModal" tabindex="-1" role="dialog" aria-labelledby="editTaskModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="editTaskModalLabel">Edit Tugas</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form action="proses_edit.php" method="post">
-                <div class="form-group">
-                  <label for="TaskTitle">TaskTitle:</label>
-                  <input type="text" class="form-control" id="TaskTitle" name="TaskTitle">
-                </div>
-                <div class="form-group">
-                  <label for="TaskDesc">TaskDesc:</label>
-                  <textarea class="form-control" id="TaskDesc" name="TaskDesc" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="DueDate">DueDate:</label>
-                  <input type="date" class="form-control" id="DueDate" name="DueDate">
-                </div>
-                <div class="form-group">
-                  <label for="Attachment">Attachment:</label>
-                  <input type="file" class="form-control-file" id="Attachment" name="Attachment">
-                </div>
-                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      
+     
       
       
       <!-- Hapus tugas -->
