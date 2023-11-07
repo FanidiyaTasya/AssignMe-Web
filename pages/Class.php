@@ -249,7 +249,6 @@
     </nav>
     <!-- End Navbar -->
 
-
     <!-- TAB LAYOUT -->
     <div class="tab">
       <a href="javascript:void(0);" class="tablinks active" onclick="openTab(event, 'ClassWork')">ClassWork</a>
@@ -315,7 +314,6 @@
             </div>
           </div>
 
-
           <div class="card">
             <div class="card-body">
               <div class="dropdown float-end">
@@ -325,17 +323,14 @@
                       class="dropdown-item text-left text-dark">Edit</a></li>
                   <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal"
                       class="dropdown-item text-left text-dark">Delete</a></li>
-                  <li><a href="#" data-toggle="modal" data-target="#"
-                      class="dropdown-item text-left text-dark">Archive</a></li>
                 </ul>
               </div>
-              <h5 class="card-title">judul tugas</h5>
+              <h5 class="card-title">Judul Tugas</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="#" class="btn btn-primary">Download File</a>
             </div>
           </div>
         </div>
-
 
         <!--materi-->
         <div class="col-sm-6">
@@ -397,11 +392,9 @@
                       class="dropdown-item text-left text-dark">Edit</a></li>
                   <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal"
                       class="dropdown-item text-left text-dark">Delete</a></li>
-                  <li><a href="#" data-toggle="modal" data-target="#"
-                      class="dropdown-item text-left text-dark">Archive</a></li>
                 </ul>
               </div>
-              <h5 class="card-title">judul materi</h5>
+              <h5 class="card-title">Judul Materi</h5>
               <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <a href="nama_file_anda.ext" download="nama_file_yang_diinginkan.ext" class="btn btn-primary">Download File</a>
             </div>

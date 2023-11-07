@@ -349,7 +349,7 @@ if (!isset($_SESSION['Email'])) {
       </div>
     </div>
 
-     <!-- Tampilan kelas di sini -->
+     <!-- Tampilan kelas -->
    <div class="col-md-9">
    <div class="row">
     <?php
@@ -379,9 +379,21 @@ if (!isset($_SESSION['Email'])) {
     </div>
 
 <!-- Edit Kelas -->
+<?php
+require_once __DIR__ . '/../function/ClassController.php';
+
+$classController = new ClassController();
+$classId = $_GET['classId'];
+$classData = $classController->getClassById($classId);
+if (!$classData) {
+    echo 'Kelas tidak ditemukan.';
+    exit();
+}
+?>
 <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+
       <div class="modal-header">
         <h5 class="modal-title" id="editKelasModalLabel">Edit Kelas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -390,25 +402,27 @@ if (!isset($_SESSION['Email'])) {
       </div>
 
       <div class="modal-body">
-        <form>
+        <form method="POST">
           <div class="form-group">
+            <input type="hidden" name="classId" value="<?= $classData['ClassId'] ?>">
+
             <label for="editNamaKelas">Class Name</label>
-            <input type="text" class="form-control" id="editNamaKelas" placeholder="Enter Class Name" required>
+            <input type="text" class="form-control" id="editNamaKelas" value="<?= $classData['ClassName'] ?>">
           </div>
 
           <div class="form-group">
             <label for="editSubject">Subject Name</label>
-            <input type="text" class="form-control" id="editSubject" placeholder="Enter Subject Name">
+            <input type="text" class="form-control" id="editSubject" value="<?= $classData['SubjectName'] ?>">
           </div>
 
           <div class="form-group">
             <label for="editDeskripsi">Description (Optional)</label>
-            <textarea class="form-control" id="editDeskripsi" placeholder="Enter Description"></textarea>
+            <textarea class="form-control" id="editDeskripsi" value="<?= $classData['Description'] ?>"></textarea>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            <button type="button" class="btn btn-primary">Simpan Perubahan</button>
+            <button type="button" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>

@@ -12,7 +12,6 @@ class Classes extends Connect {
 
     public function InsertUserClasses($userId, $classId, $role) {
         $this->sql = "INSERT INTO user_classes (UserId, ClassId, Role) VALUES ('$userId', '$classId', '$role')";
-        // var_dump($this->sql);
         return $this->getResult();
     }
 
@@ -21,7 +20,7 @@ class Classes extends Connect {
         return $this->getResult();
     }
 
-    public function EditClass($classId, $className, $subject, $desc, $classCode, $userId) {
+    public function UpdateClass($classId, $className, $subject, $desc, $classCode, $userId) {
         $this->sql = "UPDATE classes SET ClassName='$className', SubjectName='$subject', Description='$desc', ClassCode='$classCode', UserId='$userId' WHERE ClassId='$classId'";
         return $this->getResult();
     }

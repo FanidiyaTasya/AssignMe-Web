@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . ('/../database/Classes.php');
 
 class ClassController extends Classes {
@@ -22,6 +21,16 @@ class ClassController extends Classes {
             }
         } else {
             echo "Error creating class.";
+        }
+    }
+
+    public function editClass() {
+        $result = $this->UpdateClass($classId, $className, $subject, $desc, $classCode, $userId);
+        if ($result) {
+            header('Location: Dashboard.php');
+            exit();
+        } else {
+            echo 'Gagal edit kelas.';
         }
     }
     
@@ -56,7 +65,7 @@ class ClassController extends Classes {
         }
     }  
 
-    public function getClassId($className, $subject, $userId) { // untuk di userclasses
+    public function getClassId($className, $subject, $userId) { // userclasses
         $this->sql = "SELECT ClassId FROM classes WHERE ClassName = '$className' AND SubjectName = '$subject' AND UserId = '$userId'";
         $result = $this->getResult();
     
@@ -67,30 +76,7 @@ class ClassController extends Classes {
             return null;
         }
     }   
-    
-        // public function getTeachers() {
-    //     $this->sql = "SELECT * FROM user_classes WHERE Role = 'Guru'";
-    //     $result = $this->getResult();
 
-    //     $teachers = array();
-    //     while ($row = $result->FetchArray()) {
-    //         $teachers[] = $row;
-    //     }
-
-    //     return $teachers;
-    // }
-
-    // public function getStudents() {
-    //     $this->sql = "SELECT * FROM user_classes WHERE Role = 'Murid'";
-    //     $result = $this->getResult();
-
-    //     $students = array();
-    //     while ($row = $result->FetchArray()) {
-    //         $students[] = $row;
-    //     }
-
-    //     return $students;
-    // }
 }
 
 ?>
