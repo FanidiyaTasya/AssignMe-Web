@@ -13,9 +13,22 @@ if (!isset($_SESSION['Email'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>AssignMe</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
+  <!--   JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="../assets/js/popup.js"></script>
+  <script src="../assets/js/skrip.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -25,19 +38,10 @@ if (!isset($_SESSION['Email'])) {
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
-  <!--   Core JS Files   -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <script src="../assets/js/popup.js"></script>
-  <script src="../assets/js/skrip.js"></script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -358,7 +362,7 @@ if (!isset($_SESSION['Email'])) {
         echo $message;
     }
     $classes = $classController->getClasses();
-    while ($row = $classes->fetchArray()) {
+    while ($row = $classes->FetchArray()) {
     ?>
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card mb-4">
@@ -370,25 +374,34 @@ if (!isset($_SESSION['Email'])) {
                         <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
                     </ul>
                 </div>
-                <h4><a href="Class.php?classId=<?php echo $row['ClassId']; ?>" class="card-title"><?php echo $row['ClassName']; ?></a></h4>
-                <p><a href="Class.php?classId=<?php echo $row['ClassId']; ?>" class="card-text"><?php echo $row['SubjectName']; ?></a></p>
+                <div data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">
+                    <h4><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
+                    <p><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['SubjectName'] ?></a></p>
+                </div>
+
             </div>
         </div>
     </div>
     <?php } ?>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.class-link').click(function(e) {
+                e.preventDefault();
+                var classId = $(this).data('class-id');
+                var form = $('<form action="Class.php" method="post"><input type="hidden" name="classId" value="' + classId + '"></form>');
+                $('body').append(form);
+                form.submit();
+
+                return false;
+            });
+        });
+    </script>
+
 
 <!-- Edit Kelas -->
 <?php
-require_once __DIR__ . '/../function/ClassController.php';
 
-$classController = new ClassController();
-$classId = $_GET['classId'];
-$classData = $classController->getClassById($classId);
-if (!$classData) {
-    echo 'Kelas tidak ditemukan.';
-    exit();
-}
 ?>
 <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -403,26 +416,26 @@ if (!$classData) {
 
       <div class="modal-body">
         <form method="POST">
-          <div class="form-group">
-            <input type="hidden" name="classId" value="<?= $classData['ClassId'] ?>">
+            <input type="hidden" id="classId" name="classId" >
 
-            <label for="editNamaKelas">Class Name</label>
-            <input type="text" class="form-control" id="editNamaKelas" value="<?= $classData['ClassName'] ?>">
+          <div class="form-group">
+            <label for="classname">Class Name</label>
+            <input type="text" class="form-control" id="classname" name="classname">
           </div>
 
           <div class="form-group">
-            <label for="editSubject">Subject Name</label>
-            <input type="text" class="form-control" id="editSubject" value="<?= $classData['SubjectName'] ?>">
+            <label for="subject">Subject Name</label>
+            <input type="text" class="form-control" id="subject" name="subject">
           </div>
 
           <div class="form-group">
-            <label for="editDeskripsi">Description (Optional)</label>
-            <textarea class="form-control" id="editDeskripsi" value="<?= $classData['Description'] ?>"></textarea>
+            <label for="description">Description (Optional)</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
           </div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button type="submit" name="action" value="edit" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>
@@ -500,6 +513,7 @@ if (!$classData) {
       </div>
     </div>
   </div>
+
 
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

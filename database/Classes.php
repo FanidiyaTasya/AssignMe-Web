@@ -20,8 +20,8 @@ class Classes extends Connect {
         return $this->getResult();
     }
 
-    public function UpdateClass($classId, $className, $subject, $desc, $classCode, $userId) {
-        $this->sql = "UPDATE classes SET ClassName='$className', SubjectName='$subject', Description='$desc', ClassCode='$classCode', UserId='$userId' WHERE ClassId='$classId'";
+    public function UpdateClass($classId, $className, $subject, $desc) {
+        $this->sql = "UPDATE classes SET ClassName='$className', SubjectName='$subject', Description='$desc' WHERE ClassId='$classId'";
         return $this->getResult();
     }
 

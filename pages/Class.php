@@ -20,19 +20,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/class-style.css">
-  <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <script src="../assets/js/popup.js"></script>
-  <script src="../assets/js/skrip.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="../assets/js/tab-layout.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -206,8 +194,8 @@
     require_once __DIR__ . ('/../function/ClassController.php');
 
     $classController = new ClassController();
-    if (isset($_GET['classId'])) {
-      $classId = $_GET['classId'];
+    if (isset($_POST['classId'])) {
+      $classId = $_POST['classId'];
 
       $classDetail = $classController->detailClasses($classId);
 
@@ -259,6 +247,7 @@
     <div id="ClassWork" class="tabcontent">
       <!-- Content for ClassWork tab -->
       <div class="row">
+        <!-- BUAT TUGAS -->
         <div class="col-sm-6">
           <h5>Task</h5>
           <div class="container my-4">
@@ -314,6 +303,18 @@
             </div>
           </div>
 
+          <!-- TAMPIL TUGAS -->
+          <?php
+          require_once __DIR__ . ('\..\function\TaskController.php');
+
+          $taskController = new TaskController();
+          $message = $taskController->getMessage();
+          if (!empty($message)) {
+              echo $message;
+          }
+          $task = $taskController->getTask();
+          while ($row = $task->FetchArray()) {
+          ?>
           <div class="card">
             <div class="card-body">
               <div class="dropdown float-end">
@@ -325,14 +326,15 @@
                       class="dropdown-item text-left text-dark">Delete</a></li>
                 </ul>
               </div>
-              <h5 class="card-title">Judul Tugas</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Download File</a>
+              <h5 class="card-title"><?= $row['TaskName']; ?></h5>
+              <p class="card-text"><?= $row['TaskDesc']; ?></p>
+              <a href="#" class="btn btn-primary">View Assignment</a>
             </div>
           </div>
-        </div>
-
-        <!--materi-->
+          <?php } ?>
+          
+        </div>  
+        <!--BUAT MATERI-->
         <div class="col-sm-6">
           <h5>Materials</h5>
           <div class="container my-4">
@@ -382,6 +384,7 @@
             </div>
           </div>
 
+          <!-- TAMPIL MATERI -->
           <div class="card">
             <div class="card-body">
               <div class="dropdown float-end">
@@ -394,9 +397,9 @@
                       class="dropdown-item text-left text-dark">Delete</a></li>
                 </ul>
               </div>
-              <h5 class="card-title">Judul Materi</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="nama_file_anda.ext" download="nama_file_yang_diinginkan.ext" class="btn btn-primary">Download File</a>
+                <h5 class="card-title">Judul Materi</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="nama_file_anda.ext" download="nama_file_yang_diinginkan.ext" class="btn btn-primary">View Material</a>
             </div>
           </div>
 
@@ -560,9 +563,23 @@
         </div>
       </div>
     </div>
-    
+    <!--  JS Files   -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script src="../assets/js/popup.js"></script>
+    <script src="../assets/js/skrip.js"></script>
+    <script src="../assets/js/tab-layout.js"></script>
+
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/soft-ui-dashboard.min.js"></script>
 </body>

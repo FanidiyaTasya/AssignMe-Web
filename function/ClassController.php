@@ -25,7 +25,7 @@ class ClassController extends Classes {
     }
 
     public function editClass() {
-        $result = $this->UpdateClass($classId, $className, $subject, $desc, $classCode, $userId);
+        $result = $this->UpdateClass($classId, $className, $subject, $desc);
         if ($result) {
             header('Location: Dashboard.php');
             exit();
