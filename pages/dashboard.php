@@ -17,17 +17,17 @@ if (!isset($_SESSION['Email'])) {
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 
   <!--   JS Files   -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/chartjs.min.js"></script>
   <script src="../assets/js/popup.js"></script>
-  <script src="../assets/js/skrip.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- <script src="../assets/js/skrip.js"></script> -->
 
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -384,7 +384,7 @@ if (!isset($_SESSION['Email'])) {
     </div>
     <?php } ?>
     </div>
-    <script>
+    <!-- <script>
         $(document).ready(function() {
             $('.class-link').click(function(e) {
                 e.preventDefault();
@@ -396,7 +396,7 @@ if (!isset($_SESSION['Email'])) {
                 return false;
             });
         });
-    </script>
+    </script> -->
 
 
 <!-- Edit Kelas -->

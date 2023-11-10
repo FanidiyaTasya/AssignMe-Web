@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>AssignMe</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <!--     Fonts and icons     -->
@@ -18,6 +18,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/class-style.css">
 
@@ -574,7 +575,7 @@
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script>
     <script src="../assets/js/popup.js"></script>
-    <script src="../assets/js/skrip.js"></script>
+    <!-- <script src="../assets/js/skrip.js"></script> -->
     <script src="../assets/js/tab-layout.js"></script>
 
     <!-- Github buttons -->
