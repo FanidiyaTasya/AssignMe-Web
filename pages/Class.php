@@ -255,7 +255,7 @@
           <div class="container my-4">
             <div class="row">
               <div class="col-md-4">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#buattugasModal">+ Task</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buatTugasModal">+ Task</button>
               </div>
             </div>
           </div>
