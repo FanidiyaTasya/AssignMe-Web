@@ -1,3 +1,10 @@
+<?php 
+  session_start();
+  if (!isset($_SESSION['Email'])) {
+    header('Location: Login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -317,23 +324,22 @@
           while ($row = $task->FetchArray()) {
           ?>
         <div class="card mb-3">
-    <div class="card-body">
-        <div class="dropdown float-end">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false"></button>
-            <ul class="dropdown-menu">
-                <li><a href="#" data-toggle="modal" data-target="#editKelasModal"
-                        class="dropdown-item text-left text-dark">Edit</a></li>
-                <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal"
-                        class="dropdown-item text-left text-dark">Delete</a></li>
-            </ul>
-        </div>
-        <h5 class="card-title"><?= $row['TaskName']; ?></h5>
-        <p class="card-text"><?= $row['TaskDesc']; ?></p>
-        <a href="#" class="btn btn-primary">View Assignment</a>
-    </div>
-</div>
-
+          <div class="card-body">
+              <div class="dropdown float-end">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                      aria-expanded="false"></button>
+                  <ul class="dropdown-menu">
+                      <li><a href="#" data-toggle="modal" data-target="#editKelasModal"
+                              class="dropdown-item text-left text-dark">Edit</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal"
+                              class="dropdown-item text-left text-dark">Delete</a></li>
+                  </ul>
+              </div>
+                  <h5 class="card-title"><?= $row['TaskName']; ?></h5>
+                  <p class="card-text"><?= $row['TaskDesc']; ?></p>
+                  <a href="#" class="btn btn-primary">View Assignment</a>
+              </div>
+          </div>
           <?php } ?>
           
         </div>  

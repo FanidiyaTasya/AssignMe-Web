@@ -11,7 +11,6 @@
 // });
 
 // tampil kelas
-console.log('listItem');
 $(document).ready(function() {
     $('.class-link').click(function(e) {
         e.preventDefault();
@@ -26,30 +25,16 @@ $(document).ready(function() {
 });
 
 // edit kelas
-document.addEventListener('DOMContentLoaded', function () {
-    const editLinks = document.querySelectorAll('.editKelasModalLink');
-    const classIdInput = document.getElementById('classId');
-    const classNameInput = document.getElementById('classname');
-    const subjectInput = document.getElementById('subject');
-    const descriptionInput = document.getElementById('description');
-    const editForm = document.getElementById('formEditClass'); 
-    editLinks.forEach(function (link) {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
+$(document).ready(function () {
+    $('.editKelasModalLink').on('click', function () {
+        var classId = $(this).data('class-id');
+        var className = $(this).data('classname');
+        var subject = $(this).data('subject');
+        var description = $(this).data('description');
 
-            const listItem = event.target.closest('li');
-            const classId = listItem.dataset.classId;
-            const classname = listItem.dataset.classname;
-            const subject = listItem.dataset.subject;
-            const description = listItem.dataset.description;
-
-            editForm.setAttribute('data-editing-class-id', classId);
-            console.log(listItem);
-
-            classIdInput.value = classId;
-            classNameInput.value = classname;
-            subjectInput.value = subject;
-            descriptionInput.value = description;
-        });
+        $('#editKelasModal #classId').val(classId);
+        $('#editKelasModal #classname').val(className);
+        $('#editKelasModal #subject').val(subject);
+        $('#editKelasModal #description').val(description);
     });
 });

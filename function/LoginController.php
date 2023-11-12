@@ -28,6 +28,7 @@ class LoginController extends Users {
     public function Login() {
         $row = $this->SQLLogin($this->email, $this->password)->FetchArray();
         if ($row !== null && ($row['Email'] == $this->email && $row['Password'] == $this->password)) {
+            $_SESSION['UserId'] = $row['UserId'];
             $_SESSION['Username'] = $row['Username'];
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['Password'] = $row['Password'];

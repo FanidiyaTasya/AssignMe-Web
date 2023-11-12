@@ -16,19 +16,6 @@ if (!isset($_SESSION['Email'])) {
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 
-  <!--   JS Files   -->
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
-  <script src="../assets/js/popup.js"></script>
-  <!-- <script src="../assets/js/skrip.js"></script> -->
-
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -361,20 +348,22 @@ if (!isset($_SESSION['Email'])) {
     if (!empty($message)) {
         echo $message;
     }
-    $classes = $classController->getClasses();
-    while ($row = $classes->FetchArray()) {
+    $userId = $_SESSION['UserId'];
+    $classes = $classController->getClasses($userId);
+    while ($row = $classes->FetchArray()) { 
     ?>
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card mb-4">
             <div class="card-body">
+
                 <div class="dropdown float-end">
                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="dropdown-item text-left text-dark">Edit</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
                     </ul>
                 </div>
-                <div data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">
+                <div>
                     <h4><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
                     <p><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['SubjectName'] ?></a></p>
                 </div>
@@ -384,65 +373,58 @@ if (!isset($_SESSION['Email'])) {
     </div>
     <?php } ?>
     </div>
-    <!-- <script>
-        $(document).ready(function() {
-            $('.class-link').click(function(e) {
-                e.preventDefault();
-                var classId = $(this).data('class-id');
-                var form = $('<form action="Class.php" method="post"><input type="hidden" name="classId" value="' + classId + '"></form>');
-                $('body').append(form);
-                form.submit();
 
-                return false;
-            });
-        });
-    </script> -->
+    <!-- Edit Kelas -->
+    <?php
+        if (isset($_POST['action']) && $_POST['action'] == 'edit') {
+            $classId = $_POST['classId'];
+            $className = $_POST['classname'];
+            $subject = $_POST['subject'];
+            $desc = $_POST['description'];
 
+            $classController->editClass($classId, $className, $subject, $desc);
+        }
+        ?>
+    <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
-<!-- Edit Kelas -->
-<?php
+          <div class="modal-header">
+            <h5 class="modal-title" id="editKelasModalLabel">Edit Kelas</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
 
-?>
-<div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
+          <div class="modal-body">
+            <form method="POST" id="formEditClass">
+                <input type="hidden" id="classId" name="classId" >
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="editKelasModalLabel">Edit Kelas</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+              <div class="form-group">
+                <label for="classname">Class Name</label>
+                <input type="text" class="form-control" id="classname" name="classname">
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject Name</label>
+                <input type="text" class="form-control" id="subject" name="subject">
+              </div>
+
+              <div class="form-group">
+                <label for="description">Description (Optional)</label>
+                <textarea class="form-control" id="description" name="description"></textarea>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" name="action" value="edit" class="btn btn-primary">Save</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
       </div>
-
-      <div class="modal-body">
-        <form method="POST">
-            <input type="hidden" id="classId" name="classId" >
-
-          <div class="form-group">
-            <label for="classname">Class Name</label>
-            <input type="text" class="form-control" id="classname" name="classname">
-          </div>
-
-          <div class="form-group">
-            <label for="subject">Subject Name</label>
-            <input type="text" class="form-control" id="subject" name="subject">
-          </div>
-
-          <div class="form-group">
-            <label for="description">Description (Optional)</label>
-            <textarea class="form-control" id="description" name="description"></textarea>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            <button type="submit" name="action" value="edit" class="btn btn-primary">Save</button>
-          </div>
-        </form>
-      </div>
-
     </div>
-  </div>
-  </div>
 
 </div>
 
@@ -514,6 +496,18 @@ if (!isset($_SESSION['Email'])) {
     </div>
   </div>
 
+  <!--   JS Files   -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="../assets/js/popup.js"></script>
+  <!-- <script src="../assets/js/skrip.js"></script> -->
 
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -15,7 +15,6 @@ class ClassController extends Classes {
                 $role = 'Guru';
                 $this->InsertUserClasses($userId, $classId, $role);
                 // echo "Class created successfully.";
-                // header('Location: Dashboard.php');
             } else {
                 echo "Error getting classId.";
             }
@@ -24,11 +23,10 @@ class ClassController extends Classes {
         }
     }
 
-    public function editClass() {
+    public function editClass($classId, $className, $subject, $desc) {
         $result = $this->UpdateClass($classId, $className, $subject, $desc);
         if ($result) {
-            header('Location: Dashboard.php');
-            exit();
+            // echo 'Berhasil edit kelas';
         } else {
             echo 'Gagal edit kelas.';
         }
@@ -50,8 +48,8 @@ class ClassController extends Classes {
         return $this->message;
     }
 
-    public function getClasses() { // dashboard
-        $classes = $this->ShowClass();
+    public function getClasses($userId) { // dashboard
+        $classes = $this->ShowClass($userId);
         return $classes;
     }
 

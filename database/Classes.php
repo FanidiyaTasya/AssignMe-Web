@@ -15,8 +15,8 @@ class Classes extends Connect {
         return $this->getResult();
     }
 
-    public function ShowClass() {
-        $this->sql = "SELECT * FROM classes";
+    public function ShowClass($userId) {
+        $this->sql = "SELECT * FROM classes WHERE UserId = '$userId'";
         return $this->getResult();
     }
 
@@ -24,6 +24,11 @@ class Classes extends Connect {
         $this->sql = "UPDATE classes SET ClassName='$className', SubjectName='$subject', Description='$desc' WHERE ClassId='$classId'";
         return $this->getResult();
     }
+    
+    public function UpdateClassCode($classId, $newClassCode) {
+        $this->sql = "UPDATE classes SET ClassCode='$newClassCode' WHERE ClassId='$classId'";
+        return $this->getResult();
+    }  
 
     public function DeleteClass($classId) {
         $this->sql = "DELETE FROM classes WHERE ClassId=$classId";
