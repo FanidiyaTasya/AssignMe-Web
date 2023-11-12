@@ -4,6 +4,13 @@
     header('Location: Login.php');
     exit();
 }
+    if (isset($_POST['classId'])) {
+      $classId = $_POST['classId'];
+    } else {
+      header('Location: Dashboard.php');
+      exit();
+    }
+    $_SESSION['ClassId'] = $classId;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -202,34 +209,22 @@
     require_once __DIR__ . ('/../function/ClassController.php');
 
     $classController = new ClassController();
-    if (isset($_POST['classId'])) {
-      $classId = $_POST['classId'];
-
-      $classDetail = $classController->detailClasses($classId);
-
+    $classDetail = $classController->detailClasses($classId);
       if ($classDetail) {
         $className = $classDetail['ClassName'];
         $subject = $classDetail['SubjectName'];
         $desc = $classDetail['Description'];
         $classCode = $classDetail['ClassCode'];
-      }
     }
     ?>
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur"
-      navbar-scroll="true">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <h4 class="font-weight-bolder mb-0 text-white">
-              <?php echo $className; ?>
-            </h4>
+            <h4 class="font-weight-bolder mb-0 text-white"><?php echo $className; ?></h4>
           </ol>
-          <h5 class="font-weight-bolder mb-0 text-white">
-            <?php echo $subject; ?>
-          </h5><br>
-          <p class="font-weight-bolder mb-0 text-white">Class Code
-            <?php echo $classCode; ?>
-          </p>
+          <h5 class="font-weight-bolder mb-0 text-white"><?php echo $subject; ?></h5><br>
+          <p class="font-weight-bolder mb-0 text-white">Class Code : <?php echo $classCode; ?></p>
         </nav>
 
         <!-- KOLOM SEARCH -->
@@ -255,7 +250,6 @@
     <div id="ClassWork" class="tabcontent">
       <!-- Content for ClassWork tab -->
       <div class="row">
-        <!-- BUAT TUGAS -->
         <div class="col-sm-6">
           <h5>Task</h5>
           <div class="container my-4">
@@ -266,7 +260,23 @@
             </div>
           </div>
 
-          <div class="modal fade" id="buattugasModal" tabindex="-1" role="dialog" aria-labelledby="buattugasModalLabel" aria-hidden="true">
+        <!-- BUAT TUGAS -->
+        <?php 
+        require_once __DIR__ . ('\..\function\TaskController.php');
+
+        $taskController = new TaskController();
+        if (isset($_POST['action']) && $_POST['action'] == 'create') {
+            $classId = $_SESSION['ClassId'];
+            $taskName = $_POST['taskname'];
+            $taskDesc = $_POST['taskdesc'];
+            $startDate = date('Y-m-d H:i:s');
+            $dueDate = $_POST['deadline'];
+            $attachment = $_POST['attachment'];
+
+            $message = $taskController->createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment);
+        }
+        ?>  
+          <div class="modal fade" id="buatTugasModal" tabindex="-1" role="dialog" aria-labelledby="buattugasModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
@@ -280,25 +290,23 @@
                 <div class="modal-body">
                   <form method="POST">
                     <div class="form-group">
-                      <label for="classname">Task Name</label>
-                      <input type="text" class="form-control" name="classname" id="classname"
-                        placeholder="Enter Class Name" required>
+                      <label for="taskname">Task Name</label>
+                      <input type="text" class="form-control" name="taskname" id="taskname" placeholder="Enter Class Name" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="description">Description (Optional)</label>
-                      <textarea class="form-control" name="description" id="description"
-                        placeholder="Enter Description"></textarea>
+                      <label for="taskdesc">Description (Optional)</label>
+                      <textarea class="form-control" name="taskdesc" id="taskdesc" placeholder="Enter Description"></textarea>
                     </div>
 
                     <div class="form-group">
-                      <label for="dueDate">Due Date</label>
-                      <input type="datetime-local" class="form-control" name="dueDate" id="dueDate" required>
+                      <label for="deadline">Due Date</label>
+                      <input type="datetime-local" class="form-control" name="deadline" id="deadline" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="fileUpload">Attachment</label>
-                      <input type="file" class="form-control" name="fileUpload" id="fileUpload" required>
+                      <label for="attachment">Attachment</label>
+                      <input type="file" class="form-control" name="attachment" id="attachment" required>
                     </div>
 
                     <div class="modal-footer">
@@ -311,6 +319,77 @@
             </div>
           </div>
 
+          <!-- EDIT TUGAS -->
+          <?php
+              if (isset($_POST['action']) && $_POST['action'] == 'edit') {
+                  $classId = $_POST['classId'];
+                  $className = $_POST['classname'];
+                  $subject = $_POST['subject'];
+                  $desc = $_POST['description'];
+
+                  $classController->editClass($classId, $className, $subject, $desc);
+              }
+          ?>
+          <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editKelasModalLabel">Edit Task</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <form method="POST" id="formEditClass">
+                      <input type="hidden" id="classId" name="classId" >
+
+                    <div class="form-group">
+                      <label for="classname">Class Name</label>
+                      <input type="text" class="form-control" id="classname" name="classname">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="subject">Subject Name</label>
+                      <input type="text" class="form-control" id="subject" name="subject">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="description">Description (Optional)</label>
+                      <textarea class="form-control" id="description" name="description"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="submit" name="action" value="edit" class="btn btn-primary">Save</button>
+                    </div>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+    <!-- HAPUS TUGAS -->
+    <div class="modal fade" id="hapusTugasModal" tabindex="-1" role="dialog" aria-labelledby="hapusTugasModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="hapusTugasModalLabel">Konfirmasi Hapus Tugas</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Apakah Anda yakin ingin menghapus tugas ini?</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <a href="#" class="btn btn-danger">Hapus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
           <!-- TAMPIL TUGAS -->
           <?php
           require_once __DIR__ . ('\..\function\TaskController.php');
@@ -320,19 +399,16 @@
           if (!empty($message)) {
               echo $message;
           }
-          $task = $taskController->getTask();
+          $task = $taskController->getTask($classId);
           while ($row = $task->FetchArray()) {
           ?>
         <div class="card mb-3">
           <div class="card-body">
               <div class="dropdown float-end">
-                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                      aria-expanded="false"></button>
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                   <ul class="dropdown-menu">
-                      <li><a href="#" data-toggle="modal" data-target="#editKelasModal"
-                              class="dropdown-item text-left text-dark">Edit</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal"
-                              class="dropdown-item text-left text-dark">Delete</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#editTugasModal" class="dropdown-item text-left text-dark">Edit</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#hapusTugasModal" class="dropdown-item text-left text-dark">Delete</a></li>
                   </ul>
               </div>
                   <h5 class="card-title"><?= $row['TaskName']; ?></h5>
@@ -354,8 +430,7 @@
             </div>
           </div>
 
-          <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel"
-            aria-hidden="true">
+          <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
@@ -418,12 +493,23 @@
 
     <div id="People" class="tabcontent">
       <!-- Content for People tab -->
+      <?php
+        require_once __DIR__ . ('/../database/Users.php'); 
+
+        $users = new Users();
+        $classId = $_POST['classId'];       
+      ?>
       <div class="container">
         <h4 class="mt-4">Teachers</h4>
         <div class="row">
           <div class="col-md-8">
             <ul class="list-group">
-              <li class="list-group-item">sandika galih</li>
+              <?php
+              $teacherResult = $users->ShowTeacher($classId);
+              while ($teacher = $teacherResult->FetchArray()) {
+                echo '<li class="list-group-item">' . $teacher['Username'] . '</li>';
+              }
+              ?>
             </ul>
           </div>
         </div>
@@ -434,9 +520,12 @@
         <div class="row">
           <div class="col-md-8">
             <ul class="list-group">
-              <li class="list-group-item">ihsan</li>
-              <li class="list-group-item">arya</li>
-              <li class="list-group-item">udin</li>
+            <?php
+            $studentResult = $users->ShowStudent($classId);
+            while ($student = $studentResult->FetchArray()) {
+                echo '<li class="list-group-item">' . $student['Username'] . '</li>';
+            }
+            ?>
             </ul>
           </div>
         </div>
@@ -475,28 +564,6 @@
 
     </div>
     <!-- END TAB LAYOUT -->
-
-    <!-- Hapus tugas -->
-    <div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="hapusKelasModalLabel">Konfirmasi Hapus tugas</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">Apakah Anda yakin ingin menghapus tugas ini?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-            <a href="#" class="btn btn-danger">Hapus</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- tambah tugas -->
 
     <!-- toggle button -->
     <div class="fixed-plugin">

@@ -14,8 +14,8 @@ class TaskController extends Task {
         }
     }
 
-    public function getTask() { 
-        $task = $this->ShowTask();
+    public function getTask($classId) { 
+        $task = $this->ShowTask($classId);
         return $task;
     }
 

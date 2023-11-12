@@ -20,6 +20,22 @@ class Users extends Connect {
         return $this->getResult();
     }
 
+    public function ShowTeacher($classId) { 
+        $this->sql = "SELECT users.Username 
+        FROM user_classes
+        JOIN users ON user_classes.UserId = users.UserId
+        WHERE user_classes.ClassId = $classId AND user_classes.Role = 'Guru'";
+        return $this->getResult();
+    }
+
+    public function ShowStudent($classId) {
+        $this->sql = "SELECT users.Username 
+        FROM user_classes
+        JOIN users ON user_classes.UserId = users.UserId
+        WHERE user_classes.ClassId = $classId AND user_classes.Role = 'Siswa'";
+        return $this->getResult();
+    }
+
     public function getResult() {
         $this->result = $this->dbConn()->query($this->sql);
         return $this;

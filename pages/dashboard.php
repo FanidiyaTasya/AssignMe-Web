@@ -342,37 +342,6 @@ if (!isset($_SESSION['Email'])) {
 
      <!-- Tampilan kelas -->
    <div class="col-md-9">
-   <div class="row">
-    <?php
-    $message = $classController->getMessage();
-    if (!empty($message)) {
-        echo $message;
-    }
-    $userId = $_SESSION['UserId'];
-    $classes = $classController->getClasses($userId);
-    while ($row = $classes->FetchArray()) { 
-    ?>
-    <div class="col-sm-4 mb-3 mb-sm-0">
-        <div class="card mb-4">
-            <div class="card-body">
-
-                <div class="dropdown float-end">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
-                    <p><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['SubjectName'] ?></a></p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <?php } ?>
-    </div>
 
     <!-- Edit Kelas -->
     <?php
@@ -384,7 +353,7 @@ if (!isset($_SESSION['Email'])) {
 
             $classController->editClass($classId, $className, $subject, $desc);
         }
-        ?>
+    ?>
     <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -416,7 +385,6 @@ if (!isset($_SESSION['Email'])) {
               </div>
 
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 <button type="submit" name="action" value="edit" class="btn btn-primary">Save</button>
               </div>
             </form>
@@ -424,6 +392,48 @@ if (!isset($_SESSION['Email'])) {
 
         </div>
       </div>
+    </div>
+
+    <!-- CARD CLASS -->
+   <div class="row">
+    <?php
+      $message = $classController->getMessage();
+      if (!empty($message)) {
+          echo $message;
+      }
+      $userId = $_SESSION['UserId'];
+      $classes = $classController->getClasses($userId);
+      while ($row = $classes->FetchArray()) { 
+    ?>
+    <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="card mb-4">
+            <div class="card-body">
+              
+                <div class="dropdown float-end">
+                    <i class="fas text-muted dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                    <ul class="dropdown-menu"  aria-labelledby="dropdownMenuLink">
+                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
+                    </ul>
+                </div>
+
+                <!-- <div class="dropdown float-end">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
+                    </ul>
+                </div> -->
+
+                <div>
+                    <h4><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
+                    <p><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['SubjectName'] ?></a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <?php } ?>
     </div>
 
 </div>

@@ -11,8 +11,8 @@ class Task extends Connect {
         return $this-> getResult();
     }
 
-    public function ShowTask() {
-        $this->sql = "SELECT * FROM task";
+    public function ShowTask($classId) {
+        $this->sql = "SELECT * FROM task WHERE ClassId = '$classId'";
         return $this-> getResult();
     }
 
