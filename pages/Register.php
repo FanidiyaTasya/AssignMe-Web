@@ -43,8 +43,8 @@ if (isset($_POST['submit'])) {
 				    ?>
 
                     <form class="common-form" method="POST">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your username">
+                        <label for="username" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name">
 
                         <label for = "email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email">
