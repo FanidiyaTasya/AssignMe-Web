@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Archived Class</title>
-
-
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>AssignMe</title>
@@ -271,21 +264,24 @@
     </nav>
     <!-- End Navbar -->
     
-
-    <?php
-    if (isset($_GET['classId'], $_GET['className'], $_GET['subjectName'], $_GET['description'])) {
-        $classId = $_GET['classId'];
-        $className = $_GET['className'];
-        $subjectName = $_GET['subjectName'];
-        $description = $_GET['description'];
-
-        echo "<p>Archived Class: $className</p>";
-        echo "<p>Subject: $subjectName</p>";
-        echo "<p>Description: $description</p>";
-    } else {
-        echo "<p>No archived classes.</p>";
-    }
-    ?>
+    <div class="col-md-9">
+      <div class="row">
+       <div class="col-sm-4 mb-3 mb-sm-0">
+           <div class="card mb-4">
+               <div class="card-body">
+                   <div class="dropdown float-end">
+                       <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                       <ul class="dropdown-menu">
+                           <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark">Delete</a></li>
+                           <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Restore</a></li>
+                       </ul>
+                   </div>
+                   <h4><a href="#" class="card-title">Kelas 9E  </a></h4>
+                   <p><a href="#" class="card-text">Matematika</a></p>
+               </div>
+           </div>
+       </div>
+   </div>
    
    <!-- Hapus Kelas -->
    <div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel" aria-hidden="true">
