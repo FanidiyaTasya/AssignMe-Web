@@ -45,7 +45,7 @@ if (!isset($_SESSION['Email'])) {
     <div class="collapse navbar-collapse  w-auto color-blue max-height-vh-100 h-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman Buat Kelas</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
         </li>
 
         <li class="nav-item">
@@ -92,7 +92,7 @@ if (!isset($_SESSION['Email'])) {
         </li>
 
         <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Halaman buat gabung kelas</h6>
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Option</h6>
         </li>
         <li class="nav-item">
           <a class="nav-link  " href="../pages/arsip.html">
@@ -111,12 +111,12 @@ if (!isset($_SESSION['Email'])) {
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Archive class</span>
+            <span class="nav-link-text ms-1">Archive Class</span>
           </a>
         </li>
        
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/sign-in.html">
+          <a class="nav-link  " href="#">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
@@ -132,11 +132,11 @@ if (!isset($_SESSION['Email'])) {
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Sign In</span>
+            <span class="nav-link-text ms-1">Settings</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/sign-up.html">
+          <a class="nav-link  " href="#">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="20px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>spaceship</title>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['Email'])) {
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
+            <span class="nav-link-text ms-1">Log Out</span>
           </a>
         </li>
       </ul>
@@ -187,7 +187,7 @@ if (!isset($_SESSION['Email'])) {
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <span class="d-sm-inline d-none">Tasya</span>
               </a>
             </li>
 
