@@ -10,20 +10,6 @@
 //     popupMenu.style.display = 'none';
 // });
 
-// tampil kelas
-$(document).ready(function() {
-    $('.class-link').click(function(e) {
-        e.preventDefault();
-
-        var classId = $(this).data('class-id');
-        var form = $('<form action="Class.php" method="post"><input type="hidden" name="classId" value="' + classId + '"></form>');
-        $('body').append(form);
-        form.submit();
-
-        return false;
-    });
-});
-
 // edit kelas
 $(document).ready(function () {
     $('.editKelasModalLink').on('click', function () {

@@ -1,3 +1,14 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#tab-container {
+  display: flex;
+  background-color: #f2f2f2;
+  justify-content: center; 
+}
+
 .tab {
   overflow: hidden;
   background-color: #f2f2f2;
@@ -11,18 +22,31 @@
   padding: 14px 20px; 
   text-decoration: none;
   transition: 0.3s;
-  margin: 0 auto; 
 }
 
-.tab a.active {
-  background-color: #363F71;
-  color: #fff;
+.tab:hover {
+  background-color: #ddd;
 }
 
-.tabcontent {
+.tab.active a {
+  color: white; 
+  background-color: #023368 !important; 
+}
+
+.tab-content {
   display: none;
   padding: 20px;
   border: 1px solid #ccc;
-  background-color: #ffffff;
 }
 
+#tab-container .tab a {
+  text-decoration: none !important;
+}
+
+#ClassworkTabContent {
+  display: block;
+}
+
+#tab-container .tab a:hover {
+  color: #333 !important; 
+}
