@@ -337,8 +337,6 @@ if (!isset($_SESSION['Email'])) {
       $classes = $classController->getClasses($userId);
       while ($row = $classes->FetchArray()) { 
     ?>
-    
-
     <div class="col-sm-4 mb-3 mb-sm-0">
         <div class="card mb-4">
             <div class="card-body">
@@ -351,17 +349,12 @@ if (!isset($_SESSION['Email'])) {
                     </ul>
                 </div>
 
-                <!-- <div class="dropdown float-end">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
-                    </ul>
-                </div> -->
-
                 <div>
-                    <h4><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
-                    <p><a href="#" class="class-link" data-class-id="<?= $row['ClassId'] ?>"><?= $row['SubjectName'] ?></a></p>
+                    <!-- <h4><a href="#" class="class-link" data-class-id="<= $row['ClassId'] ?>"><= $row['ClassName'] ?></a></h4>
+                    <p><a href="#" class="class-link" data-class-id="<= $row['ClassId'] ?>"><= $row['SubjectName'] ?></a></p> -->
+                    
+                    <h4><a href="Class.php?classId=<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
+                    <p><a href="Class.php?classId=<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></p>
                 </div>
 
             </div>
