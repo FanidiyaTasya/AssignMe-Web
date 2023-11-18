@@ -91,12 +91,12 @@ if (!isset($_SESSION['Email'])) {
           </a>
         </li>
 
-        <!-- <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Option</h6>
-        </li> -->
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Profile</h6>
+        </li>
        
         <li class="nav-item">
-          <a class="nav-link  " href="arsip.html">
+          <a class="nav-link  " href="Profile.html">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
@@ -156,8 +156,12 @@ if (!isset($_SESSION['Email'])) {
             <li class="nav-item px-2 d-flex align-items-center">
               <li class="nav-item dropdown pe-2 d-flex">
                 <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-user cursor-pointer fa-lg"></i>
-                    <span class="d-sm-inline d-none">Fanidiya Tasya</span>
+                <div class="d-flex align-items-center"> 
+                  <div class="avatar avatar-sm me-3">
+                    <img src="../assets/img/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+                  </div>
+                  <span class="d-sm-inline d-none">Fanidiya Tasya</span>
+                </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   

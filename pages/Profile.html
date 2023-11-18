@@ -3,36 +3,23 @@
 
 <head>
   <title>AssignMe</title>
-
-
-
   <style>
     body {
-      background-color: #f8f9fa;
-    }
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+  }
 
-    .container {
-      margin-top: 5rem;
-    }
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 
-    .card2 {
-      border: none;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-body {
-      display: flex;
-      align-items: center;
-    }
-
-    .profile-image {
-      width: 100px;
-      /* Adjust the width as needed */
-      height: 100px;
-      /* Adjust the height as needed */
-      border-radius: 50%;
-      margin-right: 20px;
-    }
+  input[type="file"] {
+    display: none;
+  }
   </style>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -128,12 +115,12 @@
           </a>
         </li>
 
-        <!-- <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Option</h6>
-        </li> -->
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Profile</h6>
+        </li>
 
         <li class="nav-item">
-          <a class="nav-link  active" href="arsip.html">
+          <a class="nav-link  active" href="Profile.html">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -155,7 +142,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Archive</span>
+            <span class="nav-link-text ms-1">Profile</span>
           </a>
         </li>
 
@@ -173,9 +160,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Classes</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Profile</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0  text-white">To Review</h6>
+          <h6 class="font-weight-bolder mb-0  text-white">Profile</h6>
         </nav>
 
         <!-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -196,19 +183,22 @@
           </a>
         </li>
 
-
         <!-- DROPDOWN -->
         <li class="nav-item px-2 d-flex align-items-center">
         <li class="nav-item dropdown pe-2 d-flex">
-          <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <i class="fa fa-user cursor-pointer fa-lg"></i>
-            <span class="d-sm-inline d-none">Fanidiya Tasya</span>
+          <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- <i class="fa fa-user cursor-pointer fa-lg"></i> -->
+            <div class="d-flex align-items-center"> 
+              <div class="avatar avatar-sm me-3">
+                <img src="../assets/img/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+              </div>
+              <span class="d-sm-inline d-none">Fanidiya Tasya</span>
+            </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
 
             <li>
-              <a class="dropdown-item border-radius-md" href="path/to/logout">
+              <a class="dropdown-item border-radius-md" href="#">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
                     <i class="text-dark fa fa-pencil-alt"></i>
@@ -221,7 +211,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item border-radius-md" href="path/to/change-password">
+              <a class="dropdown-item border-radius-md" href="#">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
                     <i class="text-dark fa fa-lock"></i>
@@ -234,7 +224,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item border-radius-md" href="path/to/logout">
+              <a class="dropdown-item border-radius-md" href="#">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
                     <i class=" text-dark fa fa-sign-out"></i>
@@ -258,56 +248,60 @@
     </nav>
     <!-- End Navbar -->
 
-    <!-- DEADLINE -->
+    <!-- EDIT PROFILE -->
     <div class="container mt-4">
-      <div class="card">
-
-        <div class="card2">
-          <div class="card-body">
-            <img src="https://placekitten.com/100/100" class="profile-image" alt="Profile Image">
-            <div>
-              <h5 class="card-title mb-2">username</h5>
-              <p class="card-text">email: user123@gmail.com</p>
+      <div class="row">
+       <!-- Container 1: Foto Profil -->
+<div class="col-md-4">
+  <div class="card">
+    <div class="card-body text-center">
+      <label for="file-input">
+        <img src="../assets/img/user-picture.jpg" class="profile-image" alt="Profile Image">
+        <h5 class="card-title mt-3">Fanidiya Tasya</h5>
+      </label>
+      <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
+      <button class="btn btn-primary mt-2" onclick="document.getElementById('file-input').click()">Change Photo</button>
+    </div>
+  </div>
+</div>
+        <!-- Container 2: Formulir Edit Profil -->
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <form class="common-form" method="POST" enctype="multipart/form-data">
+    
+                <div class="form-group">
+                  <label for="username">Name</label>
+                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name" required>
+                </div>
+    
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                </div>
+    
+                <button class="btn btn-primary btn-block" type="submit" name="submit">Save</button>
+              </form>
             </div>
           </div>
         </div>
-        <form class="common-form" method="POST" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="username">Name</label>
-            <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name"
-              required>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password"
-              required>
-          </div>
-
-          <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" class="form-control" name="confirm-password" id="confirm-password"
-              placeholder="Confirm your password" required>
-          </div>
-
-          <div class="form-group">
-            <label for="profile-image">Profile Image</label>
-            <input type="file" class="form-control-file" name="profile-image" id="profile-image" accept="image/*">
-          </div>
-
-          <button class="btn btn-primary btn-block" type="submit" name="submit">Save</button>
-        </form>
       </div>
     </div>
-    </div>
-    </div>
+    
 
-
+    <!-- JavaScript untuk mengganti foto profil -->
+<script>
+  function changeProfilePicture(event) {
+    const input = event.target;
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.querySelector('.profile-image').src = e.target.result;
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
 
     <!--   Core JS Files   -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
