@@ -194,9 +194,13 @@
             $taskName = $_POST['taskname'];
             $taskDesc = $_POST['taskdesc'];
             $startDate = date('Y-m-d H:i:s');
-            $dueDate = $_POST['deadline'];
-            $attachment = $_POST['attachment'];
+            $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
+            $attachment = $_FILES['attachment'];
 
+            if (!$taskController->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
+              echo "Error: File tidak valid.";
+              return;
+          }
             $message = $taskController->createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment);
         }
         ?>  
@@ -212,7 +216,7 @@
                 </div>
 
                 <div class="modal-body">
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="taskname">Task Name</label>
                       <input type="text" class="form-control" name="taskname" id="taskname" placeholder="Enter Class Name" required>
@@ -230,7 +234,7 @@
 
                     <div class="form-group">
                       <label for="attachment">Attachment</label>
-                      <input type="file" class="form-control" name="attachment" id="attachment" required>
+                      <input type="file" class="form-control" name="attachment" id="attachment" accept=".pdf, .doc, .docx, .txt, .pptx, .ppt">
                     </div>
 
                     <div class="modal-footer">
@@ -339,6 +343,7 @@
               </div>
                   <h5 class="card-title" ><?= $row['TaskName']; ?></h5>
                   <p class="card-text"><?= $row['TaskDesc']; ?></p>
+                  <a href="/AssignMe/file/<?= $row['Attachment']; ?>" download><?= $row['Attachment']; ?></a><br><br>
                   <a href="#" class="btn btn-primary">View Assignment</a>
               </div>
           </div>
