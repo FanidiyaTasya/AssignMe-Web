@@ -148,7 +148,8 @@
             <h4 class="font-weight-bolder mb-0 text-white"><?php echo $className; ?></h4>
           </ol>
           <h5 class="font-weight-bolder mb-0 text-white"><?php echo $subject; ?></h5><br>
-          <p class="font-weight-bolder mb-0 text-white">Class Code : <?php echo $classCode; ?></p>
+          <h5 class="font-weight-bolder mb-0 text-white">code class:</h5>
+          <p class="font-weight-bolder mb-0 text-white"  class="copy-container" contenteditable="true" id="copyContainer" onclick="copyCode()" > <?php echo $classCode; ?></p>
         </nav>
 
         <!-- KOLOM SEARCH -->
@@ -504,6 +505,28 @@
     </div>
     <!-- END TAB LAYOUT -->
     </main>
+
+    <script>
+        function copyCode() {
+            // Pilih elemen dengan id 'copyContainer'
+            var copyContainer = document.getElementById('copyContainer');
+
+            // Buat salinan dari isi elemen
+            var range = document.createRange();
+            range.selectNode(copyContainer);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+
+            // Salin ke clipboard
+            document.execCommand('copy');
+
+            // Bersihkan seleksi
+            window.getSelection().removeAllRanges();
+
+            // Berikan umpan balik atau tampilkan notifikasi
+            alert('Code copied to clipboard!');
+        }
+    </script>
 
     <!--  JS Files   -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
