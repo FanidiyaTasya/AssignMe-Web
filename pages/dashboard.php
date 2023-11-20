@@ -192,13 +192,13 @@ if (!isset($_SESSION['Email'])) {
                     </li>
   
                     <li>
-                        <a class="dropdown-item border-radius-md" href="path/to/logout">
+                        <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">
                                     <i class=" text-dark fa fa-sign-out"></i>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">Log Out</h6>
+                                    <h6  class="text-sm font-weight-normal mb-1">Log Out</h6>
                                 </div>
                             </div>
                         </a>
