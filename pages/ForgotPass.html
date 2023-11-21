@@ -4,14 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OTP Verification</title>
+    <title>Forgot Password</title>
+
+        <!-- FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+        
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha384-e3YsXl83pVtISBB8pTgRXPICw2vUd49b2T6QqcgfsrXSw5tdP5J/BbSLPWepXkz" crossorigin="anonymous">
     <style>
+        *{ 
+
+    font-family: 'Poppins', sans-serif; 
+}
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -19,18 +29,18 @@
             height: 100vh;
         }
 
-        .otp-form {
-            background-color: #fff;
+        .forgot-password-form {
+            background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
+            padding: 20px;
             width: 300px;
             text-align: center;
         }
 
-        .otp-form h3 {
-            color: #465e77;
-            margin-bottom: 20px;
+        .forgot-password-form h3 {
+            color: #506880;
+            margin-bottom: 10px;
         }
 
         .form-description {
@@ -39,36 +49,32 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
-            color: #333;
         }
 
         .form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
-            outline: none;
-            font-size: 14px;
         }
 
         .form-group button {
             width: 100%;
+            /* Set the button width to 100% */
             background-color: #007bff;
             color: #fff;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
         }
 
         .form-group button:hover {
@@ -76,7 +82,7 @@
         }
 
         .back-to-login {
-            margin-top: 20px;
+            margin-top: 10px;
             text-align: center;
         }
 
@@ -86,7 +92,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
         }
 
         .back-to-login i {
@@ -97,28 +102,34 @@
 
 <body>
 
-    <div class="otp-form">
-        <i class="fas fa-shield-alt fa-3x" style="color: #007bff;"></i>
-        <img src="../assets/img/search.png" alt="Click to view image">
-        <h3>OTP Verification</h3>
-        <p class="form-description">Enter the OTP sent to your email address to verify your identity.</p>
+    <div class="forgot-password-form">
+        <i class="fas fa-lock fa-3x" style="color: #007bff;"></i>
+        <img src="../assets/img/amnesia.png" alt="Click to view image">
+        <h3>Forgot Password</h3>
+        <p class="form-description">Enter your email address and we'll send you an email with instructions to reset your
+            password.</p>
         <form method="POST">
             <div class="form-group">
-                <label for="otp">Enter OTP:</label>
-                <input type="text" id="otp" name="otp" required>
+                <label for="email">Email address:</label>
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <input type="email" id="email" name="email" required>
+                </div>
             </div>
 
             <div class="form-group">
-                <button type="submit">
-                    <i class="fas fa-check"></i> Verify
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-key"></i> Submit
                 </button>
             </div>
         </form>
 
         <div class="back-to-login">
-            <a href="#">
-                <i class="fas fa-arrow-left"></i>  < forgot password
-            </a>
+            <a href="Login.php">
+                <i class="fas fa-arrow-left"></i>
+                < Back to Login </a>
         </div>
     </div>
 

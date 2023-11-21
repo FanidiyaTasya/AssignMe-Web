@@ -197,7 +197,7 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
 
-            <li>
+            <!-- <li>
               <a class="dropdown-item border-radius-md" href="#">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
@@ -208,7 +208,7 @@
                   </div>
                 </div>
               </a>
-            </li>
+            </li> -->
 
             <li>
               <a class="dropdown-item border-radius-md" href="#">
@@ -252,18 +252,19 @@
     <div class="container mt-4">
       <div class="row">
        <!-- Container 1: Foto Profil -->
-<div class="col-md-4">
-  <div class="card">
-    <div class="card-body text-center">
-      <label for="file-input">
-        <img src="../assets/img/user-picture.jpg" class="profile-image" alt="Profile Image">
-        <h5 class="card-title mt-3">Fanidiya Tasya</h5>
-      </label>
-      <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
-      <button class="btn btn-primary mt-2" onclick="document.getElementById('file-input').click()">Change Photo</button>
+       <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <label for="file-input">
+                    <img src="../assets/img/user-picture.jpg" class="profile-image img-fluid" alt="Profile Image">
+                    <h5 class="card-title mt-3">Fanidiya Tasya</h5>
+                </label>
+                <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
+                <!-- <button class="btn btn-primary mt-2" onclick="document.getElementById('file-input').click()">Change Photo</button> -->
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+    
         <!-- Container 2: Formulir Edit Profil -->
         <div class="col-md-8">
           <div class="card">
@@ -278,6 +279,17 @@
                 <div class="form-group">
                   <label for="email">Email</label>
                   <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="mb-3 row"> 
+                    <label for="exampleFormControlSelect1" class="form-label col-md-3">Gender</label>
+                    <div class="col-md-9"> 
+                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="1">Laki-Laki</option>
+                            <option value="2">Perempuan</option>
+                        </select>
+                    </div>
                 </div>
     
                 <button class="btn btn-primary btn-block" type="submit" name="submit">Save</button>
