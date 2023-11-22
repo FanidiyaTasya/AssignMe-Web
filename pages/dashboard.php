@@ -200,7 +200,7 @@ $username = $_SESSION['Username'];
                                     <i class=" text-dark fa fa-sign-out"></i>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h6  class="text-sm font-weight-normal mb-1">Log Out</h6>
+                                    <h6  class="text-sm font-weight-normal mb-1" onclick="confirmLogout()">Log Out</h6>
                                 </div>
                             </div>
                         </a>
@@ -415,7 +415,7 @@ $username = $_SESSION['Username'];
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  <script src="../assets/js/logout.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
