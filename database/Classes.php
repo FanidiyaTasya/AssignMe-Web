@@ -4,13 +4,11 @@ require_once('Connect.php');
 class Classes extends Connect {
     protected $sql;
     protected $result;
+    protected $errorMessage;
 
     public function InsertClass($className, $subject, $desc, $classCode) {
         $this->sql = "INSERT INTO classes (ClassName, SubjectName, Description, ClassCode) VALUES ('$className', '$subject', '$desc', '$classCode')";
         return $this->getResult();
-        $classId = $this->dbConn()->insert_id;
-
-        return $classId;
     }
 
     public function InsertUserClasses($userId, $classId) {
@@ -23,6 +21,24 @@ class Classes extends Connect {
         JOIN user_classes ON classes.ClassId = user_classes.ClassId
         JOIN users ON user_classes.UserId = users.UserId WHERE users.UserId = '$userId'";
         return $this->getResult();
+    }
+
+    public function isClassExists($className, $subject) {
+        $query = "SELECT COUNT(*) as count FROM classes WHERE LOWER(ClassName) = LOWER('$className') AND LOWER(SubjectName) = LOWER('$subject')";
+        $result = $this->dbConn()->query($query);
+
+        $count = 0;
+        if (!$result) {
+            $this->errorMessage = $this->dbConn()->error;
+        } else {
+            $row = $result->fetch_assoc();
+
+            if ($row) {
+                $count = $row['count'];
+            }
+            $result->free_result();
+        }
+        return $count > 0;
     }
 
     public function UpdateClass($classId, $className, $subject, $desc) {
@@ -42,12 +58,19 @@ class Classes extends Connect {
 
     public function getResult() {
         $this->result = $this->dbConn()->query($this->sql);
+        if (!$this->result) {
+            $this->errorMessage = $this->dbConn()->error;
+        }
         return $this;
     }
 
     public function FetchArray() {
         $row = $this->result->fetch_array();
         return $row;
+    }
+
+    public function getErrorMessage() {
+        return $this->errorMessage;
     }
 }
 

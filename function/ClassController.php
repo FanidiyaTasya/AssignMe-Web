@@ -5,30 +5,51 @@ class ClassController extends Classes {
     protected $message;
 
     public function createClass($className, $subject, $desc, $userId) {
-        $classCode = $this->ClassCode(6);
-        $result = $this->InsertClass($className, $subject, $desc, $classCode, $userId);
-    
-        if ($result) {
-            $classId = $this->getClassId($className, $subject, $userId);
-    
-            if ($classId) {
-                $role = 'Guru';
-                $this->InsertUserClasses($userId, $classId, $role);
-                // echo "Class created successfully.";
-            } else {
-                echo "Error getting classId.";
+        try {
+            if ($this->isClassExists($className, $subject)) {
+                echo "Kelas ini sudah tersedia.";
+                return;
             }
-        } else {
-            echo "Error creating class.";
+    
+            $classCode = $this->ClassCode(6);
+            $result = $this->InsertClass($className, $subject, $desc, $classCode);
+    
+            if ($result) {
+                $classId = $this->getClassId($className, $subject);
+    
+                if ($classId) {
+                    $this->InsertUserClasses($userId, $classId);
+                    echo "Class created successfully.";
+                } else {
+                    throw new Exception("Error getting classId.");
+                }
+            } else {
+                throw new Exception("Error creating class.");
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
 
     public function editClass($classId, $className, $subject, $desc) {
         $result = $this->UpdateClass($classId, $className, $subject, $desc);
         if ($result) {
-            // echo 'Berhasil edit kelas';
+            echo 'Berhasil edit kelas';
         } else {
             echo 'Gagal edit kelas.';
+        }
+    }
+    
+    public function hapusClass($classId, $userId) {
+        if (empty($classId) || empty($userId)) {
+            echo 'Missing userId or classId.';
+            return;
+        }
+        $result = $this->DeleteClass($classId, $userId);
+        if ($result) {
+            echo 'Berhasil hapus kelas';
+        } else {
+            echo 'Gagal hapus kelas.';
         }
     }
     
@@ -63,8 +84,8 @@ class ClassController extends Classes {
         }
     }  
 
-    public function getClassId($className, $subject, $userId) { // userclasses
-        $this->sql = "SELECT ClassId FROM classes WHERE ClassName = '$className' AND SubjectName = '$subject' AND UserId = '$userId'";
+    public function getClassId($className, $subject) { // getClassId -> userclasses
+        $this->sql = "SELECT ClassId FROM classes WHERE ClassName = '$className' AND SubjectName = '$subject'";
         $result = $this->getResult();
     
         if ($result) {
@@ -74,7 +95,5 @@ class ClassController extends Classes {
             return null;
         }
     }   
-
 }
-
 ?>
