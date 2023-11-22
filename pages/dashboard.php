@@ -4,6 +4,7 @@ if (!isset($_SESSION['Email'])) {
     header('Location: Login.php');
     exit();
 }
+$username = $_SESSION['Username'];
 ?>
 
 <!DOCTYPE html>
@@ -126,6 +127,16 @@ if (!isset($_SESSION['Email'])) {
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
 
+        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+          <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </a>
+        </li>
+
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
@@ -142,15 +153,6 @@ if (!isset($_SESSION['Email'])) {
             </div>
           </div> -->
 
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
 
             <!-- DROPDOWN -->
             <li class="nav-item px-2 d-flex align-items-center">
@@ -160,13 +162,13 @@ if (!isset($_SESSION['Email'])) {
                   <div class="avatar avatar-sm me-3">
                     <img src="../assets/img/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
                   </div>
-                  <span class="d-sm-inline d-none">Fanidiya Tasya</span>
+                  <span class="d-sm-inline d-none"><?php echo $username; ?></span>
                 </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   
                     <li>
-                        <a class="dropdown-item border-radius-md" href="path/to/logout">
+                        <!-- <a class="dropdown-item border-radius-md" href="path/to/logout">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">
                                     <i class="text-dark fa fa-pencil-alt"></i>
@@ -176,7 +178,7 @@ if (!isset($_SESSION['Email'])) {
                                 </div>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
   
                     <li>
                         <a class="dropdown-item border-radius-md" href="path/to/change-password">
@@ -250,31 +252,68 @@ if (!isset($_SESSION['Email'])) {
           </div>
 
           <div class="modal-body">
-            <form method="POST">
-              <div class="form-group">
-                <label for="classname">Class Name</label>
-                <input type="text" class="form-control" name="classname" id="classname" placeholder="Enter Class Name" required>
-              </div>
+              <form method="POST">
+                  <div class="form-group">
+                      <label for="classname">Class Name</label>
+                      <input class="form-control" name="classname" id="classname" placeholder="Enter Class Name"></input>
+                  </div>
 
-              <div class="form-group">
-                <label for="subject">Subject Name</label>
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Enter Subject Name" required>
-              </div>
+                  <div class="form-group">
+                      <label for="subject">Subject Name</label>
+                      <input class="form-control" name="subject" id="subject" placeholder="Enter Subject Name"></input>
+                  </div>
 
-              <div class="form-group">
-                <label for="description">Description (Optional)</label>
-                <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
-              </div>
+                  <div class="form-group">
+                      <label for="description">Description (Optional)</label>
+                      <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
+                  </div>
 
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" name="action" value="create">Save</button>
-              </div>
-            </form>
+                  <div class="modal-footer">
+                      <button type="submit" name="action" value="create" class="btn btn-primary">Save</button>
+                  </div>
+              </form>
           </div>
 
         </div>
       </div>
     </div>
+
+    <!-- HAPUS KELAS -->
+    <?php 
+    if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+        $classId = $_POST["classId"];
+        $userId = $_POST["userId"];
+
+        $classController->hapusClass($classId, $userId);
+    }
+    ?>
+
+    <div class="modal fade" id="hapusKelasModal" tabindex="-1" role="dialog" aria-labelledby="hapusKelasModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hapusKelasModalLabel">Confirm Delete Class</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure want to delete this class?</p>
+                    <form method="POST">
+                        <input type="hidden" name="classId" id="deleteClassId" value="<?= $row['ClassId'] ?>">
+                        <input type="hidden" name="userId" id="deleteUserId" value="<?= $row['UserId'] ?>">
+
+                        <div class="modal-footer">
+                          <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 
      <!-- Tampilan kelas -->
    <div class="col-md-12">
@@ -349,7 +388,7 @@ if (!isset($_SESSION['Email'])) {
                     <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
                         <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#" class="dropdown-item text-left text-dark">Archive</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark deleteClassBtn" data-class-id="<?= $row['ClassId'] ?>" data-user-id="<?= $userId ?>">Delete</a></li>
                     </ul>
                 </div>
 
@@ -358,7 +397,7 @@ if (!isset($_SESSION['Email'])) {
                     <p><a href="#" class="class-link" data-class-id="<= $row['ClassId'] ?>"><= $row['SubjectName'] ?></a></p> -->
                     
                     <h4><a href="Class.php?classId=<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></h4>
-                    <p><a href="Class.php?classId=<?= $row['ClassId'] ?>"><?= $row['ClassName'] ?></a></p>
+                    <p><a href="Class.php?classId=<?= $row['ClassId'] ?>"><?= $row['SubjectName'] ?></a></p>
                 </div>
 
             </div>
