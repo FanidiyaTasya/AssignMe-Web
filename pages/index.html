@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
 
@@ -9,10 +10,10 @@
     <!--Meta Keywords and Description-->
     <meta name="keywords" content="">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="../assets/img/favicon.ico" title="Favicon"/>
+    <link rel="shortcut icon" href="../assets/img/favicon.ico" title="Favicon" />
 
     <!-- Main CSS Files -->
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -33,7 +34,7 @@
 
 
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
             margin: 0;
@@ -67,207 +68,259 @@
         .feature-description {
             color: #555;
         }
+
         .logo {
             display: flex;
             align-items: center;
         }
 
         .logo img {
-            width: 50px; /* Sesuaikan ukuran logo sesuai kebutuhan */
+            width: 50px;
+            /* Sesuaikan ukuran logo sesuai kebutuhan */
             height: 50px;
-            margin-right: 10px; /* Jarak antara logo dan teks */
+            margin-right: 10px;
+            /* Jarak antara logo dan teks */
+        }
+
+        .feature {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Menghilangkan spasi ekstra di sekitar gambar */
+            margin: 0 auto; /* Pusatkan gambar di dalam kontainer jika diperlukan */
+        }
+
+     
+        #feature1 {
+            background-color: #4352c3d9;
+            /* Ganti dengan warna latar belakang yang diinginkan */
+            padding: 20px;
+        }
+
+        /* Styling untuk link di dalam #feature1 */
+      
+        #feature1 .feature-description1 {
+         color: #202642; 
+         font-size: 20px;
         }
     </style>
 
 </head>
+
 <body>
 
-<!-- Preloader -->
-<div id="preloader">
-    <div id="status" class="la-ball-triangle-path">
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status" class="la-ball-triangle-path">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-</div>
-<!--End of Preloader-->
+    <!--End of Preloader-->
 
-<div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
-    <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
-    <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
-    <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
-    <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
-</div>
+    <div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+        <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+        <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;">
+        </div>
+        <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+        <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+    </div>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
-        <div id="header" class="nav-collapse">
-            <div class="row clearfix">
-                <div class="col-1">
+        <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+            <div id="header" class="nav-collapse">
+                <div class="row clearfix">
+                    <div class="col-1">
 
-                    <!--Logo-->
-                <div class="logo">
-                    <img src="../assets/img/logo2.png" alt="logo">
-                    <h4>AssignMe</h4>
+                        <!--Logo-->
+                        <div class="logo">
+                            <img src="../assets/img/logo2.png" alt="logo">
+                            <h4>AssignMe</h4>
+                        </div>
+
+                        <!--Main Navigation-->
+                        <nav id="nav-main">
+                            <ul>
+                                <li>
+                                    <a href="#banner">Home</a>
+                                </li>
+                                <li>
+                                    <a href="#about">Feature</a>
+                                </li>
+                                <li>
+                                    <a href="#12">About</a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--End of Main Navigation-->
+
+                        <div id="nav-trigger"><span></span></div>
+                        <nav id="nav-mobile"></nav>
+
+                    </div>
                 </div>
+            </div><!--End of Header-->
 
-                    <!--Main Navigation-->
-                    <nav id="nav-main">
-                        <ul>
-                            <li>
-                                <a href="#banner">Home</a>
-                            </li>
-                            <li>
-                                <a href="#about">About</a>
-                            </li>
-                            <li>
-                                <a href="#12">Feature</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!--End of Main Navigation-->
+            <!--Banner Content-->
+            <div id="banner-content" class="row clearfix">
 
-                    <div id="nav-trigger"><span></span></div>
-                    <nav id="nav-mobile"></nav>
+                <div class="col-38">
 
-                </div>
-            </div>
-        </div><!--End of Header-->
 
-        <!--Banner Content-->
-        <div id="banner-content" class="row clearfix">
-
-            <div class="col-38">
-                
-              
-                <div class="section-heading">
-                    <h1>Mulai menjelajahi fitur yang tersedia di AssingMe</h1>
-                    <h2>Dapatkan ide segar dan inspirasi untuk proyek atau hobi anda. Gabung sekarang gratis.</h2>
-                </div>
-
-                <!--Call to Action-->
-                <a href="Login.php" class="button">Mulai</a>
-                <!--End Call to Action-->
-
-            </div>
-
-        </div><!--End of Row-->
-    </header>
-
-    <!--Main Content Area-->
-    <main id="content">
-
-        <!--Introduction-->
-        <section id="about" class="introduction scrollto">
-
-            <div class="row clearfix">
-
-                <div class="col-3">
                     <div class="section-heading">
-                        <h3>SUCCESS</h3>
-                        <h2 class="section-title">Beberapa fitur yang bisa anda dapatkan di AssignMe</h2>
-                        <p class="section-subtitle">Fitur-fitur ini dikembangkan oleh tim pengembang perangkat lunak dan memerlukan pemeliharaan berkala untuk memastikan kinerjanya tetap optimal dan sesuai dengan perubahan dalam kebutuhan pengguna.</p>
+                        <h1>Mulai menjelajahi fitur yang tersedia di AssingMe</h1>
+                        <h2>Dapatkan ide segar dan inspirasi untuk proyek atau hobi anda. Gabung sekarang gratis.</h2>
                     </div>
+
+                    <!--Call to Action-->
+                    <a href="Login.php" class="button">Mulai</a>
+                    <!--End Call to Action-->
 
                 </div>
 
-                <div class="col-2-3">
+            </div><!--End of Row-->
+        </header>
 
-                    <!--Icon Block-->
-                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
-                        <!--Icon-->
-                        <div class="icon">
-                            <i class="fa fa-solid fa-briefcase fa-2x"></i>
+        <!--Main Content Area-->
+        <main id="content">
+
+            <!--Introduction-->
+            <section id="about" class="introduction scrollto">
+
+                <div class="row clearfix">
+
+                    <div class="col-3">
+                        <div class="section-heading">
+                            <h3>SUCCESS</h3>
+                            <h2 class="section-title">Beberapa fitur yang bisa anda dapatkan di AssignMe</h2>
+                            <p class="section-subtitle">Fitur-fitur ini dikembangkan oleh tim pengembang perangkat lunak
+                                dan memerlukan pemeliharaan berkala untuk memastikan kinerjanya tetap optimal dan sesuai
+                                dengan perubahan dalam kebutuhan pengguna.</p>
                         </div>
-                        <!--Icon Block Description-->
-                        <div class="icon-block-description">
-                            <h4>Pengumpulan Tugas</h4>
-                            <p>Tersedia Form pengumpulan tugas buat pengajar dan siswa </p>
-                        </div>
+
                     </div>
-                    <!--End of Icon Block-->
 
-                    <!--Icon Block-->
-                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
-                        <!--Icon-->
-                        <div class="icon">
-                            <i class="fa fa-bolt fa-2x"></i>
+                    <div class="col-2-3">
+
+                        <!--Icon Block-->
+                        <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
+                            <!--Icon-->
+                            <div class="icon">
+                                <i class="fa fa-solid fa-briefcase fa-2x"></i>
+                            </div>
+                            <!--Icon Block Description-->
+                            <div class="icon-block-description">
+                                <h4>Pengumpulan Tugas</h4>
+                                <p>Tersedia Form pengumpulan tugas buat pengajar dan siswa </p>
+                            </div>
                         </div>
-                        <!--Icon Block Description-->
-                        <div class="icon-block-description">
-                            <h4>Penilaian Tugas</h4>
-                            <p>Para pengampu dapat memberikan nilai secara langsung kepada siswa yang sudah mengumpulkan tugas</p>
+                        <!--End of Icon Block-->
+
+                        <!--Icon Block-->
+                        <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.3s">
+                            <!--Icon-->
+                            <div class="icon">
+                                <i class="fa fa-bolt fa-2x"></i>
+                            </div>
+                            <!--Icon Block Description-->
+                            <div class="icon-block-description">
+                                <h4>Penilaian Tugas</h4>
+                                <p>Para pengampu dapat memberikan nilai secara langsung kepada siswa yang sudah
+                                    mengumpulkan tugas</p>
+                            </div>
                         </div>
+                        <!--End of Icon Block-->
+
+                        <!--Icon Block-->
+                        <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                            <!--Icon-->
+                            <div class="icon">
+                                <i class="fa fa-tablet fa-2x"></i>
+                            </div>
+                            <!--Icon Block Description-->
+                            <div class="icon-block-description">
+                                <h4>App Mobile</h4>
+                                <p>Selain website Aplikasi AssignMe tersedia juga dalam Aplikasi mobile yang dapat anda
+                                    download di appstore atau playstore</p>
+                            </div>
+                        </div>
+                        <!--End of Icon Block-->
+
+                        <!--Icon Block-->
+                        <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
+                            <!--Icon-->
+                            <div class="icon">
+                                <i class=" fa fa-user fa-2x"></i>
+                            </div>
+                            <!--Icon Block Description-->
+                            <div class="icon-block-description">
+                                <h4>Aktivitas Siswa</h4>
+                                <p>Para pengajar dapat melihat aktivitas siswa yang mengikuti forum pembelajara online
+                                    yang telah di buat.</p>
+                            </div>
+                        </div>
+                        <!--End of Icon Block-->
+
+
                     </div>
-                    <!--End of Icon Block-->
 
-                    <!--Icon Block-->
-                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
-                        <!--Icon-->
-                        <div class="icon">
-                            <i class="fa fa-tablet fa-2x"></i>
-                        </div>
-                        <!--Icon Block Description-->
-                        <div class="icon-block-description">
-                            <h4>App Mobile</h4>
-                            <p>Selain website Aplikasi AssignMe tersedia juga dalam Aplikasi mobile yang dapat anda download di appstore atau playstore</p>
-                        </div>
-                    </div>
-                    <!--End of Icon Block-->
 
-                    <!--Icon Block-->
-                    <div class="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.5s">
-                        <!--Icon-->
-                        <div class="icon">
-                            <i class=" fa fa-user fa-2x"></i>
-                        </div>
-                        <!--Icon Block Description-->
-                        <div class="icon-block-description">
-                            <h4>Aktivitas Siswa</h4>
-                            <p>Para pengajar dapat melihat aktivitas siswa yang mengikuti forum pembelajara online yang telah di buat.</p>
-                        </div>
-                    </div>
-                    <!--End of Icon Block-->
-                    
-                
-            </div>
-           
+            </section>
+        </main>
 
-        </section>
-    </main>
-
-        <section id="12"  class="introduction scrollto">
+        <section id="12" class="introduction scrollto">
             <div class="features-container">
+
+                <div class="feature" id="feature1">
+                    <a href="#responsive" class="feature-link">
+                        <h3 class="feature-title">AssignMe</h3>
+                        <p class="feature-description1">Aplikasi Assignment atau sistem pengumpulan tugas berbasis web
+                            dan desktop bertujuan
+                            untuk membantu pengajar dan siswa dalam proses penugasan dan pengumpulan
+                            tugas. Aplikasi ini dapat digunakan dalam konteks pendidikan atau pelatihan di berbagai
+                            tingkatan.</p>
+                    </a>
+                </div>
+
                 <div class="feature">
                     <a href="#responsive" class="feature-link">
-                       
+
                         <h3 class="feature-title">Responsif</h3>
-                        <p class="feature-description">Tampilan yang responsif untuk semua perangkat, baik smartphone, tablet, atau desktop.</p>
+                        <p class="feature-description">Tampilan yang responsif untuk semua perangkat, baik smartphone,
+                            tablet, atau desktop.</p>
                     </a>
                 </div>
-        
+
                 <div class="feature">
                     <a href="#user-friendly" class="feature-link">
-                        
+
                         <h3 class="feature-title">Mudah Digunakan</h3>
-                        <p class="feature-description">Antarmuka pengguna yang sederhana dan mudah digunakan, cocok untuk semua tingkat pengguna.</p>
+                        <p class="feature-description">Antarmuka pengguna yang sederhana dan mudah digunakan, cocok
+                            untuk semua tingkat pengguna.</p>
                     </a>
                 </div>
-        
+
                 <div class="feature">
                     <a href="#cloud-access" class="feature-link">
 
                         <h3 class="feature-title">Akses Cloud</h3>
-                        <p class="feature-description">Simpan dan akses data Anda dengan mudah melalui penyimpanan cloud yang terintegrasi.</p>
+                        <p class="feature-description">Simpan dan akses data Anda dengan mudah melalui penyimpanan cloud
+                            yang terintegrasi.</p>
                     </a>
                 </div>
-        
+
                 <div class="feature">
                     <a href="#security" class="feature-link">
-                       
+
                         <h3 class="feature-title">Keamanan Terjamin</h3>
-                        <p class="feature-description">Keamanan data yang terjamin dengan enkripsi tingkat tinggi dan perlindungan terhadap ancaman keamanan terkini.</p>
+                        <p class="feature-description">Keamanan data yang terjamin dengan enkripsi tingkat tinggi dan
+                            perlindungan terhadap ancaman keamanan terkini.</p>
                     </a>
                 </div>
             </div>
@@ -276,61 +329,62 @@
 
 
 
-    <!--Footer-->
-    <footer id="landing-footer" class="clearfix">
-        <div class="row clearfix">
+        <!--Footer-->
+        <footer id="landing-footer" class="clearfix">
+            <div class="row clearfix">
 
-            <p id="copyright" class="col-2">Made by <a href="https://www.instagram.com/sayyyidi_/"></a></p>
+                <p id="copyright" class="col-2">Made by <a href="https://www.instagram.com/sayyyidi_/"></a></p>
 
-            <!--Social Icons in Footer-->
-            <ul class="col-2 social-icons">
-                <li>
-                    <a target="_blank" title="Facebook" href="https://www.facebook.com/username">
-                        <i class="fa fa-facebook fa-1x"></i><span>Facebook</span>
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" title="Google+" href="http://google.com/+username">
-                        <i class="fa fa-google-plus fa-1x"></i><span>Google+</span>
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" title="Twitter" href="http://www.twitter.com/username">
-                        <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" title="Instagram" href="http://www.instagram.com/username">
-                        <i class="fa fa-instagram fa-1x"></i><span>Instagram</span>
-                    </a>
-                </li>
-                <li>
-                    <a target="_blank" title="behance" href="http://www.behance.net">
-                        <i class="fa fa-behance fa-1x"></i><span>Behance</span>
-                    </a>
-                </li>
-            </ul>
-            <!--End of Social Icons in Footer-->
-        </div>
-    </footer>
-    <!--End of Footer-->
+                <!--Social Icons in Footer-->
+                <ul class="col-2 social-icons">
+                    <li>
+                        <a target="_blank" title="Facebook" href="https://www.facebook.com/username">
+                            <i class="fa fa-facebook fa-1x"></i><span>Facebook</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" title="Google+" href="http://google.com/+username">
+                            <i class="fa fa-google-plus fa-1x"></i><span>Google+</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" title="Twitter" href="http://www.twitter.com/username">
+                            <i class="fa fa-twitter fa-1x"></i><span>Twitter</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" title="Instagram" href="http://www.instagram.com/username">
+                            <i class="fa fa-instagram fa-1x"></i><span>Instagram</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a target="_blank" title="behance" href="http://www.behance.net">
+                            <i class="fa fa-behance fa-1x"></i><span>Behance</span>
+                        </a>
+                    </li>
+                </ul>
+                <!--End of Social Icons in Footer-->
+            </div>
+        </footer>
+        <!--End of Footer-->
 
-</div>
+    </div>
 
-<!-- Include JavaScript resources -->
-<script src="../assets/js/jquery.1.8.3.min.js"></script>
-<script src="../assets/js/wow.min.js"></script>
-<script src="../assets/js/featherlight.min.js"></script>
-<script src="../assets/js/featherlight.gallery.min.js"></script>
-<script src="../assets/js/jquery.enllax.min.js"></script>
-<script src="../assets/js/jquery.scrollUp.min.js"></script>
-<script src="../assets/js/jquery.easing.min.js"></script>
-<script src="../assets/js/jquery.stickyNavbar.min.js"></script>
-<script src="../assets/js/jquery.waypoints.min.js"></script>
-<script src="../assets/js/images-loaded.min.js"></script>
-<script src="../assets/js/lightbox.min.js"></script>
-<script src="../assets/js/site.js"></script>
+    <!-- Include JavaScript resources -->
+    <script src="../assets/js/jquery.1.8.3.min.js"></script>
+    <script src="../assets/js/wow.min.js"></script>
+    <script src="../assets/js/featherlight.min.js"></script>
+    <script src="../assets/js/featherlight.gallery.min.js"></script>
+    <script src="../assets/js/jquery.enllax.min.js"></script>
+    <script src="../assets/js/jquery.scrollUp.min.js"></script>
+    <script src="../assets/js/jquery.easing.min.js"></script>
+    <script src="../assets/js/jquery.stickyNavbar.min.js"></script>
+    <script src="../assets/js/jquery.waypoints.min.js"></script>
+    <script src="../assets/js/images-loaded.min.js"></script>
+    <script src="../assets/js/lightbox.min.js"></script>
+    <script src="../assets/js/site.js"></script>
 
 
 </body>
+
 </html>
