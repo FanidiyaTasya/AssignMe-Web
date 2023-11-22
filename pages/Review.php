@@ -1,26 +1,18 @@
+<?php
+session_start();
+if (!isset($_SESSION['Email'])) {
+    header('Location: Login.php');
+    exit();
+}
+$username = $_SESSION['Username'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <title>AssignMe</title>
-  <style>
-    body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px;
-  }
-
-  .profile-image {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  input[type="file"] {
-    display: none;
-  }
-  </style>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
@@ -34,6 +26,7 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
+  <link rel="stylesheet" href="../assets/css/tab-layout-style.css">
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
 </head>
@@ -86,7 +79,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="Review.html">
+          <a class="nav-link active" href="Review.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +113,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  active" href="Profile.html">
+          <a class="nav-link  " href="Profile.html">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +149,7 @@
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl my-3" id="navbarBlur"
       navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
-        
+
         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
           <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
@@ -166,13 +159,13 @@
             </div>
           </a>
         </li>
-        
+
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Profile</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Classes</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0  text-white">Profile</h6>
+          <h6 class="font-weight-bolder mb-0  text-white">To Review</h6>
         </nav>
 
         <!-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -184,12 +177,13 @@
           </div> -->
 
 
+
         <!-- DROPDOWN -->
         <li class="nav-item px-2 d-flex align-items-center">
         <li class="nav-item dropdown pe-2 d-flex">
-          <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <!-- <i class="fa fa-user cursor-pointer fa-lg"></i> -->
-            <div class="d-flex align-items-center"> 
+          <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <div class="d-flex align-items-center">
               <div class="avatar avatar-sm me-3">
                 <img src="../assets/img/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
               </div>
@@ -198,21 +192,21 @@
           </a>
           <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
 
-            <!-- <li>
-              <a class="dropdown-item border-radius-md" href="#">
-                <div class="d-flex py-1">
-                  <div class="avatar avatar-sm me-3">
-                    <i class="text-dark fa fa-pencil-alt"></i>
-                  </div>
-                  <div class="d-flex flex-column justify-content-center">
-                    <h6 class="text-sm font-weight-normal mb-1">Edit Profile</h6>
-                  </div>
-                </div>
-              </a>
-            </li> -->
+            <li>
+              <!-- <a class="dropdown-item border-radius-md" href="path/to/logout">
+                            <div class="d-flex py-1">
+                                <div class="avatar avatar-sm me-3">
+                                    <i class="text-dark fa fa-pencil-alt"></i>
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="text-sm font-weight-normal mb-1">Edit Profile</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </li> -->
 
             <li>
-              <a class="dropdown-item border-radius-md" href="#">
+              <a class="dropdown-item border-radius-md" href="path/to/change-password">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
                     <i class="text-dark fa fa-lock"></i>
@@ -224,18 +218,20 @@
               </a>
             </li>
 
-            <li>
-              <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
-                <div class="d-flex py-1">
-                  <div class="avatar avatar-sm me-3">
-                    <i class=" text-dark fa fa-sign-out"></i>
-                  </div>
-                  <div class="d-flex flex-column justify-content-center">
-                    <h6 class="text-sm font-weight-normal mb-1">Log Out</h6>
-                  </div>
-                </div>
-              </a>
-            </li>
+           
+    <li>
+      <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
+        <div class="d-flex py-1">
+          <div class="avatar avatar-sm me-3">
+            <i class="text-dark fa fa-sign-out"></i>
+          </div>
+          <div class="d-flex flex-column justify-content-center">
+            <h6 class="text-sm font-weight-normal mb-1">Log Out</h6>
+          </div>
+        </div>
+      </a>
+    </li>
+  
 
           </ul>
         </li>
@@ -249,82 +245,55 @@
     </nav>
     <!-- End Navbar -->
 
-    <!-- EDIT PROFILE -->
-    <div class="container mt-4">
-      <div class="row">
-       <!-- Container 1: Foto Profil -->
-       <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <label for="file-input">
-                    <img src="../assets/img/user-picture.jpg" class="profile-image img-fluid" alt="Profile Image">
-                    <h5 class="card-title mt-3">Fanidiya Tasya</h5>
-                </label>
-                <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
-                <!-- <button class="btn btn-primary mt-2" onclick="document.getElementById('file-input').click()">Change Photo</button> -->
-            </div>
-        </div>
+    <!-- TAB LAYOUT -->
+    <div id="tab-container">
+      <div class="tab active" onclick="openTab('ToReview')"><a href="#" class="text-decoration-none">To Review</a></div>
+      <div class="tab" onclick="openTab('Done')"><a href="#" class="text-decoration-none">Done</a></div>
     </div>
-    
-        <!-- Container 2: Formulir Edit Profil -->
-        <div class="col-md-8">
+
+    <div id="ToReviewTabContent" class="tab-content">
+      <div class="row">
+        <!-- Kolom 1 -->
+        <div class="col-lg-3 mb-4">
+          <div class="card position-relative">
+            <div class="card-body">
+              <h5 class="card-title">Kelas 5</h5>
+              <p class="card-text">Deskripsi Kelas 5. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="card-text">Deadline Tugas: 2023-12-15</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kolom 2 -->
+        <div class="col-lg-3 mb-4">
           <div class="card">
             <div class="card-body">
-              <form class="common-form" method="POST" enctype="multipart/form-data">
-    
-                <div class="form-group">
-                  <label for="username">Name</label>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name" required>
-                </div>
-    
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
-                </div>
-
-                <div class="mb-3 row"> 
-                    <label for="exampleFormControlSelect1" class="form-label col-md-3">Gender</label>
-                    <div class="col-md-9"> 
-                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                            <option value="" disabled selected>Select Gender</option>
-                            <option value="1">Laki-Laki</option>
-                            <option value="2">Perempuan</option>
-                        </select>
-                    </div>
-                </div>
-    
-                <button class="btn btn-primary btn-block" type="submit" name="submit">Save</button>
-              </form>
+              <h5 class="card-title">Kelas 6</h5>
+              <p class="card-text">Deskripsi Kelas 6. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="card-text">Deadline Tugas: 2023-12-20</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
 
-    <!-- JavaScript untuk mengganti foto profil -->
-<script>
-  function changeProfilePicture(event) {
-    const input = event.target;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        document.querySelector('.profile-image').src = e.target.result;
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-</script>
+    <div id="DoneTabContent" class="tab-content">
+      <h2>Done Content Goes Here</h2>
+      <p>This is the content of the Done tab.</p>
+    </div>
+    <!-- END TAB LAYOUT -->
 
     <!--   Core JS Files   -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <script src="../assets/js/logout.js"></script>
+    <script src="../assets/js/tab-layout.js"></script>
     <script src="../assets/js/core/popper.min.js"></script>
     <script src="../assets/js/core/bootstrap.min.js"></script>
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/tab-layout.js"></script>
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

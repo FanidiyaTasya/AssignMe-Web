@@ -19,7 +19,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>AssignMe</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <!--     Fonts and icons     -->
@@ -149,7 +149,8 @@
           </ol>
           <h5 class="font-weight-bolder mb-0 text-white"><?php echo $subject; ?></h5><br>
           <h5 class="font-weight-bolder mb-0 text-white">code class:</h5>
-          <p class="font-weight-bolder mb-0 text-white"  class="copy-container" contenteditable="true" id="copyContainer" onclick="copyCode()" > <?php echo $classCode; ?></p>
+          <p class="font-weight-bolder mb-0 text-white"  class="copy-container"  ml-2" contenteditable="true" id="copyContainer" onclick="copyCode()" > <?php echo $classCode; ?></p>
+          <img src="path/to/your/icon.png" alt="Copy Icon" class="copy-icon" onclick="copyCode()">
         </nav>
 
         <!-- KOLOM SEARCH -->

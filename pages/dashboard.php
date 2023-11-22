@@ -71,7 +71,7 @@ $username = $_SESSION['Username'];
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/Review.html">
+          <a class="nav-link  " href="../pages/Review.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -167,20 +167,7 @@ $username = $_SESSION['Username'];
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   
-                    <li>
-                        <!-- <a class="dropdown-item border-radius-md" href="path/to/logout">
-                            <div class="d-flex py-1">
-                                <div class="avatar avatar-sm me-3">
-                                    <i class="text-dark fa fa-pencil-alt"></i>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">Edit Profile</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li> -->
-  
-                    <li>
+                  
                         <a class="dropdown-item border-radius-md" href="path/to/change-password">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">
