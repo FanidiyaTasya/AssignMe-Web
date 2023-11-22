@@ -24,3 +24,15 @@ $(document).ready(function () {
         $('#editKelasModal #description').val(description);
     });
 });
+
+// hapus kelas
+$('.deleteClassBtn').click(function() {
+    var classId = $(this).data('class-id');
+    var userId = $(this).data('user-id');
+
+    console.log('classId:', classId);
+    console.log('userId:', userId);
+
+    $('#deleteClassId').val(classId);
+    $('#deleteUserId').val(userId);
+});

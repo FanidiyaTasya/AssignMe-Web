@@ -47,6 +47,10 @@ body {
   display: block;
 }
 
+#ToReviewTabContent {
+  display: block;
+}
+
 #tab-container .tab a:hover {
   color: #333 !important; 
 }

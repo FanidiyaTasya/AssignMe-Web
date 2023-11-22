@@ -33,7 +33,7 @@
   <!-- CSS Files -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/class-style.css">
+  <link rel="stylesheet" href="../assets/css/tab-layout-style.css">
 
 </head>
 <body class="g-sidenav-show bg-gray-100">
