@@ -5,18 +5,23 @@ class Classes extends Connect {
     protected $sql;
     protected $result;
 
-    public function InsertClass($className, $subject, $desc, $classCode, $userId) {
-        $this->sql = "INSERT INTO classes (ClassName, SubjectName, Description, ClassCode, UserId) VALUES ('$className', '$subject', '$desc', '$classCode', '$userId')";
+    public function InsertClass($className, $subject, $desc, $classCode) {
+        $this->sql = "INSERT INTO classes (ClassName, SubjectName, Description, ClassCode) VALUES ('$className', '$subject', '$desc', '$classCode')";
         return $this->getResult();
+        $classId = $this->dbConn()->insert_id;
+
+        return $classId;
     }
 
-    public function InsertUserClasses($userId, $classId, $role) {
-        $this->sql = "INSERT INTO user_classes (UserId, ClassId, Role) VALUES ('$userId', '$classId', '$role')";
+    public function InsertUserClasses($userId, $classId) {
+        $this->sql = "INSERT INTO user_classes (UserId, ClassId) VALUES ('$userId', '$classId')";
         return $this->getResult();
     }
 
     public function ShowClass($userId) {
-        $this->sql = "SELECT * FROM classes WHERE UserId = '$userId'";
+        $this->sql = "SELECT classes.* FROM classes 
+        JOIN user_classes ON classes.ClassId = user_classes.ClassId
+        JOIN users ON user_classes.UserId = users.UserId WHERE users.UserId = '$userId'";
         return $this->getResult();
     }
 
@@ -30,8 +35,8 @@ class Classes extends Connect {
         return $this->getResult();
     }  
 
-    public function DeleteClass($classId) {
-        $this->sql = "DELETE FROM classes WHERE ClassId=$classId";
+    public function DeleteClass($classId, $userId) {
+        $this->sql = "DELETE FROM user_classes WHERE ClassId = '$classId' AND UserId = '$userId'";
         return $this->getResult();
     }
 

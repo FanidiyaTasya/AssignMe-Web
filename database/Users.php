@@ -11,7 +11,7 @@ class Users extends Connect {
     }
 
     public function SQLRegister($username, $email, $password) {
-        $this->sql = "INSERT INTO users (Username, Email, Password) VALUES ('$username', '$email', '$password')";
+        $this->sql = "INSERT INTO users (Username, Email, Password, Gender, Role) VALUES ('$username', '$email', '$password', NULL, 'Guru')";
         return $this->getResult();
     }
 
@@ -21,18 +21,18 @@ class Users extends Connect {
     }
 
     public function ShowTeacher($classId) { 
-        $this->sql = "SELECT users.Username 
-        FROM user_classes
-        JOIN users ON user_classes.UserId = users.UserId
-        WHERE user_classes.ClassId = $classId AND user_classes.Role = 'Guru'";
+        $this->sql = "SELECT users.Username
+        FROM users
+        JOIN user_classes ON users.UserId = user_classes.UserId
+        WHERE user_classes.ClassId = $classId AND users.Role = 'Guru'";
         return $this->getResult();
     }
 
     public function ShowStudent($classId) {
-        $this->sql = "SELECT users.Username 
-        FROM user_classes
-        JOIN users ON user_classes.UserId = users.UserId
-        WHERE user_classes.ClassId = $classId AND user_classes.Role = 'Siswa'";
+        $this->sql = "SELECT users.Username
+        FROM users
+        JOIN user_classes ON users.UserId = user_classes.UserId
+        WHERE user_classes.ClassId = $classId AND users.Role = 'Siswa'";
         return $this->getResult();
     }
 
