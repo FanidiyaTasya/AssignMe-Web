@@ -5,7 +5,7 @@ class TaskController extends Task {
     protected $message;
 
     public function createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment) {
-        $uploadDir = 'C:\xampp\htdocs\AssignMe\file';
+        $uploadDir = 'C:\xampp\htdocs\AssignMe\upload\file';
         $uploadedFile = $uploadDir . '\\' . basename($attachment['name']);
     
         if (move_uploaded_file($attachment['tmp_name'], $uploadedFile)) {
@@ -40,11 +40,16 @@ class TaskController extends Task {
     }
 
     public function getTask($classId) { 
-        $task = $this->ShowTask($classId);
-        return $task;
+        $result = $this->ShowTask($classId);
+        return $result;
     }
 
-    public function detailTask($taskId) { 
+    public function showTaskSubmit($taskId) {
+        $result = $this->showTaskSubmit($taskId);
+        return $result;
+    }
+
+    public function detailTask($taskId) { // untuk preview task
         $this->sql = "SELECT * FROM task WHERE TaskId = $taskId"; 
         $result = $this->getResult();
 

@@ -32,12 +32,21 @@ class ClassController extends Classes {
     }
 
     public function editClass($classId, $className, $subject, $desc) {
-        $result = $this->UpdateClass($classId, $className, $subject, $desc);
-        if ($result) {
-            echo 'Berhasil edit kelas';
-        } else {
-            echo 'Gagal edit kelas.';
+        try {
+            if ($this->isClassExists($className, $subject)) {
+                echo "Kelas ini sudah tersedia.";
+                return;
+            }
+            $result = $this->UpdateClass($classId, $className, $subject, $desc);
+            if ($result) {
+                echo 'Berhasil edit kelas';
+            } else {
+                echo 'Gagal edit kelas.';
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
+        
     }
     
     public function hapusClass($classId, $userId) {

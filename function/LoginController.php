@@ -27,6 +27,13 @@ class LoginController extends Users {
 
     public function Login() {
         $row = $this->SQLLogin($this->email, $this->password)->FetchArray();
+        // if($email == $row['Email'] && password_verify($password, $row['Password'])){
+        //     try {
+        //         $apiKey = bin2hex(random_bytes(23));
+        //     } catch (Exception $e) {
+        //         $apiKey = bin2hex(uniqid($email, true));
+        //     }
+        //     $sqlUpdate = "UPDATE users SET apiKey = '".$apiKey."' WHERE Email = '".$email."'";
         if ($row !== null && ($row['Email'] == $this->email && $row['Password'] == $this->password)) {
             $_SESSION['UserId'] = $row['UserId'];
             $_SESSION['Username'] = $row['Username'];
