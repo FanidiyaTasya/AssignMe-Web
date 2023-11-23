@@ -76,7 +76,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  " href="../pages/Review.html">
+          <a class="nav-link  " href="../pages/Review.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>
@@ -150,7 +150,7 @@
           <h5 class="font-weight-bolder mb-0 text-white"><?php echo $subject; ?></h5><br>
           <h5 class="font-weight-bolder mb-0 text-white">Class Code:</h5>
           <p class="font-weight-bolder mb-0 text-white"  class="copy-container ml-2" contenteditable="true" id="copyContainer" onclick="copyCode()" > <?php echo $classCode; ?></p>
-          <img src="path/to/your/icon.png" alt="Copy Icon" class="copy-icon" onclick="copyCode()">
+          <img src="../assets/img/copy3.png" alt="Copy Icon" class="copy-icon" onclick="copyCode()">
         </nav>
 
         <!-- KOLOM SEARCH -->
