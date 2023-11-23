@@ -192,7 +192,7 @@ $username = $_SESSION['Username'];
                         <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">
-                                    <i class=" text-dark fa fa-sign-out"></i>
+                                    <i class="text-dark fa fa-sign-out"></i>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
                                     <h6 class="text-sm font-weight-normal mb-1">Log Out</h6>
@@ -213,24 +213,59 @@ $username = $_SESSION['Username'];
     </nav>
     <!-- End Navbar -->
 
-    
-    
-  <!--   Core JS Files   -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- TAB LAYOUT -->
+    <div id="tab-container">
+      <div class="tab active" onclick="openTab('ToReview')"><a href="#" class="text-decoration-none">To Review</a></div>
+      <div class="tab" onclick="openTab('Done')"><a href="#" class="text-decoration-none">Done</a></div>
+    </div>
 
-  <script src="../assets/js/tab-layout.js"></script>
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="../assets/js/tab-layout.js"></script>
+    <div id="ToReviewTabContent" class="tab-content">
+      <div class="row">
+        <!-- Kolom 1 -->
+        <div class="col-lg-3 mb-4">
+          <div class="card position-relative">
+            <div class="card-body">
+              <h5 class="card-title">Kelas 5</h5>
+              <p class="card-text">Deskripsi Kelas 5. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="card-text">Deadline Tugas: 2023-12-15</p>
+            </div>
+          </div>
+        </div>
 
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+        <!-- Kolom 2 -->
+        <div class="col-lg-3 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Kelas 6</h5>
+              <p class="card-text">Deskripsi Kelas 6. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="card-text">Deadline Tugas: 2023-12-20</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="DoneTabContent" class="tab-content">
+      <h2>Done Content Goes Here</h2>
+      <p>This is the content of the Done tab.</p>
+    </div>
+    <!-- END TAB LAYOUT -->
+
+    <!--   Core JS Files   -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../assets/js/logout.js"></script>
+    <script src="../assets/js/tab-layout.js"></script>
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/tab-layout.js"></script>
+
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
-
 </html>

@@ -167,20 +167,7 @@ $username = $_SESSION['Username'];
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   
-                    <li>
-                        <!-- <a class="dropdown-item border-radius-md" href="path/to/logout">
-                            <div class="d-flex py-1">
-                                <div class="avatar avatar-sm me-3">
-                                    <i class="text-dark fa fa-pencil-alt"></i>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">Edit Profile</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li> -->
-  
-                    <li>
+                  
                         <a class="dropdown-item border-radius-md" href="path/to/change-password">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">
@@ -200,7 +187,7 @@ $username = $_SESSION['Username'];
                                     <i class=" text-dark fa fa-sign-out"></i>
                                 </div>
                                 <div class="d-flex flex-column justify-content-center">
-                                    <h6  class="text-sm font-weight-normal mb-1">Log Out</h6>
+                                    <h6  class="text-sm font-weight-normal mb-1" onclick="confirmLogout()">Log Out</h6>
                                 </div>
                             </div>
                         </a>
@@ -415,7 +402,7 @@ $username = $_SESSION['Username'];
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  <script src="../assets/js/logout.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
