@@ -102,7 +102,7 @@
         </li>
        
         <li class="nav-item">
-          <a class="nav-link  " href="Profile.html">
+          <a class="nav-link  " href="Profile.php">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>document</title>
@@ -148,7 +148,7 @@
             <h4 class="font-weight-bolder mb-0 text-white"><?php echo $className; ?></h4>
           </ol>
           <h5 class="font-weight-bolder mb-0 text-white"><?php echo $subject; ?></h5><br>
-          <h5 class="font-weight-bolder mb-0 text-white">code class:</h5>
+          <h5 class="font-weight-bolder mb-0 text-white">Class Code:</h5>
           <p class="font-weight-bolder mb-0 text-white"  class="copy-container" contenteditable="true" id="copyContainer" onclick="copyCode()" > <?php echo $classCode; ?></p>
         </nav>
 
@@ -235,7 +235,7 @@
 
                     <div class="form-group">
                       <label for="attachment">Attachment</label>
-                      <input type="file" class="form-control" name="attachment" id="attachment" accept=".pdf, .doc, .docx, .txt, .pptx, .ppt">
+                      <input type="file" class="form-control" name="attachment" id="attachment" accept=".pdf, .doc, .docx, .ppt, .pptx, .jpg, .jpeg, .png">
                     </div>
 
                     <div class="modal-footer">
@@ -256,6 +256,10 @@
                   $subject = $_POST['subject'];
                   $desc = $_POST['description'];
 
+                  if (!$taskController->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
+                    echo "Error: File tidak valid.";
+                    return;
+                }
                   $classController->editClass($classId, $className, $subject, $desc);
               }
           ?>
@@ -328,8 +332,8 @@
           if (!empty($message)) {
               echo $message;
           }
-          $task = $taskController->getTask($classId);
-          while ($row = $task->FetchArray()) {
+          $result = $taskController->getTask($classId);
+          while ($row = $result->FetchArray()) {
           ?>
         <div class="card mb-3">
           <div class="card-body">
@@ -345,7 +349,7 @@
                   <h5 class="card-title" ><?= $row['TaskName']; ?></h5>
                   <p class="card-text"><?= $row['TaskDesc']; ?></p>
                   <a href="/AssignMe/file/<?= $row['Attachment']; ?>" download><?= $row['Attachment']; ?></a><br><br>
-                  <a href="#" class="btn btn-primary">View Assignment</a>
+                  <a href="ViewTask.php?taskId=<?= $row['TaskId'] ?>" class="btn btn-primary">View Assignment</a>
               </div>
           </div>
           <?php } ?>
@@ -362,36 +366,55 @@
             </div>
           </div>
 
+          <?php 
+          require_once __DIR__ . ('\..\function\MaterialController.php');
+
+          $materialController = new MaterialController();
+          if (isset($_POST['action']) && $_POST['action'] == 'upload') {
+            $classId = $_SESSION['ClassId'];
+            $materialName = $_POST['materiname'];
+            $materialDesc = $_POST['desc'];
+            $uploadDate = date('Y-m-d H:i:s');
+            $attachment = $_FILES['attachment'];
+
+            if (!$materialController->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
+              echo "Error: File tidak valid.";
+              return;
+          }
+          $message = $materialController->createMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment);
+          }
+
+          ?>
           <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
                 <div class="modal-header">
-                  <h5 class="modal-title">Upload Material</h5>
+                  <h5 class="modal-title">Create Material</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
 
                 <div class="modal-body">
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                      <label for="classname">Material Name</label>
-                      <input type="text" class="form-control" name="classname" id="classname" placeholder="Enter Class Name" required>
+                      <label for="materiname">Material Name</label>
+                      <input type="text" class="form-control" name="materiname" id="materiname" placeholder="Enter Material Name" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="description">Description (Optional)</label>
-                      <textarea class="form-control" name="description" id="description" placeholder="Enter Description"></textarea>
+                      <label for="desc">Description (Optional)</label>
+                      <textarea class="form-control" name="desc" id="desc" placeholder="Enter Description"></textarea>
                     </div>
 
                     <div class="form-group">
-                      <label for="fileUpload">Attachment </label>
-                      <input type="file" class="form-control" name="fileUpload" id="fileUpload" required>
+                      <label for="attachment">Attachment </label>
+                      <input type="file" class="form-control" name="attachment" id="attachment" accept=".pdf, .doc, .docx, .pptx, .ppt" required>
                     </div>
 
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary" name="action" value="create">Upload</button>
+                      <button type="submit" class="btn btn-primary" name="action" value="upload">Upload</button>
                     </div>
                   </form>
                 </div>
@@ -425,7 +448,8 @@
               </div>
                 <h5 class="card-title"><?= $row['MaterialName']; ?></h5>
                 <p class="card-text"><?= $row['MaterialDesc']; ?></p>
-                <a href="nama_file_anda.ext" download="nama_file_yang_diinginkan.ext" class="btn btn-primary">View Material</a>
+                <a href="/AssignMe/file/<?= $row['Attachment']; ?>" download><?= $row['Attachment']; ?></a><br><br>
+                <a href="#" class="btn btn-primary">View Material</a>
             </div>
           </div>
           <?php } ?>
@@ -477,30 +501,49 @@
 
     <div id="ReviewTabContent" class="tab-content">
       <div class="container mt-5">
+
+      <!-- DROPDOWN TUGAS -->
+      <?php 
+      require_once __DIR__ . ('\..\function\TaskController.php');
+      $taskController = new TaskController();
+        $message = $taskController->getMessage();
+          if (!empty($message)) {
+              echo $message;
+          }
+          $result = $taskController->getTask($classId);
+      ?>
+      <div class="col-md-5"> 
+        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" style="width: 200px">
+          <option value="" disabled selected>Select Assigment</option>
+          <?php 
+            while ($row = $result->FetchArray()) {
+            $taskName = $row['TaskName']; ?>
+          <option value="<?= $taskId; ?>"><?= $taskName; ?></option>
+          <?php } ?>
+        </select>
+      </div><br>
+
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nama Siswa</th>
-              <th scope="col">Nama Tugas</th>
-              <th scope="col">Nilai Tugas</th>
-              <th scope="col">Simpan</th>
+              <th scope="col">Name</th>
+              <th scope="col">Answer</th>
+              <th scope="col">Status</th>
+              <th scope="col">Grade</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Mahasiswa 1</td>
-              <td>Tugas 1</td>
+              <td>Tasya</td>
+              <td>Jawab</td>
+              <td>Done</td>
               <td><input type="number" class="form-control" placeholder="0-100"></td>
-              <td><button class="btn btn-primary">Simpan</button></td>
-            </tr>
-            <tr>
-              <td>Mahasiswa 2</td>
-              <td>Tugas 2</td>
-              <td><input type="number" class="form-control" placeholder="0-100"></td>
-              <td><button class="btn btn-primary">Simpan</button></td>
+              <td><button class="btn btn-primary">Save</button></td>
             </tr>
           </tbody>
         </table>
+
       </div>
     </div>
     <!-- END TAB LAYOUT -->
@@ -508,22 +551,13 @@
 
     <script>
         function copyCode() {
-            // Pilih elemen dengan id 'copyContainer'
             var copyContainer = document.getElementById('copyContainer');
-
-            // Buat salinan dari isi elemen
             var range = document.createRange();
             range.selectNode(copyContainer);
             window.getSelection().removeAllRanges();
             window.getSelection().addRange(range);
-
-            // Salin ke clipboard
             document.execCommand('copy');
-
-            // Bersihkan seleksi
             window.getSelection().removeAllRanges();
-
-            // Berikan umpan balik atau tampilkan notifikasi
             alert('Code copied to clipboard!');
         }
     </script>
