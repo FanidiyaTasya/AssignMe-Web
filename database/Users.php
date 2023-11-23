@@ -11,7 +11,7 @@ class Users extends Connect {
     }
 
     public function SQLRegister($username, $email, $password) {
-        $this->sql = "INSERT INTO users (Username, Email, Password, Gender, Role) VALUES ('$username', '$email', '$password', NULL, 'Guru')";
+        $this->sql = "INSERT INTO users (Username, Email, Password, Role) VALUES ('$username', '$email', '$password', 'Guru')";
         return $this->getResult();
     }
 

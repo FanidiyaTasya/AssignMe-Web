@@ -27,6 +27,14 @@ class Task extends Connect {
         return $this->getResult();
     }
 
+    public function ShowTaskSubmit($taskId) {
+        $this->sql = "SELECT users.Username, task_submits.Answers, task_submits.Status
+        FROM task_submits
+        INNER JOIN users ON task_submits.UserId = users.UserId
+        WHERE task_submits.TaskId = '$taskId'";
+        return $this->getResult();
+    }
+
     public function getResult() {
         $this->result = $this->dbConn()->query($this->sql);
         return $this;
@@ -37,5 +45,4 @@ class Task extends Connect {
         return $row;
     }
 }
-
 ?>
