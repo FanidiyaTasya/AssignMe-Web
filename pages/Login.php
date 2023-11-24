@@ -1,9 +1,7 @@
 <?php
-// require_once __DIR__ . ('/../function/LoginController.php');
-require_once('/home/assignme/public_html/function/LoginController.php');
+require_once __DIR__ . ('/../function/LoginController.php');
 
 session_start();
-
 if (isset($_POST['submit'])) {
     $login = new LoginController;
     $message = $login->getData($_POST['email'], $_POST['password']);

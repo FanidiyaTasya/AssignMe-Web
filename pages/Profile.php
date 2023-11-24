@@ -191,7 +191,13 @@ $username = $_SESSION['Username'];
             </div>
           </div> -->
 
+        <?php
+        require_once __DIR__ . '/../function/ProfileController.php';
 
+        $userId = $_SESSION['UserId'];
+        $profileController = new ProfileController();
+        $profilePicture = $profileController->getProfile($userId);
+        ?>
         <!-- DROPDOWN -->
         <li class="nav-item px-2 d-flex align-items-center">
         <li class="nav-item dropdown pe-2 d-flex">
@@ -199,9 +205,9 @@ $username = $_SESSION['Username'];
             <!-- <i class="fa fa-user cursor-pointer fa-lg"></i> -->
             <div class="d-flex align-items-center"> 
               <div class="avatar avatar-sm me-3">
-                <img src="../upload/profile/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+                <img src="<?= $profilePicture; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
               </div>
-              <span class="d-sm-inline d-none"><?php echo $username; ?></span>
+              <span class="d-sm-inline d-none"><?= $username; ?></span>
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
@@ -265,16 +271,36 @@ $username = $_SESSION['Username'];
         <div class="card">
             <div class="card-body text-center">
                 <label for="file-input">
-                    <img src="../upload/profile/user-picture.jpg" class="profile-image img-fluid" alt="Profile Image">
+                    <img src="<?= $profilePicture; ?>" class="profile-image img-fluid" alt="Profile Image">
                     <h5 class="card-title mt-3"><?= $username; ?></h5>
                 </label>
                 <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
-                <!-- <button class="btn btn-primary mt-2" onclick="document.getElementById('file-input').click()">Change Photo</button> -->
             </div>
         </div>
     </div>
     
         <!-- Container 2: Formulir Edit Profil -->
+        <?php
+        $userData = $profileController->getDataUser($userId);
+
+        $defaultUsername = '';
+        $defaultEmail = '';
+        $defaultGender = '';
+        
+        if (isset($userData['Username'])) {
+            $defaultUsername = $userData['Username'];
+        }
+        
+        if (isset($userData['Email'])) {
+            $defaultEmail = $userData['Email'];
+        }
+        
+        if (isset($userData['Gender'])) {
+            $defaultGender = $userData['Gender'];
+        }
+        
+
+        ?>
         <div class="col-md-8">
           <div class="card">
             <div class="card-body">
@@ -282,12 +308,12 @@ $username = $_SESSION['Username'];
     
                 <div class="form-group">
                   <label for="username">Name</label>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name" required>
+                  <input type="text" class="form-control" name="username" id="username" value="<?php echo $defaultUsername; ?>">
                 </div>
     
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email" required>
+                  <input type="email" class="form-control" name="email" id="email" value="<?php echo $defaultEmail; ?>">
                 </div>
 
                 <div class="mb-3 row"> 

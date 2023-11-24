@@ -167,11 +167,9 @@
     <!-- End Navbar -->
 
     <!-- TAB LAYOUT -->
-
     <div id="tab-container">
         <div class="tab active" onclick="openTab('Classwork')"><a href="#" class="text-decoration-none">Classwork</a></div>
         <div class="tab" onclick="openTab('People')"><a href="#" class="text-decoration-none">People</a></div>
-        <div class="tab" onclick="openTab('Review')"><a href="#" class="text-decoration-none">Review</a></div>
     </div>
 
     <div id="ClassworkTabContent" class="tab-content">
@@ -188,7 +186,7 @@
 
         <!-- BUAT TUGAS -->
         <?php 
-        require_once __DIR__ . ('\..\function\TaskController.php');
+        require_once __DIR__ . ('/../function/TaskController.php');
 
         $taskController = new TaskController();
         if (isset($_POST['action']) && $_POST['action'] == 'create') {
@@ -326,7 +324,7 @@
 
           <!-- TAMPIL TUGAS -->
           <?php
-          require_once __DIR__ . ('\..\function\TaskController.php');
+          require_once __DIR__ . ('/../function/TaskController.php');
 
           $taskController = new TaskController();
           $message = $taskController->getMessage();
@@ -368,7 +366,7 @@
           </div>
 
           <?php 
-          require_once __DIR__ . ('\..\function\MaterialController.php');
+          require_once __DIR__ . ('/../function/MaterialController.php');
 
           $materialController = new MaterialController();
           if (isset($_POST['action']) && $_POST['action'] == 'upload') {
@@ -426,7 +424,7 @@
 
           <!-- TAMPIL MATERI -->
           <?php
-          require_once __DIR__ . ('\..\function\MaterialController.php');
+          require_once __DIR__ . ('/../function/MaterialController.php');
 
           $materialController = new MaterialController();
           $message = $materialController->getMessage();
@@ -498,54 +496,6 @@
         </div>
       </div>
 
-    </div>
-
-    <div id="ReviewTabContent" class="tab-content">
-      <div class="container mt-5">
-
-      <!-- DROPDOWN TUGAS -->
-      <?php 
-      require_once __DIR__ . ('\..\function\TaskController.php');
-      $taskController = new TaskController();
-        $message = $taskController->getMessage();
-          if (!empty($message)) {
-              echo $message;
-          }
-          $result = $taskController->getTask($classId);
-      ?>
-      <div class="col-md-5"> 
-        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" style="width: 200px">
-          <option value="" disabled selected>Select Assigment</option>
-          <?php 
-            while ($row = $result->FetchArray()) {
-            $taskName = $row['TaskName']; ?>
-          <option value="<?= $taskId; ?>"><?= $taskName; ?></option>
-          <?php } ?>
-        </select>
-      </div><br>
-
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Answer</th>
-              <th scope="col">Status</th>
-              <th scope="col">Grade</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Tasya</td>
-              <td>Jawab</td>
-              <td>Done</td>
-              <td><input type="number" class="form-control" placeholder="0-100"></td>
-              <td><button class="btn btn-primary">Save</button></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
     </div>
     <!-- END TAB LAYOUT -->
     </main>
