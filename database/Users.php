@@ -36,6 +36,16 @@ class Users extends Connect {
         return $this->getResult();
     }
 
+    public function ShowDataUser($userId) {
+        $this->sql = "SELECT username, email, Gender FROM users WHERE UserId = '$userId'";
+        return $this->getResult();
+    }
+
+    public function ShowProfile($userId) {
+        $this->sql = "SELECT Profile FROM users WHERE UserId = $userId";
+        return $this->getResult();
+    }
+
     public function getResult() {
         $this->result = $this->dbConn()->query($this->sql);
         return $this;

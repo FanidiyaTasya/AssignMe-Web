@@ -13,19 +13,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
     <!--Favicon-->
-    <link rel="shortcut icon" href="../assets/img/favicon.ico" title="Favicon" />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" title="Favicon" />
 
     <!-- Main CSS Files -->
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Namari Color CSS -->
-    <link rel="stylesheet" href="../assets/css/namari-color.css">
+    <link rel="stylesheet" href="assets/css/namari-color.css">
 
     <!--Icon Fonts - Font Awesome Icons-->
-    <link rel="stylesheet" href="../assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
     <!-- Animate CSS-->
-    <link href="../assets/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/animate.css" rel="stylesheet" type="text/css">
 
     <!--Google Webfonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -135,7 +135,7 @@
 
                         <!--Logo-->
                         <div class="logo">
-                            <img src="../assets/img/logo2.png" alt="logo">
+                            <img src="assets/img/logo2.png" alt="logo">
                             <h4>AssignMe</h4>
                         </div>
 
@@ -174,7 +174,7 @@
                     </div>
 
                     <!--Call to Action-->
-                    <a href="Login.php" class="button">Mulai</a>
+                    <a href="pages/Login.php" class="button">Mulai</a>
                     <!--End Call to Action-->
 
                 </div>
@@ -366,18 +366,18 @@
     </div>
 
     <!-- Include JavaScript resources -->
-    <script src="../assets/js/jquery.1.8.3.min.js"></script>
-    <script src="../assets/js/wow.min.js"></script>
-    <script src="../assets/js/featherlight.min.js"></script>
-    <script src="../assets/js/featherlight.gallery.min.js"></script>
-    <script src="../assets/js/jquery.enllax.min.js"></script>
-    <script src="../assets/js/jquery.scrollUp.min.js"></script>
-    <script src="../assets/js/jquery.easing.min.js"></script>
-    <script src="../assets/js/jquery.stickyNavbar.min.js"></script>
-    <script src="../assets/js/jquery.waypoints.min.js"></script>
-    <script src="../assets/js/images-loaded.min.js"></script>
-    <script src="../assets/js/lightbox.min.js"></script>
-    <script src="../assets/js/site.js"></script>
+    <script src="assets/js/jquery.1.8.3.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/featherlight.min.js"></script>
+    <script src="assets/js/featherlight.gallery.min.js"></script>
+    <script src="assets/js/jquery.enllax.min.js"></script>
+    <script src="assets/js/jquery.scrollUp.min.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.stickyNavbar.min.js"></script>
+    <script src="assets/js/jquery.waypoints.min.js"></script>
+    <script src="assets/js/images-loaded.min.js"></script>
+    <script src="assets/js/lightbox.min.js"></script>
+    <script src="assets/js/site.js"></script>
 
 
 </body>

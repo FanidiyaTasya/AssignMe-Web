@@ -6,7 +6,7 @@ if (isset($_POST['submit'])) {
     $login = new LoginController;
     $message = $login->getData($_POST['email'], $_POST['password']);
     if (empty($message)) {
-        header('Location: Dashboard.php');
+        header('Location: Login.php');
         exit; 
     }
 }
