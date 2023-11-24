@@ -32,6 +32,8 @@
   <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/tab-layout-style.css">
 
@@ -526,6 +528,24 @@
     <script src="../assets/js/popup.js"></script>
     <!-- <script src="../assets/js/skrip.js"></script> -->
     <script src="../assets/js/tab-layout.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
+        var messageType = "<?php echo isset($_SESSION['message_type']) ? $_SESSION['message_type'] : 'info'; ?>";
+
+        if (message !== '') {
+            Swal.fire({
+                icon: messageType,
+                text: message,
+            });
+        }
+        <?php 
+            unset($_SESSION['message']);
+            unset($_SESSION['message_type']);
+        ?>
+    });
+</script>
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

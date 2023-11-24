@@ -7,7 +7,8 @@ class ClassController extends Classes {
     public function createClass($className, $subject, $desc, $userId) {
         try {
             if ($this->isClassExists($className, $subject)) {
-                echo "Kelas ini sudah tersedia.";
+                $_SESSION['message'] = 'This class is now available.';
+                $_SESSION['message_type'] = 'info';
                 return;
             }
     
@@ -19,12 +20,16 @@ class ClassController extends Classes {
     
                 if ($classId) {
                     $this->InsertUserClasses($userId, $classId);
-                    echo "Class created successfully.";
+                    $_SESSION['message'] = 'Class created successfully.';
+                    $_SESSION['message_type'] = 'success';
                 } else {
-                    throw new Exception("Error getting classId.");
+                    $_SESSION['message'] = 'Error getting classId.';
+                    $_SESSION['message_type'] = 'info';
+
                 }
             } else {
-                throw new Exception("Error creating class.");
+                $_SESSION['message'] = 'Error creating classId.';
+                $_SESSION['message_type'] = 'info';
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -34,14 +39,17 @@ class ClassController extends Classes {
     public function editClass($classId, $className, $subject, $desc) {
         try {
             if ($this->isClassExists($className, $subject)) {
-                echo "Kelas ini sudah tersedia.";
+                $_SESSION['message'] = 'This class is now available.';
+                $_SESSION['message_type'] = 'info';
                 return;
             }
             $result = $this->UpdateClass($classId, $className, $subject, $desc);
             if ($result) {
-                echo 'Berhasil edit kelas';
+                $_SESSION['message'] = 'Success.';
+                $_SESSION['message_type'] = 'success';
             } else {
-                echo 'Gagal edit kelas.';
+                $_SESSION['message'] = 'Failed.';
+                $_SESSION['message_type'] = 'error';
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -51,14 +59,17 @@ class ClassController extends Classes {
     
     public function hapusClass($classId, $userId) {
         if (empty($classId) || empty($userId)) {
-            echo 'Missing userId or classId.';
+            $_SESSION['message'] = 'Missing userId or classId.';
+            $_SESSION['message_type'] = 'info';
             return;
         }
         $result = $this->DeleteClass($classId, $userId);
         if ($result) {
-            echo 'Berhasil hapus kelas';
+            $_SESSION['message'] = 'Success.';
+            $_SESSION['message_type'] = 'success';
         } else {
-            echo 'Gagal hapus kelas.';
+            $_SESSION['message'] = 'Failed.';
+            $_SESSION['message_type'] = 'error';
         }
     }
     

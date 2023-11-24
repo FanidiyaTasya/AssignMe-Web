@@ -12,13 +12,15 @@ class TaskController extends Task {
             $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment['name']);
     
             if ($result) {
-                echo "Success";
+                $_SESSION['message'] = 'Success.';
+                $_SESSION['message_type'] = 'success';
             } else {
-                echo "Failed";
+                $_SESSION['message'] = 'Failed.';
+                $_SESSION['message_type'] = 'error';
             }
         } else {
-            echo "Gagal mengunggah file. Pesan kesalahan: " . error_get_last()['message'];
-            return "Gagal mengunggah file.";
+            $_SESSION['message'] = 'Failed upload file: ' . error_get_last()['message'];
+            $_SESSION['message_type'] = 'error';
         }
     }
 
@@ -27,13 +29,15 @@ class TaskController extends Task {
         $allowedFileTypes = ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'jpg', 'jpeg', 'png'];
 
         if ($fileSize > $maxFileSize) {
-            echo "Ukuran file melebihi batas maksimal (5 MB). ";
+            $_SESSION['message'] = 'The selected file exceeds the maximum allowed size of 5MB. Please choose a smaller file.';
+            $_SESSION['message_type'] = 'info';
             return false;
         }
 
         $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
         if (!in_array(strtolower($fileExtension), $allowedFileTypes)) {
-            echo "Jenis file tidak diizinkan. ";
+            $_SESSION['message'] = 'The selected file type is not allowed. Please choose a valid file type.';
+            $_SESSION['message_type'] = 'info';
             return false;
         }
         return true; 
