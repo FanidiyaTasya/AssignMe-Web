@@ -39,10 +39,11 @@ class RegisterController extends Users {
     }
 
     public function Register() {
-        $sql = $this->SQLRegister($this->username, $this->email, $this->password);
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $sql = $this->SQLRegister($this->username, $this->email, $hashedPassword);
         $_SESSION['Email'] = $this->email;
-        $_SESSION['Password'] = $this->password;
+        $_SESSION['Password'] = $hashedPassword;    
         header("Location: Login.php");
-    }
+    }    
 }
 ?>

@@ -1,10 +1,31 @@
 <?php
 session_start();
-if (!isset($_SESSION['Email'])) {
+if (!isset($_SESSION['Username'])) {
     header('Location: Login.php');
     exit();
 }
-$username = $_SESSION['Username'];
+require_once __DIR__ . '/../function/ProfileController.php';
+
+    $userId = $_SESSION['UserId']; 
+    $profileController = new ProfileController();
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+        $newUsername = $_POST['username'];
+        $newEmail = $_POST['email'];
+        $newGender = $_POST['gender'];
+    
+        $result = $profileController->editData($userId, $newUsername, $newEmail, $newGender);
+    }
+
+    $profileData = $profileController->getProfile($userId);
+    if ($profileData) {
+        $username = $profileData['username'];
+        $email = $profileData['email'];
+        $gender = $profileData['gender'];
+        $profile = $profileData['profile'];
+    } else {
+        echo "Gagal mengambil data profil.";
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +52,8 @@ $username = $_SESSION['Username'];
   </style>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <!--     Fonts and icons     -->
@@ -166,7 +189,7 @@ $username = $_SESSION['Username'];
       <div class="container-fluid py-1 px-3">
         
         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-          <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+          <a class="nav-link text-body p-0" id="iconNavbarSidenav">
             <div class="sidenav-toggler-inner">
               <i class="sidenav-toggler-line"></i>
               <i class="sidenav-toggler-line"></i>
@@ -177,7 +200,7 @@ $username = $_SESSION['Username'];
         
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">Pages</a></li>
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">Profile</li>
           </ol>
           <h6 class="font-weight-bolder mb-0  text-white">Profile</h6>
@@ -191,13 +214,6 @@ $username = $_SESSION['Username'];
             </div>
           </div> -->
 
-        <?php
-        require_once __DIR__ . '/../function/ProfileController.php';
-
-        $userId = $_SESSION['UserId'];
-        $profileController = new ProfileController();
-        $profilePicture = $profileController->getProfile($userId);
-        ?>
         <!-- DROPDOWN -->
         <li class="nav-item px-2 d-flex align-items-center">
         <li class="nav-item dropdown pe-2 d-flex">
@@ -205,7 +221,7 @@ $username = $_SESSION['Username'];
             <!-- <i class="fa fa-user cursor-pointer fa-lg"></i> -->
             <div class="d-flex align-items-center"> 
               <div class="avatar avatar-sm me-3">
-                <img src="<?= $profilePicture; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
+                <img src="<?= $profile; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
               </div>
               <span class="d-sm-inline d-none"><?= $username; ?></span>
             </div>
@@ -271,7 +287,7 @@ $username = $_SESSION['Username'];
         <div class="card">
             <div class="card-body text-center">
                 <label for="file-input">
-                    <img src="<?= $profilePicture; ?>" class="profile-image img-fluid" alt="Profile Image">
+                    <img src="<?= $profile; ?>" class="profile-image img-fluid" alt="Profile Image">
                     <h5 class="card-title mt-3"><?= $username; ?></h5>
                 </label>
                 <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
@@ -280,49 +296,29 @@ $username = $_SESSION['Username'];
     </div>
     
         <!-- Container 2: Formulir Edit Profil -->
-        <?php
-        $userData = $profileController->getDataUser($userId);
-
-        $defaultUsername = '';
-        $defaultEmail = '';
-        $defaultGender = '';
-        
-        if (isset($userData['Username'])) {
-            $defaultUsername = $userData['Username'];
-        }
-        
-        if (isset($userData['Email'])) {
-            $defaultEmail = $userData['Email'];
-        }
-        
-        if (isset($userData['Gender'])) {
-            $defaultGender = $userData['Gender'];
-        }
-        
-
-        ?>
         <div class="col-md-8">
           <div class="card">
             <div class="card-body">
               <form class="common-form" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="userId" value="<?php echo $userId; ?>">
     
                 <div class="form-group">
                   <label for="username">Name</label>
-                  <input type="text" class="form-control" name="username" id="username" value="<?php echo $defaultUsername; ?>">
+                  <input type="text" class="form-control" name="username" id="username" value="<?= $username; ?>">
                 </div>
     
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" value="<?php echo $defaultEmail; ?>">
+                  <input type="email" class="form-control" name="email" id="email" value="<?= $email; ?>">
                 </div>
 
                 <div class="mb-3 row"> 
-                    <label for="exampleFormControlSelect1" class="form-label col-md-3">Gender</label>
+                    <label for="gender" class="form-label col-md-3">Gender</label>
                     <div class="col-md-9"> 
-                        <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                        <select class="form-select" id="gender" name="gender" aria-label="Default select example">
                             <option value="" disabled selected>Select Gender</option>
-                            <option value="1">Laki-Laki</option>
-                            <option value="2">Perempuan</option>
+                            <option value="Laki-Laki" <?php echo ($gender == 'Laki-Laki') ? 'selected' : ''; ?>>Laki-Laki</option>
+                            <option value="Perempuan" <?php echo ($gender == 'Perempuan') ? 'selected' : ''; ?>>Perempuan</option>
                         </select>
                     </div>
                 </div>
@@ -348,6 +344,23 @@ $username = $_SESSION['Username'];
       reader.readAsDataURL(input.files[0]);
     }
   }
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
+        var messageType = "<?php echo isset($_SESSION['message_type']) ? $_SESSION['message_type'] : 'info'; ?>";
+
+        if (message !== '') {
+            Swal.fire({
+                icon: messageType,
+                text: message,
+            });
+        }
+        <?php 
+            unset($_SESSION['message']);
+            unset($_SESSION['message_type']);
+        ?>
+    });
 </script>
 
     <!--   Core JS Files   -->

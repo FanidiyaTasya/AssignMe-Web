@@ -36,13 +36,27 @@ class Users extends Connect {
         return $this->getResult();
     }
 
-    public function ShowDataUser($userId) {
-        $this->sql = "SELECT username, email, Gender FROM users WHERE UserId = '$userId'";
+    public function ShowProfileData($userId) {
+        $this->sql = "SELECT Username, Email, Gender, Profile FROM users WHERE UserId = '$userId'";
         return $this->getResult();
     }
 
-    public function ShowProfile($userId) {
-        $this->sql = "SELECT Profile FROM users WHERE UserId = $userId";
+    public function UpdateData($userId, $newUsername, $newEmail, $newGender) {
+        $this->sql = "UPDATE users SET username = '$newUsername', email = '$newEmail', Gender = '$newGender' WHERE UserId = '$userId'";
+        return $this->getResult();
+    }
+
+    public function UpdateProfile($userId, $newProfile) {
+        $newProfile = $newProfile['name']; 
+        $this->sql = "UPDATE users SET Profile = '$newProfile' WHERE UserId = '$userId'";
+        return $this->getResult();
+    }
+
+    public function CountUser($classId) {
+        $this->sql = "SELECT COUNT(user_classes.UserId)
+        FROM user_classes
+        JOIN users ON user_classes.UserId = users.UserId
+        WHERE user_classes.ClassId = $classId AND users.Role = 'Siswa'";
         return $this->getResult();
     }
 
