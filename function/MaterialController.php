@@ -5,24 +5,25 @@ class MaterialController extends Materials {
     protected $message;
 
     public function createMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment) {
-        $uploadDir = 'C:\xampp\htdocs\AssignMe\upload\file';
-        $uploadedFile = $uploadDir . '\\' . basename($attachment['name']);
-
+        $uploadDir = 'upload/file';
+        $uploadedFile = $uploadDir . '/' . basename($attachment['name']);
+    
         if (move_uploaded_file($attachment['tmp_name'], $uploadedFile)) {
             $result = $this->InsertMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment['name']);
-            
+    
             if ($result) {
                 $_SESSION['message'] = 'Success.';
                 $_SESSION['message_type'] = 'success';
             } else {
-                $_SESSION['message'] = 'Failed.';
+                $_SESSION['message'] = 'Failed to save data to the database.';
                 $_SESSION['message_type'] = 'error';
             }
         } else {
-            $_SESSION['message'] = 'Gagal upload file.';
+            $_SESSION['message'] = 'Failed to upload file.';
             $_SESSION['message_type'] = 'error';
         }
     }
+    
 
     public function validateFile($fileName, $fileSize, $fileType) {
         $maxFileSize = 5242880; // 5 mb max

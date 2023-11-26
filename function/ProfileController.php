@@ -5,32 +5,58 @@ class ProfileController extends Users {
     protected $message;
 
     public function getProfile($userId) {
-        $result = $this->ShowProfile($userId);
+        $result = $this->ShowProfileData($userId);
+    
         if ($result) {
             $row = $result->FetchArray();
-            $profilePicture = $row['Profile'];
-
-            if (empty($profilePicture)) {
-                return '../upload/profile/user-picture.jpg';
-            } else {
-                return $profilePicture;
-            }
+            $profileData = array(
+                'username' => $row['Username'],
+                'email' => $row['Email'],
+                'gender' => $row['Gender'],
+                'profile' => ($row['Profile'] !== null) ? $row['Profile'] : '../upload/profile/user-picture.jpg',
+            );
+    
+            return $profileData;
         } else {
-            return '../upload/profile/user-picture.jpg';
+            throw new Exception("Gagal mendapatkan data profil untuk pengguna dengan ID: $userId");
         }
     }
 
-    public function getDataUser($userId) {
-        $result = $this->ShowDataUser($userId);
+    public function editData($userId, $newUsername, $newEmail, $newGender) {
+        $result = $this->UpdateData($userId, $newUsername, $newEmail, $newGender);
+    
         if ($result) {
-            $row = $result->FetchArray();
+            $_SESSION['message'] = 'Profile updated successfully.';
+            $_SESSION['message_type'] = 'success';
         } else {
-            return null;
+            $_SESSION['message'] = 'Failed to update profile.';
+            $_SESSION['message_type'] = 'error';
         }
     }
     
-    public function changeProfile() {
+    public function changeProfile($userId, $newProfile) {
+        if (!empty($newProfile['name'])) {
+            $oldProfilePath = $this->getProfile($userId);
+            if ($oldProfilePath !== '../upload/profile/user-picture.jpg') {
+                unlink($oldProfilePath);
+            }
 
+            $newProfilePath = 'upload/profile/' . uniqid() . '.' . pathinfo($newProfile['name'], PATHINFO_EXTENSION);
+            $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/' . $newProfilePath;
+            move_uploaded_file($newProfile['tmp_name'], $uploadPath);
+
+            $result = $this->UpdateProfile($userId, $newProfile);
+            if ($result) {
+                $_SESSION['message'] = 'Profile updated successfully.';
+                $_SESSION['message_type'] = 'success';
+                return $newProfilePath;
+            } else {
+                $_SESSION['message'] = 'Failed to update profile.';
+                $_SESSION['message_type'] = 'error';
+                return $oldProfilePath;
+            }
+            return $newProfilePath;
+        }
     }
 
     public function getMessage() {

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head lang="en">
     <meta charset="UTF-8">
 
-    <!--Page Title-->
     <title>AssignMe</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
     <!--Meta Keywords and Description-->
     <meta name="keywords" content="">

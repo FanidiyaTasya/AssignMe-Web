@@ -30,6 +30,7 @@ class LoginController extends Users {
             $_SESSION['Username'] = $row['Username'];
             $_SESSION['Email'] = $row['Email'];
             $_SESSION['Password'] = $row['Password'];
+            $_SESSION['Gender'] = $row['Gender'];
 
             header('Location: Dashboard.php');
             exit();

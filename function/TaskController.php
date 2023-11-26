@@ -5,8 +5,10 @@ class TaskController extends Task {
     protected $message;
 
     public function createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment) {
-        $uploadDir = 'C:\xampp\htdocs\AssignMe\upload\file';
-        $uploadedFile = $uploadDir . '\\' . basename($attachment['name']);
+        // $uploadDir = 'C:\xampp\htdocs\AssignMe\upload\file';
+        // $uploadedFile = $uploadDir . '\\' . basename($attachment['name']);
+        $uploadDir = 'upload/file';
+        $uploadedFile = $uploadDir . '/' . uniqid() .basename($attachment['name']);
     
         if (move_uploaded_file($attachment['tmp_name'], $uploadedFile)) {
             $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment['name']);
@@ -48,9 +50,9 @@ class TaskController extends Task {
         return $result;
     }
 
-    public function showTaskSubmit($taskId) {
+    public function getTaskSubmit($taskId) {
         $result = $this->showTaskSubmit($taskId);
-        return $result;
+        return $result->getResult();
     }
 
     public function detailTask($taskId) { // untuk preview task
