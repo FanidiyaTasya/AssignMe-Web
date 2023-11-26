@@ -5,14 +5,17 @@ class MaterialController extends Materials {
     protected $message;
 
     public function createMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment) {
-        $uploadDir = 'upload/file';
-        $uploadedFile = $uploadDir . '/' . basename($attachment['name']);
-    
-        if (move_uploaded_file($attachment['tmp_name'], $uploadedFile)) {
-            $result = $this->InsertMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment['name']);
+        if (!$this->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
+            return;
+        }
+        $uploadDir = '../upload/file/';
+        $uniqueName = uniqid() . '_' . basename($_FILES['attachment']['name']);
+        $uploadedFile = $uploadDir . $uniqueName;
+        if (move_uploaded_file($_FILES['attachment']['tmp_name'], $uploadedFile)) {
+            $result = $this->InsertMateri($classId, $materialName, $materialDesc, $uploadDate, $uniqueName);
     
             if ($result) {
-                $_SESSION['message'] = 'Success.';
+                $_SESSION['message'] = 'Successfully uploaded material.';
                 $_SESSION['message_type'] = 'success';
             } else {
                 $_SESSION['message'] = 'Failed to save data to the database.';
@@ -24,6 +27,9 @@ class MaterialController extends Materials {
         }
     }
     
+    // public function editMateri() {
+
+    // }
 
     public function validateFile($fileName, $fileSize, $fileType) {
         $maxFileSize = 5242880; // 5 mb max

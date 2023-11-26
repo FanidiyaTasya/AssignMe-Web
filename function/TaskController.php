@@ -5,25 +5,33 @@ class TaskController extends Task {
     protected $message;
 
     public function createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment) {
-        // $uploadDir = 'C:\xampp\htdocs\AssignMe\upload\file';
-        // $uploadedFile = $uploadDir . '\\' . basename($attachment['name']);
-        $uploadDir = 'upload/file';
-        $uploadedFile = $uploadDir . '/' . uniqid() .basename($attachment['name']);
-    
-        if (move_uploaded_file($attachment['tmp_name'], $uploadedFile)) {
-            $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment['name']);
-    
-            if ($result) {
-                $_SESSION['message'] = 'Success.';
-                $_SESSION['message_type'] = 'success';
+        if (!$this->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
+            return;
+        }
+        $uploadDir = '../upload/file/';
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        $uniqueName = uniqid() . '_' . basename($_FILES['attachment']['name']);
+        $uploadedFile = $uploadDir . $uniqueName;
+            if (move_uploaded_file($_FILES['attachment']['tmp_name'], $uploadedFile)) {
+                $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $uniqueName);
+
+                if ($result) {
+                    $_SESSION['message'] = 'Successfully created the assignment.';
+                    $_SESSION['message_type'] = 'success';
+                } else {
+                    $_SESSION['message'] = 'Failed to save data to the database..';
+                    $_SESSION['message_type'] = 'error';
+                }
             } else {
-                $_SESSION['message'] = 'Failed.';
+                $_SESSION['message'] = 'Failed upload file: ' . error_get_last()['message'];
                 $_SESSION['message_type'] = 'error';
             }
-        } else {
-            $_SESSION['message'] = 'Failed upload file: ' . error_get_last()['message'];
-            $_SESSION['message_type'] = 'error';
         }
+
+    public function editTask() {
+
     }
 
     public function validateFile($fileName, $fileSize, $fileType) {
@@ -45,8 +53,13 @@ class TaskController extends Task {
         return true; 
     }
 
-    public function getTask($classId) { 
-        $result = $this->ShowTask($classId);
+    public function getTask($taskId, $classId) { // untuk task view
+        $result = $this->ShowTask($taskId, $classId);
+        return $result;
+    }
+
+    public function getAllTask() { 
+        $result = $this->ShowAllTask();
         return $result;
     }
 

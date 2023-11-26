@@ -28,45 +28,6 @@ $username = $_SESSION['Username'];
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
   <style>
-    .assignment-details {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin: 20px auto;
-      max-width: 600px;
-      padding: 20px;
-    }
-
-    .assignment-details h4 {
-      color: #4285f4;
-      text-align: center;
-    }
-
-    .assignment-details p {
-      margin-bottom: 15px;
-    }
-
-    .assignment-details button {
-      background-color: #4285f4;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .cc {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      margin-top: 20px;
-      padding: 20px;
-    }
-
-    
-
     .table tbody tr:hover {
       background-color: #f5f5f5;
     }
@@ -75,10 +36,11 @@ $username = $_SESSION['Username'];
       width: 80px;
     }
 
-    .btn-primary {
-      background-color: #4285f4;
-      color: white;
+    .custom-icon {
+        font-size: 20px; 
+        margin-right: 8px; 
     }
+
   </style>
 </head>
 
@@ -130,7 +92,7 @@ $username = $_SESSION['Username'];
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="Review.php">
+          <a class="nav-link active" href="Review.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +126,7 @@ $username = $_SESSION['Username'];
         </li>
 
         <li class="nav-item">
-          <a class="nav-link  " href="Profile.php">
+          <a class="nav-link " href="Profile.php">
             <div
               class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -214,7 +176,7 @@ $username = $_SESSION['Username'];
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Classes</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">View Task</li>
           </ol>
           <h6 class="font-weight-bolder mb-0  text-white">To Review</h6>
         </nav>
@@ -227,59 +189,76 @@ $username = $_SESSION['Username'];
             </div>
           </div> -->
 
-
-
-
         </li>
         </ul>
       </div>
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container">
+    
+    <div class="container mt-4">
       <div class="row">
-        <div class="col">
-          <div class="container mt-5">
-            <div class="assignment-details">
-              <h4>Math Assignment</h4>
-              <p><strong>Description:</strong> Solve the following math problems and submit your solutions by the
-                deadline.</p>
-              <p><strong>Deadline:</strong> 2023-12-31</p>
-              <p><strong>Status:</strong> Not Submitted</p>
+        <?php 
+        require_once __DIR__ . '/../function/TaskController.php';
+
+        $taskId = $_GET['taskId'];
+        $classId = ""; 
+        $taskController = new TaskController();
+        $result = $taskController->getTask($taskId, $classId);
+        $row = $result->FetchArray()
+        ?>
+      <div class="col-md-4">
+          <div class="card">
+              <div class="card-body text-left">
+                  <h4 class="mb-2">
+                    <i class="fas fa-book custom-icon"></i><?= $row['TaskName']; ?>
+                  </h4>
+                  <h6 class="text-muted mb-1"><?= $row['ClassName']; ?></h6>
+                  <p class="mb-0 text-right small">Due On <?php echo date('M j, Y ', strtotime($row['DueDate'])); ?></p>
+                  <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
+                  <div class="modal-footer"></div>
+                  <p class="mb-0 small"><?= $row['TaskDesc']; ?></p>
+              </div>
+          </div>
+      </div>
+
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+                <?php 
+                  require_once __DIR__ . ('/../function/TaskController.php');
+
+                  $taskController = new TaskController();
+                  $taskId = $_GET['taskId'];
+                  $result = $taskController->getTaskSubmit($taskId);
+                ?>
+                  <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Grade</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->FetchArray()) : ?>
+                            <tr>
+                                <td><?= $row['Username']; ?></td>
+                                <td><a href="../upload/file/<?= $row['Answer']; ?>" download><?= $row['Answer']; ?></a></td>
+                                <td><?= $row['Status']; ?></td>
+                                <td><input type="number" class="form-control" value="<?= $row['Grade']; ?>" placeholder="0-100"></td>
+                                <td><button class="btn btn-primary">Save</button></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                  </table>
             </div>
           </div>
         </div>
 
-
-        <div class="col">
-        <div class="container mt-5">
-            <div class="assignment-details">
-            <table class="table">
-              
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Answer</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Grade</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Tasya</td>
-                    <td>Jawab</td>
-                    <td>Done</td>
-                    <td><input type="number" class="form-control" placeholder="0-100"></td>
-                    <td><button class="btn btn-primary">Save</button></td>
-                  </tr>
-                </tbody>
-            </table>
-          </div>
-        </div>
       </div>
-
-    </div>
     </div>
 
     <!--   Core JS Files   -->
@@ -299,5 +278,4 @@ $username = $_SESSION['Username'];
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
-
 </html>

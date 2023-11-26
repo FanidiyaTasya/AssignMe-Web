@@ -36,3 +36,22 @@ $('.deleteClassBtn').click(function() {
     $('#deleteClassId').val(classId);
     $('#deleteUserId').val(userId);
 });
+
+// edit tugas
+$(document).ready(function () {
+    $('.editTugasModalLink').on('click', function () {
+        var taskId = $(this).data('task-id');
+        var taskName = $(this).data('taskname');
+        var taskDesc = $(this).data('taskdesc');
+        var dueDate = $(this).data('deadline');
+        var attachment = $(this).data('attachment');
+        console.log("Test");
+        console.log(taskId, taskName, taskDesc, dueDate, attachment);
+
+        $('#editTugasModal #taskId').val(taskId);
+        $('#editTugasModal #taskname').val(taskName);
+        $('#editTugasModal #taskdesc').val(taskDesc);
+        $('#editTugasModal #deadline').val(dueDate);
+        $('#editTugasModal #attachment').val(attachment);
+    });
+});

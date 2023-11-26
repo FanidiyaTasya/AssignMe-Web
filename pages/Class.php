@@ -170,8 +170,8 @@
 
     <!-- TAB LAYOUT -->
     <div id="tab-container">
-        <div class="tab active" onclick="openTab('Classwork')"><a href="#" class="text-decoration-none">Classwork</a></div>
-        <div class="tab" onclick="openTab('People')"><a href="#" class="text-decoration-none">People</a></div>
+        <div class="tab active" onclick="openTab('Classwork')"><a class="text-decoration-none">Classwork</a></div>
+        <div class="tab" onclick="openTab('People')"><a class="text-decoration-none">People</a></div>
     </div>
 
     <div id="ClassworkTabContent" class="tab-content">
@@ -199,10 +199,6 @@
             $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
             $attachment = $_FILES['attachment'];
 
-            if (!$taskController->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
-              echo "Error: File tidak valid.";
-              return;
-          }
             $message = $taskController->createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment);
         }
         ?>  
@@ -252,46 +248,48 @@
           <!-- EDIT TUGAS -->
           <?php
               if (isset($_POST['action']) && $_POST['action'] == 'edit') {
-                  $classId = $_POST['classId'];
-                  $className = $_POST['classname'];
-                  $subject = $_POST['subject'];
-                  $desc = $_POST['description'];
+                  $taskId = $_POST['taskId'];
+                  $taskName = $_POST['taskname'];
+                  $taskDesc = $_POST['taskdesc'];
+                  $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
+                  $attachment = $_FILES['attachment'];
 
-                  if (!$taskController->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
-                    echo "Error: File tidak valid.";
-                    return;
-                }
-                  $classController->editClass($classId, $className, $subject, $desc);
+                  $classController->editTask($taskId, $taskName, $taskDesc, $dueDate, $attachment);
               }
           ?>
-          <div class="modal fade" id="editKelasModal" tabindex="-1" role="dialog" aria-labelledby="editKelasModalLabel" aria-hidden="true">
+          <div class="modal fade" id="editTugasModal" tabindex="-1" role="dialog" aria-labelledby="editTugasModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
                 <div class="modal-header">
-                  <h5 class="modal-title" id="editKelasModalLabel">Edit Task</h5>
+                  <h5 class="modal-title" id="editTugasModalLabel">Edit Task</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
 
                 <div class="modal-body">
-                  <form method="POST" id="formEditClass">
-                      <input type="hidden" id="classId" name="classId" >
+                  <form method="POST" id="formEditTask" enctype="multipart/form-data">
+                    <input type="hidden" id="taskId" name="taskId">
 
                     <div class="form-group">
-                      <label for="classname">Class Name</label>
-                      <input type="text" class="form-control" id="classname" name="classname">
+                      <label for="taskname">Task Name</label>
+                      <input type="text" class="form-control" name="taskname" id="taskname" >
                     </div>
 
                     <div class="form-group">
-                      <label for="subject">Subject Name</label>
-                      <input type="text" class="form-control" id="subject" name="subject">
+                      <label for="taskdesc">Description (Optional)</label>
+                      <textarea class="form-control" name="taskdesc" id="taskdesc"></textarea>
                     </div>
 
                     <div class="form-group">
-                      <label for="description">Description (Optional)</label>
-                      <textarea class="form-control" id="description" name="description"></textarea>
+                      <label for="deadline">Due Date</label>
+                      <input type="datetime-local" class="form-control" name="deadline" id="deadline">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="attachment">Attachment</label>
+                      <input type="file" class="form-control" name="attachment" id="attachment" accept=".pdf, .doc, .docx, .ppt, .pptx, .jpg, .jpeg, .png">
                     </div>
 
                     <div class="modal-footer">
@@ -333,8 +331,13 @@
           if (!empty($message)) {
               echo $message;
           }
-          $result = $taskController->getTask($classId);
+          $taskId = "";
+          $result = $taskController->getTask($taskId, $classId);
           while ($row = $result->FetchArray()) {
+            $combinedName = $row['Attachment'];
+            $parts = explode('_', $combinedName);
+            $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
+            $fileUrl = '../upload/file/' . $combinedName; 
           ?>
         <div class="card mb-3">
           <div class="card-body">
@@ -349,7 +352,7 @@
               </div>
                   <h5 class="card-title" ><?= $row['TaskName']; ?></h5>
                   <p class="card-text"><?= $row['TaskDesc']; ?></p>
-                  <a href="/AssignMe/file/<?= $row['Attachment']; ?>" download><?= $row['Attachment']; ?></a><br><br>
+                  <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a><br><br>
                   <a href="ViewTask.php?taskId=<?= $row['TaskId'] ?>" class="btn btn-primary">View Assignment</a>
               </div>
           </div>
@@ -378,11 +381,7 @@
             $uploadDate = date('Y-m-d H:i:s');
             $attachment = $_FILES['attachment'];
 
-            if (!$materialController->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
-              echo "Error: File tidak valid.";
-              return;
-          }
-          $message = $materialController->createMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment);
+            $message = $materialController->createMateri($classId, $materialName, $materialDesc, $uploadDate, $attachment);
           }
 
           ?>
@@ -426,15 +425,17 @@
 
           <!-- TAMPIL MATERI -->
           <?php
-          require_once __DIR__ . ('/../function/MaterialController.php');
-
-          $materialController = new MaterialController();
           $message = $materialController->getMessage();
           if (!empty($message)) {
               echo $message;
           }
           $materi = $materialController->getMateri($classId);
           while ($row = $materi->FetchArray()) {
+            $combinedName = $row['Attachment'];
+            $parts = explode('_', $combinedName);
+            $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
+            $fileUrl = '../upload/file/' . $combinedName; 
+
           ?>
           <div class="card mb-3">
             <div class="card-body">
@@ -449,7 +450,7 @@
               </div>
                 <h5 class="card-title"><?= $row['MaterialName']; ?></h5>
                 <p class="card-text"><?= $row['MaterialDesc']; ?></p>
-                <a href="/AssignMe/file/<?= $row['Attachment']; ?>" download><?= $row['Attachment']; ?></a><br><br>
+                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a><br><br>
                 <a href="#" class="btn btn-primary">View Material</a>
             </div>
           </div>
@@ -464,7 +465,11 @@
         require_once __DIR__ . ('/../database/Users.php'); 
 
         $users = new Users();
-        $classId = $_GET['classId'];       
+        $classId = $_GET['classId'];  
+
+        $result = $users->CountUser($classId);
+        $row = $result->FetchArray();
+        $count = $row['COUNT(user_classes.UserId)'];   
       ?>
       <div class="container">
         <h4 class="mt-4">Teachers</h4>
@@ -486,6 +491,7 @@
         <h4 class="mt-4">Classmates</h4>
         <div class="row">
           <div class="col-md-8">
+            <strong><p class="text-right"><?= $count; ?></p></strong>
             <ul class="list-group">
             <?php
             $studentResult = $users->ShowStudent($classId);
@@ -526,7 +532,6 @@
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script>
     <script src="../assets/js/popup.js"></script>
-    <!-- <script src="../assets/js/skrip.js"></script> -->
     <script src="../assets/js/tab-layout.js"></script>
 
     <script>

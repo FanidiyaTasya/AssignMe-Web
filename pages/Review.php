@@ -4,12 +4,23 @@ if (!isset($_SESSION['Email'])) {
     header('Location: Login.php');
     exit();
 }
-$username = $_SESSION['Username'];
+require_once __DIR__ . '/../function/ProfileController.php';
+
+    $userId = $_SESSION['UserId']; 
+    $profileController = new ProfileController();
+    $profileData = $profileController->getProfile($userId);
+    $username = $profileData['username'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title>AssignMe</title>
+  <style>
+        .custom-icon {
+        font-size: 20px; 
+        margin-right: 8px; 
+    }
+  </style>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
@@ -163,19 +174,6 @@ $username = $_SESSION['Username'];
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   
                     <li>
-                        <!-- <a class="dropdown-item border-radius-md" href="path/to/logout">
-                            <div class="d-flex py-1">
-                                <div class="avatar avatar-sm me-3">
-                                    <i class="text-dark fa fa-pencil-alt"></i>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">Edit Profile</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li> -->
-  
-                    <li>
                         <a class="dropdown-item border-radius-md" href="path/to/change-password">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">
@@ -215,33 +213,37 @@ $username = $_SESSION['Username'];
 
     <!-- TAB LAYOUT -->
     <div id="tab-container">
-      <div class="tab active" onclick="openTab('ToReview')"><a href="#" class="text-decoration-none">To Review</a></div>
-      <div class="tab" onclick="openTab('Done')"><a href="#" class="text-decoration-none">Done</a></div>
+      <div class="tab active" onclick="openTab('ToReview')"><a class="text-decoration-none">To Review</a></div>
+      <div class="tab" onclick="openTab('Done')"><a class="text-decoration-none">Done</a></div>
     </div>
 
     <div id="ToReviewTabContent" class="tab-content">
       <div class="row">
-        <!-- Kolom 1 -->
-        <div class="col-lg-3 mb-4">
-          <div class="card position-relative">
-            <div class="card-body">
-              <h5 class="card-title">Kelas 5</h5>
-              <p class="card-text">Deskripsi Kelas 5. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <p class="card-text">Deadline Tugas: 2023-12-15</p>
-            </div>
-          </div>
-        </div>
 
-        <!-- Kolom 2 -->
+      <?php 
+        require_once __DIR__ . '/../function/TaskController.php';
+
+        $taskController = new TaskController();
+        $result = $taskController->getAllTask();
+        while ($row = $result->FetchArray()) :
+        
+        ?>
+
         <div class="col-lg-3 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Kelas 6</h5>
-              <p class="card-text">Deskripsi Kelas 6. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              <p class="card-text">Deadline Tugas: 2023-12-20</p>
+          <div class="card ">
+            <div class="card-body text-left">
+            <h4 class="mb-2">
+              <a href="ViewTask.php?taskId=<?= $row['TaskId'] ?>">
+                <i class="fas fa-book custom-icon"></i><?= $row['TaskName']; ?>
+                <h6 class="text-muted mb-1"><?= $row['ClassName']; ?></h6>
+              </a>
+            </h4>
+              <p class="mb-0 text-right small">Due On <?php echo date('M j, Y ', strtotime($row['DueDate'])); ?></p>
+              <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
             </div>
           </div>
         </div>
+        <?php endwhile; ?>
       </div>
     </div>
 
