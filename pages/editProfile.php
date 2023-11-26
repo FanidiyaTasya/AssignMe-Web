@@ -102,23 +102,6 @@
     }
 }
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
-        var messageType = "<?php echo isset($_SESSION['message_type']) ? $_SESSION['message_type'] : 'info'; ?>";
-
-        if (message !== '') {
-            Swal.fire({
-                icon: messageType,
-                text: message,
-            });
-        }
-        <?php 
-            unset($_SESSION['message']);
-            unset($_SESSION['message_type']);
-        ?>
-    });
-</script>
     
 </body>
 </html>

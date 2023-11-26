@@ -414,7 +414,6 @@ require_once __DIR__ . '/../function/ProfileController.php';
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/chartjs.min.js"></script>
   <script src="../assets/js/popup.js"></script>
-  <!-- <script src="../assets/js/skrip.js"></script> -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
         var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
