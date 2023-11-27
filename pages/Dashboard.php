@@ -222,7 +222,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
   
     <!-- FROM BUAT KELAS -->
     <?php
-    require_once __DIR__ . ('\..\function\ClassController.php');
+    require_once __DIR__ . ('/../function/ClassController.php');
 
     $classController = new ClassController();
     if (isset($_POST['action']) && $_POST['action'] == 'create') {

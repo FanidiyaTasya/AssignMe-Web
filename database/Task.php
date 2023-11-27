@@ -15,7 +15,7 @@ class Task extends Connect {
         $this->sql = "SELECT * 
         FROM tasks 
         JOIN classes ON tasks.ClassId = classes.ClassId
-        WHERE tasks.ClassId = '$classId'  OR tasks.TaskId = '$taskId'";
+        WHERE tasks.ClassId = '$classId' OR tasks.TaskId = '$taskId'";
         return $this-> getResult();
     }
 
@@ -31,14 +31,25 @@ class Task extends Connect {
     }
 
     public function ShowTaskSubmit($taskId) {
-        $this->sql = "SELECT users.Username, task_submits.Answers, task_submits.Status, task_submits.Grade
+        $this->sql = "SELECT users.UserId, users.Username, task_submits.Answers, task_submits.Status, task_submits.Grade
         FROM task_submits
         INNER JOIN users ON task_submits.UserId = users.UserId
-        WHERE task_submits.TaskId = $taskId
+        WHERE task_submits.TaskId = $taskId 
         ORDER BY task_submits.SubmitDate ASC";
         return $this->getResult();
     }
 
+    public function CekData($taskId, $userId) {
+        $this->sql = "SELECT * FROM task_submits WHERE TaskId = $taskId AND UserId = $userId";
+        $result = $this->getResult();
+        return $result;
+    }    
+
+    public function UpdateGrade($grade, $taskId, $userId) {
+        $this->sql = "UPDATE task_submits SET Grade='$grade' WHERE TaskId=$taskId AND UserId=$userId";
+        return $this->getResult();
+    }
+    
     public function ShowAllTask() {
         $this->sql = "SELECT tasks.*, classes.ClassName
         FROM tasks

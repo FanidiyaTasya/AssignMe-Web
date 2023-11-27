@@ -74,10 +74,8 @@
 
         .logo img {
             width: 50px;
-            /* Sesuaikan ukuran logo sesuai kebutuhan */
             height: 50px;
             margin-right: 10px;
-            /* Jarak antara logo dan teks */
         }
 
         .feature {
@@ -88,13 +86,12 @@
         img {
             max-width: 100%;
             height: auto;
-            display: block; /* Menghilangkan spasi ekstra di sekitar gambar */
-            margin: 0 auto; /* Pusatkan gambar di dalam kontainer jika diperlukan */
+            display: block; 
+            margin: 0 auto; 
         }
      
         #feature1 {
             background-color: #4352c3d9;
-            /* Ganti dengan warna latar belakang yang diinginkan */
             padding: 20px;
         }
       

@@ -13,6 +13,9 @@ $username = $_SESSION['Username'];
   <title>AssignMe</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <!--     Fonts and icons     -->
@@ -229,6 +232,14 @@ $username = $_SESSION['Username'];
                   require_once __DIR__ . ('/../function/TaskController.php');
 
                   $taskController = new TaskController();
+                  if (isset($_POST['action']) && $_POST['action'] == 'save') {
+                    $taskId = $_POST['taskId'];
+                    $userId = $_POST['userId'];
+                    $grade = $_POST['grade'];
+
+                    $message = $taskController->saveGrade($taskId, $userId, $grade);
+                  }
+                  // SHOW
                   $taskId = $_GET['taskId'];
                   $result = $taskController->getTaskSubmit($taskId);
                 ?>
@@ -243,17 +254,45 @@ $username = $_SESSION['Username'];
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $result->FetchArray()) : ?>
+                        <?php while ($row = $result->FetchArray()) :
+                          $combinedName = $row['Answers'];
+                          $parts = explode('_', $combinedName);
+                          $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
+                          $fileUrl = '../upload/file/' . $combinedName;  ?>
                             <tr>
                                 <td><?= $row['Username']; ?></td>
-                                <td><a href="../upload/file/<?= $row['Answer']; ?>" download><?= $row['Answer']; ?></a></td>
+                                <td>
+                                    <?php if (isset($row['Answers'])) : ?>
+                                        <a href="<?= $fileUrl; ?>" download><?= $originalName; ?></a>
+                                    <?php else : ?>
+                                        No Answer Available
+                                    <?php endif; ?>
+                                </td>
                                 <td><?= $row['Status']; ?></td>
-                                <td><input type="number" class="form-control" value="<?= $row['Grade']; ?>" placeholder="0-100"></td>
-                                <td><button class="btn btn-primary">Save</button></td>
+                                <td>
+                                    <form method="POST">
+                                        <input type="hidden" name="taskId" value="<?= $taskId; ?>">
+                                        <input type="hidden" name="userId" value="<?= $row['UserId']; ?>">
+                                        <input type="number" class="form-control" name="grade" value="<?= $row['Grade']; ?>" placeholder="0-100">
+                                    </td>
+                                    <td>
+                                        <button type="submit" name="action" value="save" class="btn btn-primary">Save</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
                   </table>
+
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                  </nav>
             </div>
           </div>
         </div>
@@ -272,6 +311,24 @@ $username = $_SESSION['Username'];
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../assets/js/tab-layout.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
+        var messageType = "<?php echo isset($_SESSION['message_type']) ? $_SESSION['message_type'] : 'info'; ?>";
+
+        if (message !== '') {
+            Swal.fire({
+                icon: messageType,
+                text: message,
+            });
+        }
+        <?php 
+            unset($_SESSION['message']);
+            unset($_SESSION['message_type']);
+        ?>
+    });
+</script>
 
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

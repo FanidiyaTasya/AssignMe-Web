@@ -21,7 +21,7 @@ class TaskController extends Task {
                     $_SESSION['message'] = 'Successfully created the assignment.';
                     $_SESSION['message_type'] = 'success';
                 } else {
-                    $_SESSION['message'] = 'Failed to save data to the database..';
+                    $_SESSION['message'] = 'Failed to save data to the database.';
                     $_SESSION['message_type'] = 'error';
                 }
             } else {
@@ -62,6 +62,19 @@ class TaskController extends Task {
         $result = $this->ShowAllTask();
         return $result;
     }
+
+    public function saveGrade($taskId, $userId, $grade) {
+        $checkData = $this->CekData($taskId, $userId);
+    
+        if ($checkData) {
+            $this->UpdateGrade($grade, $taskId, $userId);
+            $_SESSION['message'] = 'Successfully updated.';
+            $_SESSION['message_type'] = 'success';
+        } else {
+            $_SESSION['message'] = 'Failed to update.';
+            $_SESSION['message_type'] = 'error';
+        }
+    }    
 
     public function getTaskSubmit($taskId) {
         $result = $this->showTaskSubmit($taskId);
