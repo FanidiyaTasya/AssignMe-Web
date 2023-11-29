@@ -345,7 +345,11 @@
               <div class="dropdown float-end">
                   <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                      <li><a href="#" data-toggle="modal" data-target="#editTugasModal" class="dropdown-item text-left text-dark">Edit</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#editTugasModal" class="editTugasModalLink dropdown-item text-left text-dark"
+                            data-task-id="<?= $row['TaskId']; ?>"
+                            data-taskname="<?= $row['TaskName']; ?>"
+                            data-taskdesc="<?= $row['TaskDesc']; ?>"
+                            data-deadline="<?= $row['DueDate']; ?>">Edit</a></li>
                       <li><a href="#" data-toggle="modal" data-target="#hapusTugasModal" class="dropdown-item text-left text-dark">Delete</a></li>
                   </ul>
                 
@@ -365,7 +369,7 @@
           <div class="container my-4">
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">+ Materials</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buatMateriModal">+ Materials</button>
               </div>
             </div>
           </div>
@@ -385,7 +389,7 @@
           }
 
           ?>
-          <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel" aria-hidden="true">
+          <div class="modal fade" id="buatMateriModal" tabindex="-1" role="dialog" aria-labelledby="buatMateriModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 

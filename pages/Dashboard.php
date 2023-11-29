@@ -381,7 +381,11 @@ require_once __DIR__ . '/../function/ProfileController.php';
                 <div class="dropdown float-end">
                     <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" 
+                              data-class-id="<?= $row['ClassId'] ?>" 
+                              data-classname="<?= $row['ClassName'] ?>" 
+                              data-subject="<?= $row['SubjectName'] ?>" 
+                              data-description="<?= $row['Description'] ?>">Edit</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark deleteClassBtn" data-class-id="<?= $row['ClassId'] ?>" data-user-id="<?= $userId ?>">Delete</a></li>
                     </ul>
                 </div>

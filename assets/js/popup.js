@@ -10,6 +10,20 @@
 //     popupMenu.style.display = 'none';
 // });
 
+// autofocus
+$(document).ready(function () {
+    $('#buatKelasModal').on('shown.bs.modal', function () {
+        $('#classname').focus();
+    });
+    $('#buatTugasModal').on('shown.bs.modal', function () {
+        $('#taskname').focus();
+    });
+    $('#buatMateriModal').on('shown.bs.modal', function () {
+        $('#materiname').focus();
+    });
+});
+
+
 // edit kelas
 $(document).ready(function () {
     $('.editKelasModalLink').on('click', function () {
@@ -44,14 +58,14 @@ $(document).ready(function () {
         var taskName = $(this).data('taskname');
         var taskDesc = $(this).data('taskdesc');
         var dueDate = $(this).data('deadline');
-        var attachment = $(this).data('attachment');
+        // var attachment = $(this).data('attachment');
         console.log("Test");
-        console.log(taskId, taskName, taskDesc, dueDate, attachment);
+        console.log(taskId, taskName, taskDesc, dueDate);
 
         $('#editTugasModal #taskId').val(taskId);
         $('#editTugasModal #taskname').val(taskName);
         $('#editTugasModal #taskdesc').val(taskDesc);
         $('#editTugasModal #deadline').val(dueDate);
-        $('#editTugasModal #attachment').val(attachment);
+        // $('#editTugasModal #attachment').val(attachment);
     });
 });
