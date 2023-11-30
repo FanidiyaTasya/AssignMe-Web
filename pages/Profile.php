@@ -241,7 +241,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
               </a>
             </li> -->
 
-            <li>
+            <!-- <li>
               <a class="dropdown-item border-radius-md" href="#">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
@@ -252,7 +252,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
                   </div>
                 </div>
               </a>
-            </li>
+            </li> -->
 
             <li>
               <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">

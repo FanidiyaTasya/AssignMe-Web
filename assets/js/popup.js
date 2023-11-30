@@ -69,3 +69,10 @@ $(document).ready(function () {
         // $('#editTugasModal #attachment').val(attachment);
     });
 });
+
+//hapus tugas
+$('.deleteTaskBtn').click(function() {
+    var taskId = $(this).data('task-id');
+    console.log('taskId:', taskId);
+    $('#deleteTaskId').val(taskId);
+});

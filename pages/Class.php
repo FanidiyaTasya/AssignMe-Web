@@ -254,7 +254,7 @@
                   $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
                   $attachment = $_FILES['attachment'];
 
-                  $classController->editTask($taskId, $taskName, $taskDesc, $dueDate, $attachment);
+                  $taskController->editTask($taskId, $taskName, $taskDesc, $dueDate, $attachment);
               }
           ?>
           <div class="modal fade" id="editTugasModal" tabindex="-1" role="dialog" aria-labelledby="editTugasModalLabel" aria-hidden="true">
@@ -303,20 +303,32 @@
           </div>
 
     <!-- HAPUS TUGAS -->
-    <div class="modal fade" id="hapusTugasModal" tabindex="-1" role="dialog" aria-labelledby="hapusTugasModalLabel"
-      aria-hidden="true">
+    <?php 
+    if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+      $taskId = $_POST["taskId"];
+      
+      $taskController->hapusTugas($taskId);
+    }
+    ?>
+    <div class="modal fade" id="hapusTugasModal" tabindex="-1" role="dialog" aria-labelledby="hapusTugasModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="hapusTugasModalLabel">Konfirmasi Hapus Tugas</h5>
+            <h5 class="modal-title" id="hapusTugasModalLabel">Confirm Delete Task</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">Apakah Anda yakin ingin menghapus tugas ini?</div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-            <a href="#" class="btn btn-danger">Hapus</a>
+          <div class="modal-body">
+            <p>Are you sure want to delete this task?</p>
+            <form method="POST">
+              <input type="hidden" name="taskId" id="deleteTaskId" value="<?= $taskId ?>">
+
+              <div class="modal-footer">
+                <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -350,7 +362,8 @@
                             data-taskname="<?= $row['TaskName']; ?>"
                             data-taskdesc="<?= $row['TaskDesc']; ?>"
                             data-deadline="<?= $row['DueDate']; ?>">Edit</a></li>
-                      <li><a href="#" data-toggle="modal" data-target="#hapusTugasModal" class="dropdown-item text-left text-dark">Delete</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#hapusTugasModal" class="deleteTaskBtn dropdown-item text-left text-dark"
+                            data-task-id="<?= $row['TaskId'] ?>" >Delete</a></li>
                   </ul>
                 
               </div>
