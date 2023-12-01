@@ -11,19 +11,21 @@ class Materials extends Connect {
         return $this-> getResult();
     }
 
-    public function ShowMateri($classId) {
-        $this->sql = "SELECT * FROM materials WHERE ClassId = '$classId'";
+    public function ShowMateri($materialId, $classId) {
+        $this->sql = "SELECT * FROM materials 
+        JOIN classes ON materials.ClassId = classes.ClassId
+        WHERE materials.ClassId = '$classId' OR materials.MaterialId = '$materialId'";
         return $this-> getResult();
     }
 
-    public function EditMateri($materialId, $classId, $materialName, $materialDesc, $attachment) {
-        $this->sql = "UPDATE materials SET MaterialName='$taskName', MaterialDesc='$taskDesc', 
-        UploadDate='$startDate', Attachment='$attachment' WHERE MaterialId=$materialId";
+    public function UpdateMateri($materialId, $classId, $materialName, $materialDesc, $attachment) {
+        $this->sql = "UPDATE materials SET MaterialName='$taskName', MaterialDesc='$taskDesc', Attachment='$attachment' 
+        WHERE MaterialId=$materialId";
         return $this->getResult();
     }
 
     public function DeleteMateri($materialId) {
-        $this->sql = "DELETE FROM materials WHERE MaterialId=$materialId";
+        $this->sql = "DELETE FROM materials WHERE MaterialId = '$materialId'";
         return $this->getResult();
     }
 

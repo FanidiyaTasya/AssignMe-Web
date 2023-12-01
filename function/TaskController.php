@@ -1,59 +1,138 @@
 <?php
-require_once __DIR__ . ('/../database/Task.php');
+require_once __DIR__ . '/../database/Task.php';
 
 class TaskController extends Task {
     protected $message;
-
+    
     public function createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment) {
-        if (!$this->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
-            return;
-        }
         $uploadDir = '../upload/file/';
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        $uniqueName = uniqid() . '_' . basename($_FILES['attachment']['name']);
+        $uniqueName = uniqid() . '_' . basename($attachment['name']);
         $uploadedFile = $uploadDir . $uniqueName;
-            if (move_uploaded_file($_FILES['attachment']['tmp_name'], $uploadedFile)) {
-                $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $uniqueName);
+    
+        if (empty($attachment['name'])) {
+            $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, null);
+        } else {
+            if (!$this->validateFile($attachment['name'], $attachment['size'], $attachment['type'])) {
+                return;
+            }
+            $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $uniqueName);
+            if ($result) {
+                move_uploaded_file($attachment['tmp_name'], $uploadedFile);
+            }
+        }
+    
+        if ($result) {
+            $_SESSION['message'] = 'Successfully created the assignment.';
+            $_SESSION['message_type'] = 'success';
+        } else {
+            $_SESSION['message'] = 'Failed to create the assignment.';
+            $_SESSION['message_type'] = 'error';
+    
+            if (!empty($attachment['name']) && !move_uploaded_file($attachment['tmp_name'], $uploadedFile)) {
+                echo "Error uploading file: " . error_get_last()['message'] . "\n";
+                $_SESSION['message'] = 'Failed to upload file: ' . error_get_last()['message'];
+            }
+        }
+    }
+    
+  
+    public function hapusFile($taskId) {
+        try {
+            $showTask = $this->ShowTask($taskId, null); 
+            if ($showTask) {
+                $row = $showTask->FetchArray(); 
+                $attachment = $row['Attachment'];
 
+                $uploadDir = '../upload/file/';
+                $uploadedFile = $uploadDir . $attachment;
+
+                if (file_exists($uploadedFile)) {
+                    unlink($uploadedFile);
+                    echo "Old file deleted successfully.";
+                } else {
+                    echo "Old file not found for TaskId: $taskId";
+                }
+            } else {
+                echo "Task not found.";
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function editTask($taskId, $taskName, $taskDesc, $dueDate, $attachment) {
+        try {
+            $result = $this->UpdateTask($taskId, $taskName, $taskDesc, $dueDate, $attachment);
+            
+            if ($result) {
+                $_SESSION['message'] = 'Task updated successfully!';
+                $_SESSION['message_type'] = 'success';
+            } else {
+                $_SESSION['message'] = 'Failed to update task.';
+                $_SESSION['message_type'] = 'error';
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+  
+    public function hapusTugas($taskId) {
+        try {
+            $showTask = $this->ShowTask($taskId, null); 
+            if ($showTask) {
+                $row = $showTask->FetchArray(); 
+                $taskId = $row['TaskId'];
+                $attachment = $row['Attachment']; 
+    
+                $uploadDir = '../upload/file/';
+                $uploadedFile = $uploadDir . $attachment;
+                if (!empty($attachment) && file_exists($uploadedFile)) {
+                    unlink($uploadedFile); 
+                }
+                $result = $this->DeleteTask($taskId);
+    
                 if ($result) {
-                    $_SESSION['message'] = 'Successfully created the assignment.';
+                    $_SESSION['message'] = 'Successfully deleted this task.';
                     $_SESSION['message_type'] = 'success';
                 } else {
-                    $_SESSION['message'] = 'Failed to save data to the database.';
+                    $_SESSION['message'] = 'Failed to delete this task from the database.';
                     $_SESSION['message_type'] = 'error';
                 }
             } else {
-                $_SESSION['message'] = 'Failed upload file: ' . error_get_last()['message'];
-                $_SESSION['message_type'] = 'error';
+                $_SESSION['message'] = 'Task not found.';
+                $_SESSION['message_type'] = 'info';
             }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
         }
-
-    public function editTask() {
-
     }
+    
+    
 
     public function validateFile($fileName, $fileSize, $fileType) {
+        if (empty($fileName)) {
+            return true;
+        }
+    
         $maxFileSize = 5242880; // 5 mb max
         $allowedFileTypes = ['pdf', 'doc', 'docx', 'ppt', 'pptx', 'jpg', 'jpeg', 'png'];
-
+    
         if ($fileSize > $maxFileSize) {
             $_SESSION['message'] = 'The selected file exceeds the maximum allowed size of 5MB. Please choose a smaller file.';
             $_SESSION['message_type'] = 'info';
             return false;
         }
-
+    
         $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
         if (!in_array(strtolower($fileExtension), $allowedFileTypes)) {
             $_SESSION['message'] = 'The selected file type is not allowed. Please choose a valid file type.';
             $_SESSION['message_type'] = 'info';
             return false;
         }
-        return true; 
+        return true;
     }
-
-    public function getTask($taskId, $classId) { // untuk task view
+    
+    public function getTask($taskId, $classId) { // untuk tampil di classwork
         $result = $this->ShowTask($taskId, $classId);
         return $result;
     }
@@ -77,7 +156,7 @@ class TaskController extends Task {
     }    
 
     public function getTaskSubmit($taskId) {
-        $result = $this->showTaskSubmit($taskId);
+        $result = $this->ShowTaskSubmit($taskId);
         return $result->getResult();
     }
 

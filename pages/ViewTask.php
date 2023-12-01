@@ -205,10 +205,14 @@ $username = $_SESSION['Username'];
         require_once __DIR__ . '/../function/TaskController.php';
 
         $taskId = $_GET['taskId'];
-        $classId = ""; 
         $taskController = new TaskController();
-        $result = $taskController->getTask($taskId, $classId);
-        $row = $result->FetchArray()
+        $result = $taskController->getTask($taskId, null);
+        $row = $result->FetchArray();
+
+        $combinedName = $row['Attachment'];
+        $parts = explode('_', $combinedName);
+        $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
+        $fileUrl = '../upload/file/' . $combinedName; 
         ?>
       <div class="col-md-4">
           <div class="card">
@@ -220,7 +224,8 @@ $username = $_SESSION['Username'];
                   <p class="mb-0 text-right small">Due On <?php echo date('M j, Y ', strtotime($row['DueDate'])); ?></p>
                   <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
                   <div class="modal-footer"></div>
-                  <p class="mb-0 small"><?= $row['TaskDesc']; ?></p>
+                  <p class="mb-0 small"><?= $row['TaskDesc']; ?></p><br>
+                  <p class="mb-0 small"><a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a></p>
               </div>
           </div>
       </div>
@@ -249,6 +254,7 @@ $username = $_SESSION['Username'];
                             <th scope="col">Name</th>
                             <th scope="col">Answer</th>
                             <th scope="col">Status</th>
+                            <th scope="col">Time</th>
                             <th scope="col">Grade</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -269,6 +275,7 @@ $username = $_SESSION['Username'];
                                     <?php endif; ?>
                                 </td>
                                 <td><?= $row['Status']; ?></td>
+                                <td><?= date('M j, Y g:i A', strtotime($row['SubmitDate'])); ?></td>
                                 <td>
                                     <form method="POST">
                                         <input type="hidden" name="taskId" value="<?= $taskId; ?>">

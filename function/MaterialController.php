@@ -27,9 +27,57 @@ class MaterialController extends Materials {
         }
     }
     
-    // public function editMateri() {
+    public function editMateri() {
+        try {
+            $result = $this->UpdateMateri($materialId, $materialName, $materialDesc, $attachment);
+            
+            if ($result) {
+                $_SESSION['message'] = 'Task updated successfully!';
+                $_SESSION['message_type'] = 'success';
+            } else {
+                $_SESSION['message'] = 'Failed to update task.';
+                $_SESSION['message_type'] = 'error';
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 
-    // }
+    public function hapusMateri($materialId) {
+        try {
+            $showMateri = $this->ShowMateri($materialId, null); 
+            if ($showMateri) {
+                $row = $showMateri->FetchArray(); 
+                $materialId = $row['MaterialId'];
+                $attachment = $row['Attachment']; 
+    
+                $uploadDir = '../upload/file/';
+                $uploadedFile = $uploadDir . $attachment;
+                if (!empty($attachment) && file_exists($uploadedFile)) {
+                    unlink($uploadedFile); 
+                }
+                $result = $this->DeleteMateri($materialId);
+    
+                if ($result) {
+                    $_SESSION['message'] = 'Successfully deleted this material.';
+                    $_SESSION['message_type'] = 'success';
+                } else {
+                    $_SESSION['message'] = 'Failed to delete this material from the database.';
+                    $_SESSION['message_type'] = 'error';
+                }
+            } else {
+                $_SESSION['message'] = 'Material not found.';
+                $_SESSION['message_type'] = 'info';
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function getMateri($materialId, $classId) { 
+        $result = $this->ShowMateri($materialId, $classId);
+        return $result;
+    }
 
     public function validateFile($fileName, $fileSize, $fileType) {
         $maxFileSize = 5242880; // 5 mb max
@@ -48,11 +96,6 @@ class MaterialController extends Materials {
             return false;
         }
         return true; 
-    }
-
-    public function getMateri($classId) { 
-        $task = $this->ShowMateri($classId);
-        return $task;
     }
 
     public function getMessage() {

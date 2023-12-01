@@ -58,15 +58,20 @@ $(document).ready(function () {
         var taskName = $(this).data('taskname');
         var taskDesc = $(this).data('taskdesc');
         var dueDate = $(this).data('deadline');
-        // var attachment = $(this).data('attachment');
-        console.log("Test");
-        console.log(taskId, taskName, taskDesc, dueDate);
+        var attachment = $(this).data('attachment');
+        
+        console.log("Task ID:", taskId);
+        console.log("Task Name:", taskName);
+        console.log("Task Description:", taskDesc);
+        console.log("Due Date:", dueDate);
+        console.log("Attachment:", attachment);
+
 
         $('#editTugasModal #taskId').val(taskId);
         $('#editTugasModal #taskname').val(taskName);
         $('#editTugasModal #taskdesc').val(taskDesc);
         $('#editTugasModal #deadline').val(dueDate);
-        // $('#editTugasModal #attachment').val(attachment);
+        $('#editTugasModal #attachment').val(attachment);
     });
 });
 
@@ -75,4 +80,11 @@ $('.deleteTaskBtn').click(function() {
     var taskId = $(this).data('task-id');
     console.log('taskId:', taskId);
     $('#deleteTaskId').val(taskId);
+});
+
+//hapus materi
+$('.deleteMateriBtn').click(function() {
+    var materialId = $(this).data('material-id');
+    console.log('materialId:', materialId);
+    $('#deleteMaterialId').val(materialId);
 });

@@ -309,7 +309,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
     
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" value="<?= $email; ?>">
+                  <input type="email" class="form-control" name="email" id="email" value="<?= $email; ?>" readonly>
                 </div>
 
                 <div class="mb-3 row"> 
