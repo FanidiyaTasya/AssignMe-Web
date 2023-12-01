@@ -100,18 +100,23 @@
 
     <div class="otp-form">
         <i class="fas fa-shield-alt fa-3x" style="color: #007bff;"></i>
-        <img src="../assets/img/search.png" alt="Click to view image">
-        <h3>OTP Verification</h3>
+        <img src="../assets/img/ver.png" alt="Click to view image">
+        <h3>Reset Password</h3>
         <p class="form-description">Enter the OTP sent to your email address to verify your identity.</p>
-        <form method="POST">
+        <form method="POST" action="../function/resetController.php"> 
             <div class="form-group">
-                <label for="otp">Enter OTP:</label>
-                <input type="text" id="otp" name="otp" required>
+                <label for="new_password">New Password:</label>
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <input type="password" id="new_password" name="new_password" required>
+                </div>
             </div>
 
             <div class="form-group">
-                <button type="submit">
-                    <i class="fas fa-check"></i> Verify
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-key"></i> Reset Password
                 </button>
             </div>
         </form>

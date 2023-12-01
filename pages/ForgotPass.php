@@ -104,11 +104,11 @@
 
     <div class="forgot-password-form">
         <i class="fas fa-lock fa-3x" style="color: #007bff;"></i>
-        <img src="../assets/img/amnesia.png" alt="Click to view image">
+        <img src="../assets/img/1.png" alt="Click to view image">
         <h3>Forgot Password</h3>
         <p class="form-description">Enter your email address and we'll send you an email with instructions to reset your
             password.</p>
-        <form method="POST">
+        <form action="../function/sendemailController.php" method="POST">
             <div class="form-group">
                 <label for="email">Email address:</label>
                 <div class="input-group">

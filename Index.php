@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
     <meta charset="UTF-8">
 
@@ -83,21 +84,55 @@
             background-color: #f0f0f0;
             padding: 20px;
         }
+
         img {
             max-width: 100%;
             height: auto;
-            display: block; 
-            margin: 0 auto; 
+            display: block;
+            margin: 0 auto;
         }
-     
+
         #feature1 {
             background-color: #4352c3d9;
             padding: 20px;
         }
-      
+
         #feature1 .feature-description1 {
-         color: #202642; 
-         font-size: 20px;
+            color: #202642;
+            font-size: 20px;
+        }
+
+        .gallery-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .screenshot-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .screenshot {
+            width: 100%;
+            height: auto;
+        }
+
+        .screenshot-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        h2.text-center.mb-4 {
+            font-size: 2rem;
+            color: #0766AD;
+            /* Warna hitam */
+            font-weight: bold;
+            /* Teks bold */
+            margin-bottom: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
     </style>
 
@@ -147,6 +182,10 @@
                                 </li>
                                 <li>
                                     <a href="#12">About</a>
+                                </li>
+
+                                <li>
+                                    <a href="#11">Galery</a>
                                 </li>
                             </ul>
                         </nav>
@@ -272,11 +311,11 @@
                 <div class="feature" id="feature1">
                     <a href="#responsive" class="feature-link">
                         <h3 class="feature-title">AssignMe</h3>
-                        <p class="feature-description1">Aplikasi Assignment atau sistem pengumpulan tugas berbasis web
-                            dan desktop bertujuan
-                            untuk membantu pengajar dan siswa dalam proses penugasan dan pengumpulan
-                            tugas. Aplikasi ini dapat digunakan dalam konteks pendidikan atau pelatihan di berbagai
-                            tingkatan.</p>
+                        <p class="feature-description1">"Aplikasi AssignMe adalah sebuah platform yang dirancang khusus
+                            untuk memudahkan proses pengumpulan tugas di lingkungan pendidikan. Dengan antarmuka yang
+                            ramah pengguna dan menggunakan database MySQL melalui localhost dengan bantuan phpMyAdmin,
+                            AssignMe menyediakan solusi yang efisien dan terpercaya bagi mahasiswa, pengajar, dan
+                            administrator."</p>
                     </a>
                 </div>
 
@@ -301,9 +340,9 @@
                 <div class="feature">
                     <a href="#cloud-access" class="feature-link">
 
-                        <h3 class="feature-title">Akses Cloud</h3>
-                        <p class="feature-description">Simpan dan akses data Anda dengan mudah melalui penyimpanan cloud
-                            yang terintegrasi.</p>
+                        <h3 class="feature-title">Fleksibilitas dan Skalabilitas</h3>
+                        <p class="feature-description">Dapat disesuaikan dengan kebutuhan institusi pendidikan dan dapat
+                            berkembang seiring waktu.</p>
                     </a>
                 </div>
 
@@ -317,6 +356,39 @@
                 </div>
             </div>
         </section>
+
+        <section id="11" class="introduction scrollto">
+            <div class="container mt-5 gallery-container">
+                <h2 class="text-center mb-4">Galery </h2>
+
+                <div class="row">
+                    <!-- Gambar 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="screenshot-container">
+                            <img src="assets/img/ss1.png" alt="Tangkapan Layar 1" class="screenshot img-fluid">
+                        </div>
+                    </div>
+
+                    <!-- Gambar 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="screenshot-container">
+                            <img src="assets/img/ss2.png" alt="Tangkapan Layar 2" class="screenshot img-fluid">
+                        </div>
+                    </div>
+
+                    <!-- Gambar 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="screenshot-container">
+                            <img src="assets/img/ss3.png" alt="Tangkapan Layar 3" class="screenshot img-fluid">
+                        </div>
+                    </div>
+                    <!-- Tambahkan lebih banyak gambar jika diperlukan -->
+                </div>
+            </div>
+        </section>
+
+
+
         <!--End of Introduction-->
 
 
@@ -325,7 +397,7 @@
         <footer id="landing-footer" class="clearfix">
             <div class="row clearfix">
 
-                <p id="copyright" class="col-2">Made by <a href="https://www.instagram.com/sayyyidi_/"></a></p>
+                <p id="copyright" class="col-2">Made by AssignMe <a href="https://www.instagram.com/sayyyidi_/"></a></p>
 
                 <!--Social Icons in Footer-->
                 <ul class="col-2 social-icons">
@@ -378,4 +450,5 @@
 
 
 </body>
+
 </html>

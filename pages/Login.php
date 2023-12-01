@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control"  name="password" id="password" placeholder="Enter your password">
                         
-                        <a href="ForgotPass.html" class="text-decoration-none">Forgot Password?</a>
+                        <a href="ForgotPass.php" class="text-decoration-none">Forgot Password?</a>
                         
                         <button class="common-button" type="submit" name="submit">Sign In</button>
                         <button class="common-button-google" >
