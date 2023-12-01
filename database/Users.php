@@ -29,7 +29,7 @@ class Users extends Connect {
     }
 
     public function ShowStudent($classId) {
-        $this->sql = "SELECT users.Username
+        $this->sql = "SELECT users.Username, user_classes.UserId
         FROM users
         JOIN user_classes ON users.UserId = user_classes.UserId
         WHERE user_classes.ClassId = $classId AND users.Role = 'Siswa'";

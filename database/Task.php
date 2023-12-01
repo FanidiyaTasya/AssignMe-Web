@@ -1,5 +1,6 @@
 <?php 
 require_once ('Connect.php');
+require_once ('Users.php');
 
 class Task extends Connect {
     protected $sql;
@@ -9,7 +10,41 @@ class Task extends Connect {
         $this->sql = "INSERT INTO tasks (ClassId, TaskName, TaskDesc, StartDate, DueDate, Attachment) 
         VALUES ('$classId','$taskName','$taskDesc','$startDate','$dueDate','$attachment')";
         return $this-> getResult();
+        // $this-> getResult();
+        // return $this->dbConn()->insert_id;
     }
+
+    public function InsertToDo($taskId, $userId) {
+        $this->sql = "INSERT INTO task_submits (TaskId, UserId, Status) VALUES ('$taskId', '$userId', 'To-Do')";
+        $this->getResult();
+    }
+
+    public function GetSiswa($classId) { 
+        $users = new Users();
+        return $users->ShowStudent($classId);
+        var_dump($users->ShowStudent);
+    }
+
+    // public function InsertToDo($taskId, $userId) {
+    //     $users = new Users();
+    //     $userIds = $users->ShowStudent($classId);
+    
+    //     foreach ($userIds as $userId) {
+    //         $this->sql = "INSERT INTO task_submits (TaskId, UserId, Status) VALUES ('$taskId', '$userId', 'To-Do')";
+    //         $this->getResult();
+    //     }
+    // }
+
+    public function UpdateTask($taskId, $taskName, $taskDesc, $dueDate, $attachment) {
+        $this->sql = "UPDATE tasks SET TaskName='$taskName', TaskDesc='$taskDesc', 
+        DueDate='$dueDate', Attachment='$attachment' WHERE TaskId=$taskId";
+        return $this->getResult();
+    }
+
+    public function DeleteTask($taskId) {
+        $this->sql = "DELETE FROM tasks WHERE TaskId = '$taskId'";
+        return $this->getResult();
+    }   
 
     public function ShowTask($taskId, $classId) {
         $this->sql = "SELECT * 
@@ -19,19 +54,8 @@ class Task extends Connect {
         return $this-> getResult();
     }
 
-    public function UpdateTask($taskId, $classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment) {
-        $this->sql = "UPDATE tasks SET TaskName='$taskName', TaskDesc='$taskDesc', 
-        StartDate='$startDate', DueDate='$dueDate', Attachment='$attachment' WHERE TaskId=$taskId";
-        return $this->getResult();
-    }
-
-    public function DeleteTask($taskId) {
-        $this->sql = "DELETE FROM tasks WHERE TaskId=$taskId";
-        return $this->getResult();
-    }
-
-    public function ShowTaskSubmit($taskId) {
-        $this->sql = "SELECT users.UserId, users.Username, task_submits.Answers, task_submits.Status, task_submits.Grade
+    public function ShowTaskSubmit($taskId) { // tabel nilai
+        $this->sql = "SELECT users.UserId, users.Username, task_submits.Answers, task_submits.SubmitDate, task_submits.Status, task_submits.Grade
         FROM task_submits
         INNER JOIN users ON task_submits.UserId = users.UserId
         WHERE task_submits.TaskId = $taskId 
@@ -50,7 +74,7 @@ class Task extends Connect {
         return $this->getResult();
     }
     
-    public function ShowAllTask() {
+    public function ShowAllTask() { // untuk to review
         $this->sql = "SELECT tasks.*, classes.ClassName
         FROM tasks
         JOIN classes ON tasks.ClassId = classes.ClassId

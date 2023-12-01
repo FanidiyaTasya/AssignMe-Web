@@ -241,7 +241,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
               </a>
             </li> -->
 
-            <li>
+            <!-- <li>
               <a class="dropdown-item border-radius-md" href="#">
                 <div class="d-flex py-1">
                   <div class="avatar avatar-sm me-3">
@@ -252,7 +252,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
                   </div>
                 </div>
               </a>
-            </li>
+            </li> -->
 
             <li>
               <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
@@ -309,7 +309,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
     
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" name="email" id="email" value="<?= $email; ?>">
+                  <input type="email" class="form-control" name="email" id="email" value="<?= $email; ?>" readonly>
                 </div>
 
                 <div class="mb-3 row"> 

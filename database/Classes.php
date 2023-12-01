@@ -41,6 +41,11 @@ class Classes extends Connect {
         return $count > 0;
     }
 
+    // public function updateTaskStatus($taskId, $newStatus) {
+    //     $this->sql = "UPDATE tasks SET Status = '$newStatus' WHERE TaskId = '$taskId'";
+    //     $this->getResult();
+    // }
+
     public function UpdateClass($classId, $className, $subject, $desc) {
         $this->sql = "UPDATE classes SET ClassName='$className', SubjectName='$subject', Description='$desc' WHERE ClassId='$classId'";
         return $this->getResult();

@@ -115,5 +115,18 @@ class ClassController extends Classes {
             return null;
         }
     }   
+
+    // public function updateOverdueStatus() {
+    //     $currentDate = date('Y-m-d H:i:s');
+    
+    //     // Mendapatkan tugas yang masih belum overdue dan sudah melewati due date
+    //     $this->sql = "SELECT * FROM tasks WHERE DueDate < '$currentDate' AND Status != 'Overdue'";
+    //     $overdueTasks = $this->getResult();
+    
+    //     foreach ($overdueTasks as $task) {
+    //         $taskId = $task['TaskId'];
+    //         $this->updateTaskStatus($taskId, 'Overdue');
+    //     }
+    // }
 }
 ?>

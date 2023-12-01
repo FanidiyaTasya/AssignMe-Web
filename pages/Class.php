@@ -228,7 +228,8 @@ $_SESSION['ClassId'] = $classId;
             $taskDesc = $_POST['taskdesc'];
             $startDate = date('Y-m-d H:i:s');
             $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
-            $attachment = $_FILES['attachment'];
+            $attachment = isset($_FILES['attachment']) ? $_FILES['attachment'] : null;
+            // $attachment = $_FILES['attachment'];
 
             $message = $taskController->createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment);
           }
@@ -280,6 +281,7 @@ $_SESSION['ClassId'] = $classId;
             </div>
           </div>
 
+<<<<<<< HEAD
           <!-- EDIT TUGAS -->
           <?php
           if (isset($_POST['action']) && $_POST['action'] == 'edit') {
@@ -294,6 +296,37 @@ $_SESSION['ClassId'] = $classId;
           ?>
           <div class="modal fade" id="editTugasModal" tabindex="-1" role="dialog" aria-labelledby="editTugasModalLabel"
             aria-hidden="true">
+=======
+   <!-- EDIT TUGAS -->
+    <?php
+    if (isset($_POST['action']) && $_POST['action'] == 'edit') {
+        $taskId = $_POST['taskId'];
+        $taskName = $_POST['taskname'];
+        $taskDesc = $_POST['taskdesc'];
+        $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
+
+        $result = $taskController->getTask($taskId, null); 
+        $row = $result->FetchArray();
+        if ($_FILES['attachment']['error'] == 4) {
+            $attachment = $row['Attachment'];
+        } else {
+            $oldAttachment = $row['Attachment'];
+            if ($oldAttachment != "") {
+                unlink("../upload/file/" . $oldAttachment);
+            }
+            $uploadDir = '../upload/file/';
+            $uniqueName = uniqid() . '_' . basename($_FILES['attachment']['name']);
+            $uploadedFile = $uploadDir . $uniqueName;
+            move_uploaded_file($_FILES['attachment']['tmp_name'], $uploadedFile);
+
+            $attachment = $uniqueName;
+        }
+
+        $taskController->editTask($taskId, $taskName, $taskDesc, $dueDate, $attachment);
+    }
+    ?>
+          <div class="modal fade" id="editTugasModal" tabindex="-1" role="dialog" aria-labelledby="editTugasModalLabel" aria-hidden="true">
+>>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
@@ -339,6 +372,7 @@ $_SESSION['ClassId'] = $classId;
             </div>
           </div>
 
+<<<<<<< HEAD
           <!-- HAPUS TUGAS -->
           <div class="modal fade" id="hapusTugasModal" tabindex="-1" role="dialog"
             aria-labelledby="hapusTugasModalLabel" aria-hidden="true">
@@ -358,18 +392,47 @@ $_SESSION['ClassId'] = $classId;
               </div>
             </div>
           </div>
+=======
+    <!-- HAPUS TUGAS -->
+    <?php 
+    if (isset($_POST['action']) && $_POST['action'] == 'delete') {
+      $taskId = $_POST["taskId"];
+      
+      $taskController->hapusTugas($taskId);
+    }
+    ?>
+    <div class="modal fade" id="hapusTugasModal" tabindex="-1" role="dialog" aria-labelledby="hapusTugasModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="hapusTugasModalLabel">Confirm Delete Task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure want to delete this task?</p>
+            <form method="POST">
+              <input type="hidden" name="taskId" id="deleteTaskId" value="<?= $taskId ?>">
+
+              <div class="modal-footer">
+                <button type="submit" name="action" value="delete" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+>>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
 
           <!-- TAMPIL TUGAS -->
           <?php
-          require_once __DIR__ . ('/../function/TaskController.php');
-
-          $taskController = new TaskController();
           $message = $taskController->getMessage();
           if (!empty($message)) {
             echo $message;
           }
-          $taskId = "";
-          $result = $taskController->getTask($taskId, $classId);
+          $result = $taskController->getTask(null, $classId);
           while ($row = $result->FetchArray()) {
             $combinedName = $row['Attachment'];
             $parts = explode('_', $combinedName);
@@ -383,10 +446,21 @@ $_SESSION['ClassId'] = $classId;
                   <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"></i>
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+<<<<<<< HEAD
                     <li><a href="#" data-toggle="modal" data-target="#editTugasModal"
                         class="dropdown-item text-left text-dark">Edit</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#hapusTugasModal"
                         class="dropdown-item text-left text-dark">Delete</a></li>
+=======
+                      <li><a href="#" data-toggle="modal" data-target="#editTugasModal" class="editTugasModalLink dropdown-item text-left text-dark"
+                            data-task-id="<?= $row['TaskId']; ?>"
+                            data-taskname="<?= $row['TaskName']; ?>"
+                            data-taskdesc="<?= $row['TaskDesc']; ?>"
+                            data-deadline="<?= $row['DueDate']; ?>"
+                            data-attachment="<?= $row['Attachment']; ?>">Edit</a></li>
+                      <li><a href="#" data-toggle="modal" data-target="#hapusTugasModal" class="deleteTaskBtn dropdown-item text-left text-dark"
+                            data-task-id="<?= $row['TaskId'] ?>">Delete</a></li>
+>>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
                   </ul>
 
                 </div>
@@ -411,7 +485,7 @@ $_SESSION['ClassId'] = $classId;
           <div class="container my-4">
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#buatKelasModal">+ Materials</button>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#buatMateriModal">+ Materials</button>
               </div>
             </div>
           </div>
@@ -431,8 +505,12 @@ $_SESSION['ClassId'] = $classId;
           }
 
           ?>
+<<<<<<< HEAD
           <div class="modal fade" id="buatKelasModal" tabindex="-1" role="dialog" aria-labelledby="buatKelasModalLabel"
             aria-hidden="true">
+=======
+          <div class="modal fade" id="buatMateriModal" tabindex="-1" role="dialog" aria-labelledby="buatMateriModalLabel" aria-hidden="true">
+>>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
             <div class="modal-dialog" role="document">
               <div class="modal-content">
 
@@ -472,13 +550,45 @@ $_SESSION['ClassId'] = $classId;
             </div>
           </div>
 
+    <!-- HAPUS MATERI -->
+    <?php 
+    if (isset($_POST['action']) && $_POST['action'] == 'hapus') {
+      $materialId = $_POST["materialId"];
+      
+      $materialController->hapusMateri($materialId);
+    }
+    ?>
+    <div class="modal fade" id="hapusMateriModal" tabindex="-1" role="dialog" aria-labelledby="hapusMateriModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="hapusTugasModalLabel">Confirm Delete Material</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure want to delete this material?</p>
+            <form method="POST">
+              <input type="hidden" name="materialId" id="deleteMaterialId" value="<?= $materialId ?>">
+
+              <div class="modal-footer">
+                <button type="submit" name="action" value="hapus" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
           <!-- TAMPIL MATERI -->
           <?php
           $message = $materialController->getMessage();
           if (!empty($message)) {
             echo $message;
           }
-          $materi = $materialController->getMateri($classId);
+          $materi = $materialController->getMateri(null, $classId);
           while ($row = $materi->FetchArray()) {
             $combinedName = $row['Attachment'];
             $parts = explode('_', $combinedName);
@@ -489,6 +599,7 @@ $_SESSION['ClassId'] = $classId;
             <div class="card mb-3">
               <div class="card-body">
 
+<<<<<<< HEAD
                 <div class="dropdown float-end">
                   <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown"
                     aria-expanded="false"></i>
@@ -498,6 +609,15 @@ $_SESSION['ClassId'] = $classId;
                     <li><a href="#" data-toggle="modal" data-target="#hapusMateriModal"
                         class="dropdown-item text-left text-dark">Delete</a></li>
                   </ul>
+=======
+              <div class="dropdown float-end">
+                <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a href="#" data-toggle="modal" data-target="#editMateriModal" class="dropdown-item text-left text-dark">Edit</a></li>
+                  <li><a href="#" data-toggle="modal" data-target="#hapusMateriModal" class="deleteMateriBtn dropdown-item text-left text-dark"
+                      data-material-id="<?= $row['MaterialId'] ?>">Delete</a></li>
+                </ul>
+>>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
 
                 </div>
                 <h5 class="card-title">
@@ -624,10 +744,18 @@ $_SESSION['ClassId'] = $classId;
     }
   </script>
 
+<<<<<<< HEAD
   <!--  JS Files   -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+=======
+    <!--  JS Files   -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+>>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
 
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>

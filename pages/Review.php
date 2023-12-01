@@ -174,19 +174,6 @@ require_once __DIR__ . '/../function/ProfileController.php';
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   
                     <li>
-                        <a class="dropdown-item border-radius-md" href="path/to/change-password">
-                            <div class="d-flex py-1">
-                                <div class="avatar avatar-sm me-3">
-                                    <i class="text-dark fa fa-lock"></i>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">Change Password</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-  
-                    <li>
                         <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
                             <div class="d-flex py-1">
                                 <div class="avatar avatar-sm me-3">

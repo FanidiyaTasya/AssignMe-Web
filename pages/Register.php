@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
 
                     <form class="common-form" method="POST">
                         <label for="username" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter your name" autofocus>
 
                         <label for = "email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email">
@@ -59,8 +59,8 @@ if (isset($_POST['submit'])) {
                         <input type="password" class="form-control" name="confirm-password" id="confirm-password" placeholder="Confirm your password">
 
                         <button class="common-button" type="submit" name="submit">Sign Up</button>
-                        <button class="common-button-google">
-                            <img src="../assets/img/google.png" width="20" height="20" alt="">  Sign Up With Google</button>
+                        <!-- <button class="common-button-google">
+                            <img src="../assets/img/google.png" width="20" height="20" alt="">  Sign Up With Google</button> -->
                         
                         <div class="text-center">
                             <span class="d-inline">Already have an account? <a href="Login.php" class="d-inline text-decoration-none">Sign In</a></span>

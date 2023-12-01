@@ -174,19 +174,6 @@ require_once __DIR__ . '/../function/ProfileController.php';
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
   
-                  
-                        <a class="dropdown-item border-radius-md" href="path/to/change-password">
-                            <div class="d-flex py-1">
-                                <div class="avatar avatar-sm me-3">
-                                    <i class="text-dark fa fa-lock"></i>
-                                </div>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="text-sm font-weight-normal mb-1">Change Password</h6>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-  
                     <li>
                         <a class="dropdown-item border-radius-md" href="../function/LogoutController.php">
                             <div class="d-flex py-1">
@@ -381,8 +368,14 @@ require_once __DIR__ . '/../function/ProfileController.php';
                 <div class="dropdown float-end">
                     <i class="fas text-muted dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" data-class-id="<?= $row['ClassId'] ?>" data-classname="<?= $row['ClassName'] ?>" data-subject="<?= $row['SubjectName'] ?>" data-description="<?= $row['Description'] ?>">Edit</a></li>
-                        <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="dropdown-item text-left text-dark deleteClassBtn" data-class-id="<?= $row['ClassId'] ?>" data-user-id="<?= $userId ?>">Delete</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#editKelasModal" class="editKelasModalLink dropdown-item text-left text-dark" 
+                              data-class-id="<?= $row['ClassId'] ?>" 
+                              data-classname="<?= $row['ClassName'] ?>" 
+                              data-subject="<?= $row['SubjectName'] ?>" 
+                              data-description="<?= $row['Description'] ?>">Edit</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#hapusKelasModal" class="deleteClassBtn dropdown-item text-left text-dark" 
+                              data-class-id="<?= $row['ClassId'] ?>" 
+                              data-user-id="<?= $userId ?>">Delete</a></li>
                     </ul>
                 </div>
 
