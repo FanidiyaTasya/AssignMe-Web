@@ -122,8 +122,8 @@
         </form>
 
         <div class="back-to-login">
-            <a href="#">
-                <i class="fas fa-arrow-left"></i>  < forgot password
+            <a href="../pages/ForgotPass.php    ">
+                <i class="fas fa-arrow-left"></i>  << forgot password
             </a>
         </div>
     </div>
