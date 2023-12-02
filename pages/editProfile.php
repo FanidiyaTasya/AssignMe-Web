@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 50px;
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+  </style>
 </head>
 <body>
 
@@ -43,7 +61,7 @@
         <div class="card-body text-center">
             <form id="editProfileForm" enctype="multipart/form-data">
                 <label for="file-input">
-                    <img src="<?= $profile; ?>" class="profile-image img-fluid" alt="Profile Image">
+                    <img src="<?= $profile; ?>" class="profile-image" alt="Profile Image">
                     <h5 class="card-title mt-3"><?= $username; ?></h5>
                 </label>
                 <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)">

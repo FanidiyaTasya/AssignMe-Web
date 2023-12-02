@@ -19,7 +19,7 @@ class Classes extends Connect {
     public function ShowClass($userId) {
         $this->sql = "SELECT classes.* FROM classes 
         JOIN user_classes ON classes.ClassId = user_classes.ClassId
-        JOIN users ON user_classes.UserId = users.UserId WHERE users.UserId = '$userId'";
+        JOIN users ON user_classes.UserId = users.UserId WHERE user_classes.UserId = '$userId'";
         return $this->getResult();
     }
 

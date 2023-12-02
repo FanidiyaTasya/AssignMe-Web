@@ -424,7 +424,7 @@ $_SESSION['ClassId'] = $classId;
                             data-task-id="<?= $row['TaskId'] ?>">Delete</a></li>
                   </ul>
 
-                </div>
+              </div>
                 <h5 class="card-title">
                   <?= $row['TaskName']; ?>
                 </h5>
@@ -432,9 +432,7 @@ $_SESSION['ClassId'] = $classId;
                   <?= $row['TaskDesc']; ?>
                 </p>
                 <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
-                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>">
-                  <?= $originalName; ?>
-                </a><br><br>
+                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a><br><br>
                 <a href="ViewTask.php?taskId=<?= $row['TaskId'] ?>" class="btn btn-primary">View Assignment</a>
               </div>
             </div>

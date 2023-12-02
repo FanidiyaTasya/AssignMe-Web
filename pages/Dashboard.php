@@ -169,7 +169,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
                   <div class="avatar avatar-sm me-3">
                     <img src="../upload/profile/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
                   </div>
-                  <span class="d-sm-inline d-none"><?php echo $username; ?></span>
+                  <span class="d-sm-inline d-none"><?= $username; ?></span>
                 </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">

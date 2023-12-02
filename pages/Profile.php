@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['Username'])) {
+if (!isset($_SESSION['UserId'])) {
     header('Location: Login.php');
     exit();
 }
@@ -11,7 +11,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $newUsername = $_POST['username'];
         $newEmail = $_POST['email'];
-        $newGender = $_POST['gender'];
+        $newGender = empty($newGender) ? null : $newGender;
     
         $result = $profileController->editData($userId, $newUsername, $newEmail, $newGender);
     }
@@ -206,14 +206,6 @@ require_once __DIR__ . '/../function/ProfileController.php';
           <h6 class="font-weight-bolder mb-0  text-white">Profile</h6>
         </nav>
 
-        <!-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
-          </div> -->
-
         <!-- DROPDOWN -->
         <li class="nav-item px-2 d-flex align-items-center">
         <li class="nav-item dropdown pe-2 d-flex">
@@ -284,16 +276,18 @@ require_once __DIR__ . '/../function/ProfileController.php';
       <div class="row">
        <!-- Container 1: Foto Profil -->
        <div class="col-md-4">
-        <div class="card">
-            <div class="card-body text-center">
-                <label for="file-input">
-                    <img src="<?= $profile; ?>" class="profile-image img-fluid" alt="Profile Image">
-                    <h5 class="card-title mt-3"><?= $username; ?></h5>
-                </label>
-                <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)"><br>
+            <div class="card">
+                <div class="card-body text-center">
+                    <form id="editProfileForm" enctype="multipart/form-data">
+                        <label for="file-input">
+                            <img src="<?= $profile; ?>" class="profile-image" alt="Profile Image">
+                            <h5 class="card-title mt-3"><?= $username; ?></h5>
+                        </label>
+                        <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)">
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     
         <!-- Container 2: Formulir Edit Profil -->
         <div class="col-md-8">
@@ -328,6 +322,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
             </div>
           </div>
         </div>
+        
       </div>
     </div>
     

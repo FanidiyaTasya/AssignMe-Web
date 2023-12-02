@@ -34,29 +34,33 @@ class ProfileController extends Users {
         }
     }
     
-    public function changeProfile($userId, $newProfile) {
-        if (!empty($newProfile['name'])) {
-            $oldProfilePath = $this->getProfile($userId);
-            if ($oldProfilePath !== '../upload/profile/user-picture.jpg') {
-                unlink($oldProfilePath);
-            }
+    // public function changeProfile($userId, $profile) {
+    //     if (!empty($profile['name'])) {
+    //         $oldProfilePath = $this->getProfile($userId);
+    //         if ($oldProfilePath !== '../upload/profile/user-picture.jpg') {
+    //             unlink($oldProfilePath);
+    //         }
 
-            $newProfilePath = 'upload/profile/' . uniqid() . '.' . pathinfo($newProfile['name'], PATHINFO_EXTENSION);
-            $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/' . $newProfilePath;
-            move_uploaded_file($newProfile['tmp_name'], $uploadPath);
+    //         $newProfilePath = 'upload/profile/' . uniqid() . '.' . pathinfo($newProfile['name'], PATHINFO_EXTENSION);
+    //         $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/' . $newProfilePath;
+    //         move_uploaded_file($newProfile['tmp_name'], $uploadPath);
 
-            $result = $this->UpdateProfile($userId, $newProfile);
-            if ($result) {
-                $_SESSION['message'] = 'Profile updated successfully.';
-                $_SESSION['message_type'] = 'success';
-                return $newProfilePath;
-            } else {
-                $_SESSION['message'] = 'Failed to update profile.';
-                $_SESSION['message_type'] = 'error';
-                return $oldProfilePath;
-            }
-            return $newProfilePath;
-        }
+    //         $result = $this->UpdateProfile($userId, $newProfile);
+    //         if ($result) {
+    //             $_SESSION['message'] = 'Profile updated successfully.';
+    //             $_SESSION['message_type'] = 'success';
+    //             return $newProfilePath;
+    //         } else {
+    //             $_SESSION['message'] = 'Failed to update profile.';
+    //             $_SESSION['message_type'] = 'error';
+    //             return $oldProfilePath;
+    //         }
+    //         return $newProfilePath;
+    //     }
+    // }
+
+    public function changeProfile() {
+        
     }
 
     public function getMessage() {

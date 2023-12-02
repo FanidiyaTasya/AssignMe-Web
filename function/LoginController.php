@@ -22,46 +22,35 @@ class LoginController extends Users {
             return $this->Login();
         }
     }
-
+    
     public function Login() {
-        $row = $this->SQLLogin($this->email, $this->password)->FetchArray();
-        
-        if ($row !== null && $row['Email'] == $this->email) {
-            if (password_verify($this->password, $row['Password'])) {
-                $this->handleSuccessfulLogin($row);
-            } elseif ($row['Password'] == $this->password) {
-                $this->handleSuccessfulLogin($row);
+        $row = $this->SQLLogin($this->email)->FetchArray();
+    
+        if ($row !== null) {
+            if ($row['Role'] === 'Guru') {
+                if (password_verify($this->password, $row['Password']) || $this->password === $row['Password']) {
+                    $this->performLogin($row);
+                } else {
+                    return $this->message = 'Your email or password is incorrect! Please try again.';
+                }
+            } elseif ($row['Role'] === 'student') {
+                return $this->message = 'User not found!';
+            } else {
+                return $this->message = 'Unknown user.';
             }
+        } else {
+            return $this->message = 'User not found!';
         }
-        return $this->message = 'Your email or password is incorrect! Please try again.';
     }
     
-    private function handleSuccessfulLogin($row) {
+    private function performLogin($row) {
         $_SESSION['UserId'] = $row['UserId'];
         $_SESSION['Username'] = $row['Username'];
         $_SESSION['Email'] = $row['Email'];
-        // $_SESSION['Password'] = $row['Password']; // Sebaiknya tidak perlu menyimpan password di session
         $_SESSION['Gender'] = $row['Gender'];
     
         header('Location: Dashboard.php');
         exit();
     }
-    
-
-    // public function Login() {
-    //     $row = $this->SQLLogin($this->email, $this->password)->FetchArray();
-    //     if ($row !== null && ($row['Email'] == $this->email && $row['Password'] == $this->password)) {
-    //         $_SESSION['UserId'] = $row['UserId'];
-    //         $_SESSION['Username'] = $row['Username'];
-    //         $_SESSION['Email'] = $row['Email'];
-    //         $_SESSION['Password'] = $row['Password'];
-    //         $_SESSION['Gender'] = $row['Gender'];
-
-    //         header('Location: Dashboard.php');
-    //         exit();
-    //     } else {
-    //         return $this->message = 'Your email or password is incorrect! Please try again.';
-    //     } 
-    // }
 }
 ?>

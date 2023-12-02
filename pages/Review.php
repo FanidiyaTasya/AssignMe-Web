@@ -206,12 +206,12 @@ require_once __DIR__ . '/../function/ProfileController.php';
 
     <div id="ToReviewTabContent" class="tab-content">
       <div class="row">
-
       <?php 
         require_once __DIR__ . '/../function/TaskController.php';
 
         $taskController = new TaskController();
-        $result = $taskController->getAllTask();
+        $userId = $_SESSION['UserId'];
+        $result = $taskController->getToReview($userId);
         while ($row = $result->FetchArray()) :
         
         ?>
@@ -235,8 +235,32 @@ require_once __DIR__ . '/../function/ProfileController.php';
     </div>
 
     <div id="DoneTabContent" class="tab-content">
-      <h2>Done Content Goes Here</h2>
-      <p>This is the content of the Done tab.</p>
+    <!-- <div class="row">
+      <php 
+        require_once __DIR__ . '/../function/TaskController.php';
+
+        $taskController = new TaskController();
+        $result = $taskController->getToReview();
+        while ($row = $result->FetchArray()) :
+        
+        ?>
+
+        <div class="col-lg-3 mb-4">
+          <div class="card ">
+            <div class="card-body text-left">
+            <h4 class="mb-2">
+              <a href="ViewTask.php?taskId=<= $row['TaskId'] ?>">
+                <i class="fas fa-book custom-icon"></i><= $row['TaskName']; ?>
+                <h6 class="text-muted mb-1"><= $row['ClassName']; ?></h6>
+              </a>
+            </h4>
+              <p class="mb-0 text-right small">Due On <php echo date('M j, Y ', strtotime($row['DueDate'])); ?></p>
+              <p class="mb-0 text-right small"><php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
+            </div>
+          </div>
+        </div>
+        <php endwhile; ?>
+      </div> -->
     </div>
     <!-- END TAB LAYOUT -->
 

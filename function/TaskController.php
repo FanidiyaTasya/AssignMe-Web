@@ -137,8 +137,8 @@ class TaskController extends Task {
         return $result;
     }
 
-    public function getAllTask() { 
-        $result = $this->ShowAllTask();
+    public function getToReview($userId) { 
+        $result = $this->ShowReview($userId);
         return $result;
     }
 

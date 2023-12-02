@@ -5,8 +5,8 @@ class Users extends Connect {
     protected $sql;
     protected $result;
 
-    public function SQLLogin($email, $password) {
-        $this->sql = "SELECT * FROM users WHERE Email='".$email."' AND Password='".$password."'";
+    public function SQLLogin($email) {
+        $this->sql = "SELECT * FROM users WHERE Email='".$email."'";
         return $this->getResult();
     }
 
@@ -46,9 +46,8 @@ class Users extends Connect {
         return $this->getResult();
     }
 
-    public function UpdateProfile($userId, $newProfile) {
-        $newProfile = $newProfile['name']; 
-        $this->sql = "UPDATE users SET Profile = '$newProfile' WHERE UserId = '$userId'";
+    public function UpdateProfile($userId, $profile) {
+        $this->sql = "UPDATE users SET Profile = '$profile' WHERE UserId = '$userId'";
         return $this->getResult();
     }
 
