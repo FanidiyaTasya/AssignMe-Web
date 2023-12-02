@@ -98,6 +98,30 @@ class MaterialController extends Materials {
         return true; 
     }
 
+    function getFileIcon($fileExtension) {
+        $iconPath = '../assets/img/file-type/';
+        
+        switch ($fileExtension) {
+            case 'pdf':
+                return $iconPath . 'pdf.png';
+            case 'doc':
+            case 'docx':
+                return $iconPath . 'doc.png';
+            case 'ppt':
+            case 'pptx':
+                return $iconPath . 'ppt.png';
+            case 'jpg':
+                return $iconPath . 'jpg.png';
+            case 'jpeg':
+                return $iconPath . 'jpeg.png';
+            case 'png':
+                return $iconPath . 'png.png';
+            
+            default:
+                return $iconPath . 'default-file.png';
+        }
+    }
+
     public function getMessage() {
         return $this->message;
     }

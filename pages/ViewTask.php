@@ -43,6 +43,11 @@ $username = $_SESSION['Username'];
       font-size: 20px;
       margin-right: 8px;
     }
+
+    .file-icon {
+    width: 25px;
+    height: 25px;
+  }
   </style>
 </head>
 
@@ -212,6 +217,9 @@ $username = $_SESSION['Username'];
         $parts = explode('_', $combinedName);
         $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
         $fileUrl = '../upload/file/' . $combinedName; 
+
+        $fileExtension = pathinfo($originalName, PATHINFO_EXTENSION);
+        $iconPath = $taskController->getFileIcon($fileExtension);
         ?>
       <div class="col-md-4">
           <div class="card">
@@ -224,7 +232,10 @@ $username = $_SESSION['Username'];
                   <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
                   <div class="modal-footer"></div>
                   <p class="mb-0 small"><?= $row['TaskDesc']; ?></p><br>
-                  <p class="mb-0 small"><a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a></p>
+                  <p class="mb-0 small">
+                    <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
+                    <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a>
+                  </p>
               </div>
           </div>
         </div>

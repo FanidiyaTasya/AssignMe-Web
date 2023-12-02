@@ -37,8 +37,13 @@ $_SESSION['ClassId'] = $classId;
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/tab-layout-style.css">
 
+  <style>
+    .file-icon {
+    width: 25px;
+    height: 25px;
+}
+  </style>
 </head>
-
 <body class="g-sidenav-show bg-gray-100">
   <!-- Sidebar -->
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
@@ -398,6 +403,9 @@ $_SESSION['ClassId'] = $classId;
             $parts = explode('_', $combinedName);
             $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
             $fileUrl = '../upload/file/' . $combinedName;
+                  
+            $fileExtension = pathinfo($originalName, PATHINFO_EXTENSION);
+            $iconPath = $taskController->getFileIcon($fileExtension);
             ?>
             <div class="card mb-3">
               <div class="card-body">
@@ -423,6 +431,7 @@ $_SESSION['ClassId'] = $classId;
                 <p class="card-text">
                   <?= $row['TaskDesc']; ?>
                 </p>
+                <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
                 <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>">
                   <?= $originalName; ?>
                 </a><br><br>
@@ -609,6 +618,8 @@ $_SESSION['ClassId'] = $classId;
             $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
             $fileUrl = '../upload/file/' . $combinedName;
 
+            $fileExtension = pathinfo($originalName, PATHINFO_EXTENSION);
+            $iconPath = $materialController->getFileIcon($fileExtension);
             ?>
             <div class="card mb-3">
               <div class="card-body">
@@ -632,9 +643,8 @@ $_SESSION['ClassId'] = $classId;
                 <p class="card-text">
                   <?= $row['MaterialDesc']; ?>
                 </p>
-                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>">
-                  <?= $originalName; ?>
-                </a><br><br>
+                <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
+                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a><br><br>
                 <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#infoModal">View Material</a>
               </div>
             </div>
@@ -669,9 +679,8 @@ $_SESSION['ClassId'] = $classId;
                 <p class="card-text">
                   <?= $row['MaterialDesc']; ?>
                 </p>
-                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>">
-                  <?= $originalName; ?>
-                </a>
+                <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
+                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
