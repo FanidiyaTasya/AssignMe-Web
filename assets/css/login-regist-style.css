@@ -130,9 +130,9 @@
     padding: 0;
     overflow: hidden;
     position: relative;
-    display: flex; /* pakai flexbox */
-    justify-content: center; /* Menengahkan secara horizontal */
-    align-items: center; /* Menengahkan secara vertikal */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
   }
   
   .common-right img {

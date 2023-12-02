@@ -12,9 +12,9 @@ function sendOTP($email, $otp) {
 
     try {
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com'; // Ganti dengan alamat SMTP sesuai kebutuhan
+        $mail->Host       = 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'riovas1212@gmail.com'; // Ganti dengan email dan password SMTP Anda
+        $mail->Username   = 'riovas1212@gmail.com'; 
         $mail->Password   = 'tqttkrvcryptdeer';
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
@@ -57,8 +57,6 @@ $userResult = $conn->query("SELECT UserId FROM users WHERE email = '$email'");
 
 if ($userResult->num_rows > 0) {
     $otp = generateOTP();
-
-    // Set waktu kadaluarsa (5 menit dari sekarang)
     $expirationTime = date('Y-m-d H:i:s', strtotime('+5 minutes'));
 
     sendOTP($email, $otp);
@@ -66,7 +64,6 @@ if ($userResult->num_rows > 0) {
     $sql = "INSERT INTO verifications (UserId, otp, reset_password_expiry) VALUES ((SELECT UserId FROM users WHERE email = '$email'), '$otp', NOW() + INTERVAL 5 MINUTE)";
     $conn->query($sql);
 
-    // Arahkan pengguna ke halaman formulir input OTP
     header("Location: ../pages/otp.php");
     exit();
 } else {

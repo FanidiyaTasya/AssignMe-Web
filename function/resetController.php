@@ -14,27 +14,22 @@ session_start();
 $otp = $_SESSION['otp'];
 
 try {
-    // Update password di tabel 'users' kolom 'Password'
     $sqlUpdatePassword = "UPDATE users SET Password = ? WHERE UserId = (SELECT UserId FROM verifications WHERE otp = ?)";
     $stmtUpdatePassword = $conn->prepare($sqlUpdatePassword);
     $stmtUpdatePassword->bind_param("ss", $newPassword, $otp);
     $stmtUpdatePassword->execute();
     $stmtUpdatePassword->close();
 
-    // Hapus data verifikasi
     $sqlDeleteVerification = "DELETE FROM verifications WHERE otp = ?";
     $stmtDeleteVerification = $conn->prepare($sqlDeleteVerification);
     $stmtDeleteVerification->bind_param("s", $otp);
     $stmtDeleteVerification->execute();
     $stmtDeleteVerification->close();
 
-    // Cek apakah proses reset password berhasil
     if ($stmtUpdatePassword && $stmtDeleteVerification) {
-        // Arahkan pengguna ke halaman login jika berhasil
         header("Location: ../pages/Login.php");
         exit();
     } else {
-        // Jika gagal, berikan notifikasi
         echo "Gagal mereset password. Silakan coba lagi atau hubungi dukungan.";
     }
 

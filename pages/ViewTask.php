@@ -204,34 +204,6 @@ $username = $_SESSION['Username'];
         require_once __DIR__ . '/../function/TaskController.php';
 
         $taskId = $_GET['taskId'];
-<<<<<<< HEAD
-        $classId = "";
-        $taskController = new TaskController();
-        $result = $taskController->getTask($taskId, $classId);
-        $row = $result->FetchArray()
-          ?>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-left">
-              <h4 class="mb-2">
-                <i class="fas fa-book custom-icon"></i>
-                <?= $row['TaskName']; ?>
-              </h4>
-              <h6 class="text-muted mb-1">
-                <?= $row['ClassName']; ?>
-              </h6>
-              <p class="mb-0 text-right small">Due On
-                <?php echo date('M j, Y ', strtotime($row['DueDate'])); ?>
-              </p>
-              <p class="mb-0 text-right small">
-                <?php echo date('g:i A', strtotime($row['DueDate'])); ?>
-              </p>
-              <div class="modal-footer"></div>
-              <p class="mb-0 small">
-                <?= $row['TaskDesc']; ?>
-              </p>
-            </div>
-=======
         $taskController = new TaskController();
         $result = $taskController->getTask($taskId, null);
         $row = $result->FetchArray();
@@ -254,7 +226,6 @@ $username = $_SESSION['Username'];
                   <p class="mb-0 small"><?= $row['TaskDesc']; ?></p><br>
                   <p class="mb-0 small"><a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a></p>
               </div>
->>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
           </div>
         </div>
 
@@ -270,61 +241,6 @@ $username = $_SESSION['Username'];
                 $userId = $_POST['userId'];
                 $grade = $_POST['grade'];
 
-<<<<<<< HEAD
-                $message = $taskController->saveGrade($taskId, $userId, $grade);
-              }
-              // SHOW
-              $taskId = $_GET['taskId'];
-              $result = $taskController->getTaskSubmit($taskId);
-              ?>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Answer</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Grade</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php while ($row = $result->FetchArray()):
-                    $combinedName = $row['Answers'];
-                    $parts = explode('_', $combinedName);
-                    $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
-                    $fileUrl = '../upload/file/' . $combinedName; ?>
-                    <tr>
-                      <td>
-                        <?= $row['Username']; ?>
-                      </td>
-                      <td>
-                        <?php if (isset($row['Answers'])): ?>
-                          <a href="<?= $fileUrl; ?>" download>
-                            <?= $originalName; ?>
-                          </a>
-                        <?php else: ?>
-                          No Answer Available
-                        <?php endif; ?>
-                      </td>
-                      <td>
-                        <?= $row['Status']; ?>
-                      </td>
-                      <td>
-                        <form method="POST">
-                          <input type="hidden" name="taskId" value="<?= $taskId; ?>">
-                          <input type="hidden" name="userId" value="<?= $row['UserId']; ?>">
-                          <input type="number" class="form-control" name="grade" value="<?= $row['Grade']; ?>"
-                            placeholder="0-100">
-                      </td>
-                      <td>
-                        <button type="submit" name="action" value="save" class="btn btn-primary">Save</button>
-                        </form>
-                      </td>
-                    </tr>
-                  <?php endwhile; ?>
-                </tbody>
-              </table>
-=======
                     $message = $taskController->saveGrade($taskId, $userId, $grade);
                   }
                   // SHOW
@@ -373,7 +289,6 @@ $username = $_SESSION['Username'];
                         <?php endwhile; ?>
                     </tbody>
                   </table>
->>>>>>> d30a7b3042cb7cf442018249cf2d8c9e7e57f468
 
               <nav aria-label="Page navigation">
                 <ul class="pagination">

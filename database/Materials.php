@@ -18,8 +18,8 @@ class Materials extends Connect {
         return $this-> getResult();
     }
 
-    public function UpdateMateri($materialId, $classId, $materialName, $materialDesc, $attachment) {
-        $this->sql = "UPDATE materials SET MaterialName='$taskName', MaterialDesc='$taskDesc', Attachment='$attachment' 
+    public function UpdateMateri($materialId, $materialName, $materialDesc, $attachment) {
+        $this->sql = "UPDATE materials SET MaterialName='$materialName', MaterialDesc='$materialDesc', Attachment='$attachment' 
         WHERE MaterialId=$materialId";
         return $this->getResult();
     }

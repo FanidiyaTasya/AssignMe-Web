@@ -27,15 +27,15 @@ class MaterialController extends Materials {
         }
     }
     
-    public function editMateri() {
+    public function editMateri($materialId, $materialName, $materialDesc, $attachment) {
         try {
             $result = $this->UpdateMateri($materialId, $materialName, $materialDesc, $attachment);
             
             if ($result) {
-                $_SESSION['message'] = 'Task updated successfully!';
+                $_SESSION['message'] = 'Material updated successfully!';
                 $_SESSION['message_type'] = 'success';
             } else {
-                $_SESSION['message'] = 'Failed to update task.';
+                $_SESSION['message'] = 'Failed to update material.';
                 $_SESSION['message_type'] = 'error';
             }
         } catch (Exception $e) {

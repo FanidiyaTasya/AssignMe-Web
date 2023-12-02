@@ -10,7 +10,6 @@ if ($conn->connect_error) {
 }
 
 try {
-    // Menggunakan NOW() di MySQL untuk mendapatkan waktu dari server database
     $sql = "SELECT * FROM verifications WHERE otp = ? AND reset_password_expiry > NOW() - INTERVAL 5 MINUTE";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $otp);
@@ -18,7 +17,6 @@ try {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Simpan OTP di sesi untuk digunakan saat reset password
         session_start();
         $_SESSION['otp'] = $otp;
         

@@ -82,6 +82,27 @@ $('.deleteTaskBtn').click(function() {
     $('#deleteTaskId').val(taskId);
 });
 
+// edit materi
+$(document).ready(function () {
+    $('.editMateriModalLink').on('click', function () {
+        var materialId = $(this).data('material-id');
+        var materialName = $(this).data('materiname');
+        var materialDesc = $(this).data('desc');
+        var attachment = $(this).data('attachment');
+        
+        console.log("Material ID:", materialId);
+        console.log("Material Name:", materialName);
+        console.log("Description:", materialDesc);
+        console.log("Attachment:", attachment);
+
+
+        $('#editMateriModal #materialId').val(materialId);
+        $('#editMateriModal #materiname').val(materialName);
+        $('#editMateriModal #desc').val(materialDesc);
+        $('#editMateriModal #attachment').val(attachment);
+    });
+});
+
 //hapus materi
 $('.deleteMateriBtn').click(function() {
     var materialId = $(this).data('material-id');

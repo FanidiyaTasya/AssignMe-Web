@@ -62,7 +62,7 @@
 
         .form-group button {
             width: 100%;
-            background-color: #007bff;
+            background-color: #363F71;
             color: #fff;
             border: none;
             padding: 12px;
@@ -73,7 +73,7 @@
         }
 
         .form-group button:hover {
-            background-color: #0056b3;
+            background-color: #B4B6B9;
         }
 
         .back-to-login {
