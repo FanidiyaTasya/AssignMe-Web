@@ -301,7 +301,7 @@ $username = $_SESSION['Username'];
                     </tbody>
                   </table>
 
-              <nav aria-label="Page navigation">
+              <!-- <nav aria-label="Page navigation">
                 <ul class="pagination">
                   <li class="page-item">
                     <a class="page-link" href="#" aria-label="Previous">
@@ -320,7 +320,7 @@ $username = $_SESSION['Username'];
               </nav>
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div>
     </div>

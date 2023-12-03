@@ -10,6 +10,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
     $profileController = new ProfileController();
     $profileData = $profileController->getProfile($userId);
     $username = $profileData['username'];
+    $profile = $profileData['profile'];
 ?>
 
 <!DOCTYPE html>
@@ -167,7 +168,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
                 <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="d-flex align-items-center"> 
                   <div class="avatar avatar-sm me-3">
-                    <img src="../upload/profile/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+                    <img src="../upload/profile/<?= $profile; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
                   </div>
                   <span class="d-sm-inline d-none"><?= $username; ?></span>
                 </div>

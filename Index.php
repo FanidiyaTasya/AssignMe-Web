@@ -29,7 +29,10 @@
     <link href="assets/css/animate.css" rel="stylesheet" type="text/css">
 
     <!--Google Webfonts-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
 
     <style>
@@ -80,8 +83,7 @@
         }
 
         .feature {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0;
+            background-color: #EFF4FF;
             padding: 20px;
         }
 
@@ -93,13 +95,16 @@
         }
 
         #feature1 {
-            background-color: #4352c3d9;
+            background-color: #363F71;
             padding: 20px;
         }
 
+        #feature1 .feature-title1 {
+            color: white;
+        }
+
         #feature1 .feature-description1 {
-            color: #202642;
-            font-size: 20px;
+            color: white;
         }
 
         .gallery-container {
@@ -127,10 +132,8 @@
 
         h2.text-center.mb-4 {
             font-size: 2rem;
-            color: #0766AD;
-            /* Warna hitam */
+            color: ##363F71;
             font-weight: bold;
-            /* Teks bold */
             margin-bottom: 30px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -205,8 +208,8 @@
 
 
                     <div class="section-heading">
-                        <h1>Mulai menjelajahi fitur yang tersedia di AssingMe</h1>
-                        <h2>Dapatkan ide segar dan inspirasi untuk proyek atau hobi anda. Gabung sekarang gratis.</h2>
+                        <h1>Mulai menjelajahi fitur yang tersedia di AssignMe</h1>
+                        <h2>Mengubah Cara Pengajaran dengan Pengelolaan Tugas Digital</h2>
                     </div>
 
                     <!--Call to Action-->
@@ -248,7 +251,8 @@
                             <!--Icon Block Description-->
                             <div class="icon-block-description">
                                 <h4>Pengumpulan Tugas</h4>
-                                <p>Tersedia Form pengumpulan tugas buat pengajar dan siswa </p>
+                                <p>Fitur pengumpulan tugas ini mempermudah siswa menyampaikan pekerjaan 
+                                    secara online dengan efisien dan terorganisir.</p>
                             </div>
                         </div>
                         <!--End of Icon Block-->
@@ -262,8 +266,8 @@
                             <!--Icon Block Description-->
                             <div class="icon-block-description">
                                 <h4>Penilaian Tugas</h4>
-                                <p>Para pengampu dapat memberikan nilai secara langsung kepada siswa yang sudah
-                                    mengumpulkan tugas</p>
+                                <p>Para pengajar dapat memberikan nilai secara langsung kepada siswa yang sudah
+                                    mengumpulkan tugas.</p>
                             </div>
                         </div>
                         <!--End of Icon Block-->
@@ -278,7 +282,7 @@
                             <div class="icon-block-description">
                                 <h4>App Mobile</h4>
                                 <p>Selain website Aplikasi AssignMe tersedia juga dalam Aplikasi mobile yang dapat anda
-                                    download di appstore atau playstore</p>
+                                    download di App Store atau Play Store</p>
                             </div>
                         </div>
                         <!--End of Icon Block-->
@@ -291,9 +295,8 @@
                             </div>
                             <!--Icon Block Description-->
                             <div class="icon-block-description">
-                                <h4>Aktivitas Siswa</h4>
-                                <p>Para pengajar dapat melihat aktivitas siswa yang mengikuti forum pembelajara online
-                                    yang telah di buat.</p>
+                                <h4>Pemantauan Kemajuan Tugas Siswa</h4>
+                                <p>Pengajar dapat memantau kemajuan pengerjaan tugas siswa di dalam kelas yang telah dibuat.</p>
                             </div>
                         </div>
                         <!--End of Icon Block-->
@@ -310,18 +313,17 @@
 
                 <div class="feature" id="feature1">
                     <a href="#responsive" class="feature-link">
-                        <h3 class="feature-title">AssignMe</h3>
-                        <p class="feature-description1">"Aplikasi AssignMe adalah sebuah platform yang dirancang khusus
-                            untuk memudahkan proses pengumpulan tugas di lingkungan pendidikan. Dengan antarmuka yang
-                            ramah pengguna dan menggunakan database MySQL melalui localhost dengan bantuan phpMyAdmin,
-                            AssignMe menyediakan solusi yang efisien dan terpercaya bagi mahasiswa, pengajar, dan
-                            administrator."</p>
+                        <h3 class="feature-title1">AssignMe</h3>
+                        <p class="feature-description1">"AssignMe adalah platform online yang dirancang khusus untuk 
+                            membantu pengguna dalam pengelolaan tugas dan penjadwalan tenggat waktu pengumpulan tugas. 
+                            Aplikasi ini memudahkan para pengguna untuk efisien mengorganisir dan menyelesaikan tugas-tugas mereka. 
+                            Dengan menyederhanakan proses pengumpulan tugas, platform ini memberikan akses mudah bagi guru dan siswa, 
+                            kapan pun dan di mana pun mereka berada."</p>
                     </a>
                 </div>
 
                 <div class="feature">
                     <a href="#responsive" class="feature-link">
-
                         <h3 class="feature-title">Responsif</h3>
                         <p class="feature-description">Tampilan yang responsif untuk semua perangkat, baik smartphone,
                             tablet, atau desktop.</p>
@@ -330,7 +332,6 @@
 
                 <div class="feature">
                     <a href="#user-friendly" class="feature-link">
-
                         <h3 class="feature-title">Mudah Digunakan</h3>
                         <p class="feature-description">Antarmuka pengguna yang sederhana dan mudah digunakan, cocok
                             untuk semua tingkat pengguna.</p>
@@ -339,7 +340,6 @@
 
                 <div class="feature">
                     <a href="#cloud-access" class="feature-link">
-
                         <h3 class="feature-title">Fleksibilitas dan Skalabilitas</h3>
                         <p class="feature-description">Dapat disesuaikan dengan kebutuhan institusi pendidikan dan dapat
                             berkembang seiring waktu.</p>
@@ -348,10 +348,9 @@
 
                 <div class="feature">
                     <a href="#security" class="feature-link">
-
-                        <h3 class="feature-title">Keamanan Terjamin</h3>
-                        <p class="feature-description">Keamanan data yang terjamin dengan enkripsi tingkat tinggi dan
-                            perlindungan terhadap ancaman keamanan terkini.</p>
+                        <h3 class="feature-title">Keamanan Data</h3>
+                        <p class="feature-description">Aplikasi ini dirancang dengan keamanan tinggi untuk melindungi 
+                            informasi pengguna dan menghindari penyalahgunaan data.</p>
                     </a>
                 </div>
             </div>

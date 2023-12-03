@@ -142,6 +142,11 @@ class TaskController extends Task {
         return $result;
     }
 
+    public function getDone($userId) { 
+        $result = $this->ShowDone($userId);
+        return $result;
+    }
+
     public function saveGrade($taskId, $userId, $grade) {
         $checkData = $this->CekData($taskId, $userId);
     

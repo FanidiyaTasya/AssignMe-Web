@@ -74,17 +74,25 @@ class Task extends Connect {
         return $this->getResult();
     }
     
+    public function ShowReview($userId) { 
+        $this->sql = "SELECT tasks.*, classes.ClassName
+        FROM tasks
+        JOIN classes ON tasks.ClassId = classes.ClassId
+        LEFT JOIN task_submits ON tasks.TaskId = task_submits.TaskId AND task_submits.UserId = $userId
+        WHERE task_submits.Grade IS NULL
+        ORDER BY tasks.DueDate ASC";
+        return $this->getResult();
+    }
 
-
-    public function ShowReview($userId) { // untuk to review
+    public function ShowDone($userId) {
         $this->sql = "SELECT tasks.*, classes.ClassName
         FROM tasks
         JOIN classes ON tasks.ClassId = classes.ClassId
         JOIN task_submits ON tasks.TaskId = task_submits.TaskId
         JOIN user_classes ON task_submits.UserId = user_classes.UserId
         JOIN users ON user_classes.UserId = users.UserId
-        WHERE task_submits.Grade IS NULL OR users.Role = 'Siswa' OR user_classes.UserId = $userId
-        GROUP BY tasks.TaskId, tasks.TaskName, tasks.DueDate, classes.ClassName
+        WHERE task_submits.Grade IS NOT NULL AND users.Role = 'Siswa' OR user_classes.UserId = $userId
+        GROUP BY tasks.TaskId, task_submits.Grade
         ORDER BY tasks.DueDate ASC";
         return $this->getResult();
     }

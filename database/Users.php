@@ -37,7 +37,7 @@ class Users extends Connect {
     }
 
     public function ShowProfileData($userId) {
-        $this->sql = "SELECT Username, Email, Gender, Profile FROM users WHERE UserId = '$userId'";
+        $this->sql = "SELECT * FROM users WHERE UserId = '$userId'";
         return $this->getResult();
     }
 

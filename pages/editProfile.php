@@ -33,7 +33,7 @@
     <?php
     require_once __DIR__ . '/../function/ProfileController.php';
 
-    $userId = 1; 
+    $userId = 8; 
     $profileController = new ProfileController();
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $newUsername = $_POST['username'];
@@ -42,7 +42,7 @@
     
         $result = $profileController->editData($userId, $newUsername, $newEmail, $newGender);
     }
-
+    
     $profileData = $profileController->getProfile($userId);
     if ($profileData) {
         $username = $profileData['username'];
@@ -59,12 +59,14 @@
 <div class="col-md-4">
     <div class="card">
         <div class="card-body text-center">
-            <form id="editProfileForm" enctype="multipart/form-data">
-                <label for="file-input">
-                    <img src="<?= $profile; ?>" class="profile-image" alt="Profile Image">
+            <form method="POST" id="editProfileForm" enctype="multipart/form-data">
+                <label for="profile">
+                    <input type="hidden" id="userId" name="userId" value="<?= $userId; ?>">
+
+                    <img src="../upload/profile/<?= $profile; ?>" class="profile-image" id="previewImage" alt="Profile Image">
                     <h5 class="card-title mt-3"><?= $username; ?></h5>
+                    <input type="file" id="profile" name="profile" accept=".jpg, .jpeg, .png" onchange="changeProfilePicture(event)">
                 </label>
-                <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)">
             </form>
         </div>
     </div>
@@ -109,17 +111,28 @@
 
 <!-- JavaScript untuk mengganti foto profil -->
 <script>
-  function changeProfilePicture(event) {
-    const input = event.target;
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector('.profile-image').src = e.target.result;
-        }
-        reader.readAsDataURL(input.files[0]);
+function changeProfilePicture() {
+    var input = document.getElementById("profile");
+    // var previewImage = document.getElementById("previewImage");
+
+    // if (input.files && input.files[0]) {
+    //         var reader = new FileReader();
+    //         reader.onload = function (e) {
+    //             // previewImage.src = e.target.result;
+    //             document.querySelector('.profile-image').setAttribute('src', e.target.result);
+    //         };
+    //         reader.readAsDataURL(input.files[0]);
+    //     }
+        document.getElementById("editProfileForm").submit();
     }
-}
 </script>
+<?php 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $profile = $_FILES['profile']['name'];
+        $result = $profileController->changeProfile($userId, $profile);
+        
+    }
+?>
     
 </body>
 </html>

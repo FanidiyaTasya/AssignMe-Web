@@ -29,6 +29,9 @@
 /*------------------------------------------------------------------------------------------*/
 /* 1. Defaults & Reset of specific styles across browsers */
 /*------------------------------------------------------------------------------------------*/
+*{ 
+    font-family: 'Poppins', sans-serif; 
+}
 
 *, *:before, *:after {
     -webkit-box-sizing: border-box;

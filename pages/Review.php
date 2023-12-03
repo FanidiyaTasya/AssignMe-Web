@@ -10,6 +10,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
     $profileController = new ProfileController();
     $profileData = $profileController->getProfile($userId);
     $username = $profileData['username'];
+    $profile = $profileData['profile'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -166,7 +167,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
                 <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   <div class="d-flex align-items-center"> 
                     <div class="avatar avatar-sm me-3">
-                      <img src="../upload/profile/user-picture.jpg" alt="Profile Picture" class="img-fluid rounded-circle">
+                      <img src="../upload/profile/<?= $profile; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
                     </div>
                     <span class="d-sm-inline d-none"><?= $username; ?></span>
                   </div>
@@ -235,12 +236,12 @@ require_once __DIR__ . '/../function/ProfileController.php';
     </div>
 
     <div id="DoneTabContent" class="tab-content">
-    <!-- <div class="row">
-      <php 
+    <div class="row">
+      <?php 
         require_once __DIR__ . '/../function/TaskController.php';
 
         $taskController = new TaskController();
-        $result = $taskController->getToReview();
+        $result = $taskController->getDone($userId);
         while ($row = $result->FetchArray()) :
         
         ?>
@@ -250,17 +251,17 @@ require_once __DIR__ . '/../function/ProfileController.php';
             <div class="card-body text-left">
             <h4 class="mb-2">
               <a href="ViewTask.php?taskId=<= $row['TaskId'] ?>">
-                <i class="fas fa-book custom-icon"></i><= $row['TaskName']; ?>
-                <h6 class="text-muted mb-1"><= $row['ClassName']; ?></h6>
+                <i class="fas fa-book custom-icon"></i><?= $row['TaskName']; ?>
+                <h6 class="text-muted mb-1"><?= $row['ClassName']; ?></h6>
               </a>
             </h4>
-              <p class="mb-0 text-right small">Due On <php echo date('M j, Y ', strtotime($row['DueDate'])); ?></p>
-              <p class="mb-0 text-right small"><php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
+              <p class="mb-0 text-right small">Due On <?= date('M j, Y ', strtotime($row['DueDate'])); ?></p>
+              <p class="mb-0 text-right small"><?= date('g:i A', strtotime($row['DueDate'])); ?></p>
             </div>
           </div>
         </div>
-        <php endwhile; ?>
-      </div> -->
+        <?php endwhile; ?>
+      </div>
     </div>
     <!-- END TAB LAYOUT -->
 

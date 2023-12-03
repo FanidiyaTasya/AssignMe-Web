@@ -213,7 +213,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
             <!-- <i class="fa fa-user cursor-pointer fa-lg"></i> -->
             <div class="d-flex align-items-center"> 
               <div class="avatar avatar-sm me-3">
-                <img src="<?= $profile; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
+                <img src="../upload/profile/<?= $profile; ?>" alt="Profile Picture" class="img-fluid rounded-circle">
               </div>
               <span class="d-sm-inline d-none"><?= $username; ?></span>
             </div>
@@ -275,20 +275,21 @@ require_once __DIR__ . '/../function/ProfileController.php';
     <div class="container mt-4">
       <div class="row">
        <!-- Container 1: Foto Profil -->
-       <div class="col-md-4">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <form id="editProfileForm" enctype="multipart/form-data">
-                        <label for="file-input">
-                            <img src="<?= $profile; ?>" class="profile-image" alt="Profile Image">
+                    <form method="POST" id="editProfileForm" enctype="multipart/form-data">
+                        <label for="profile">
+                            <input type="hidden" id="userId" name="userId" value="<?= $userId; ?>">
+
+                            <img src="../upload/profile/<?= $profile; ?>" class="profile-image" id="previewImage" alt="Profile Image">
                             <h5 class="card-title mt-3"><?= $username; ?></h5>
+                            <input type="file" id="profile" name="profile" accept=".jpg, .jpeg, .png" onchange="changeProfilePicture(event)">
                         </label>
-                        <input type="file" id="file-input" style="display: none;" accept="image/*" onchange="changeProfilePicture(event)">
                     </form>
                 </div>
             </div>
         </div>
-    
         <!-- Container 2: Formulir Edit Profil -->
         <div class="col-md-8">
           <div class="card">
@@ -329,17 +330,18 @@ require_once __DIR__ . '/../function/ProfileController.php';
 
     <!-- JavaScript untuk mengganti foto profil -->
 <script>
-  function changeProfilePicture(event) {
-    const input = event.target;
-    if (input.files && input.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        document.querySelector('.profile-image').src = e.target.result;
-      }
-      reader.readAsDataURL(input.files[0]);
+function changeProfilePicture() {
+    var input = document.getElementById("profile");
+      document.getElementById("editProfileForm").submit();
     }
-  }
 </script>
+<?php 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $profile = $_FILES['profile']['name'];
+        $result = $profileController->changeProfile($userId, $profile);
+        $profileData = $profileController->getProfile($userId);
+    }
+?>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
