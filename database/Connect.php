@@ -6,7 +6,7 @@ class Connect {
     private $pass;
     private $db;
     
-    protected function dbConn() {
+    public function dbConn() {
         $this->host = "localhost";
         $this->user = "root";
         $this->pass = "";

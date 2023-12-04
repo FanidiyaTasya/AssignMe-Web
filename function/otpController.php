@@ -1,13 +1,14 @@
 <?php
-// verify_otp.php
 require_once __DIR__ . ('/../database/Connect.php');
 
 $otp = $_POST['otp'];
 
-$conn = new mysqli("localhost", "root", "", "assignme");
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+// $conn = new mysqli("localhost", "root", "", "assignme");
+// if ($conn->connect_error) {
+//     die("Koneksi gagal: " . $conn->connect_error);
+// }
+$connect = new Connect();
+$conn = $connect->dbConn();
 
 try {
     $sql = "SELECT * FROM verifications WHERE otp = ? AND reset_password_expiry > NOW() - INTERVAL 5 MINUTE";

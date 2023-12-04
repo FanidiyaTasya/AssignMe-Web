@@ -1,11 +1,10 @@
 <?php
-// send_email.php
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
 require_once __DIR__ . '/../database/Connect.php';
-require '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 function sendOTP($email, $otp) {
     $mail = new PHPMailer(true);
@@ -48,10 +47,12 @@ function generateOTP() {
 
 $email = $_POST['email'];
 
-$conn = new mysqli("localhost", "root", "", "assignme");
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+// $conn = new mysqli("localhost", "root", "", "assignme");
+// if ($conn->connect_error) {
+//     die("Koneksi gagal: " . $conn->connect_error);
+// }
+$connect = new Connect();
+$conn = $connect->dbConn();
 
 $userResult = $conn->query("SELECT UserId FROM users WHERE email = '$email'");
 
