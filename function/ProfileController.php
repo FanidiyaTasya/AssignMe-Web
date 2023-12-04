@@ -29,13 +29,9 @@ class ProfileController extends Users {
             if ($showData) {
                 $row = $showData->FetchArray();
                 $oldProfile = $row['Profile'];
-
-                // if (!empty($oldProfile) && $oldProfile !== '../upload/profile/user-picture.jpg' && file_exists($_SERVER['DOCUMENT_ROOT'] . '/' . $oldProfile)) {
-                //     unlink($_SERVER['DOCUMENT_ROOT'] . '/' . $oldProfile);
-                // }
     
-                if (!empty($oldProfile) && $oldProfile !== '../upload/profile/user-picture.jpg' && file_exists("../upload/file/" . $oldProfile)) {
-                    unlink("../upload/file/" . $oldProfile);
+                if (!empty($oldProfile) && $oldProfile !== '../upload/profile/user-picture.jpg' && file_exists("../upload/profile/" . $oldProfile)) {
+                    unlink("../upload/profile/" . $oldProfile);
                 }
     
                 $uploadDir = '../upload/profile/';

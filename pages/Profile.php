@@ -11,7 +11,7 @@ require_once __DIR__ . '/../function/ProfileController.php';
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $newUsername = $_POST['username'];
         $newEmail = $_POST['email'];
-        $newGender = empty($newGender) ? null : $newGender;
+        $newGender = $_POST['gender'];
     
         $result = $profileController->editData($userId, $newUsername, $newEmail, $newGender);
     }
@@ -335,13 +335,14 @@ function changeProfilePicture() {
       document.getElementById("editProfileForm").submit();
     }
 </script>
+
 <?php 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $profile = $_FILES['profile']['name'];
-        $result = $profileController->changeProfile($userId, $profile);
-        $profileData = $profileController->getProfile($userId);
-    }
+  if (isset($_FILES['profile']['name']) && !empty($_FILES['profile']['name'])) {
+    $profile = $_FILES['profile']['name'];
+    $result = $profileController->changeProfile($userId, $profile);
+}
 ?>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
