@@ -30,7 +30,7 @@ try {
         header("Location: ../pages/Login.php");
         exit();
     } else {
-        echo "Gagal mereset password. Silakan coba lagi atau hubungi dukungan.";
+        echo '<script>alert("Password reset failed, please try again.");</script>';
     }
 
 } catch (Exception $e) {

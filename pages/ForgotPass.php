@@ -11,14 +11,10 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
         
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha384-e3YsXl83pVtISBB8pTgRXPICw2vUd49b2T6QqcgfsrXSw5tdP5J/BbSLPWepXkz" crossorigin="anonymous">
     <style>
         *{ 
-
-    font-family: 'Poppins', sans-serif; 
-}
+            font-family: 'Poppins', sans-serif; 
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
@@ -68,7 +64,6 @@
 
         .form-group button {
             width: 100%;
-            /* Set the button width to 100% */
             background-color: #363F71;
             color: #fff;
             border: none;
@@ -99,9 +94,7 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="forgot-password-form">
         <i class="fas fa-lock fa-3x" style="color: #007bff;"></i>
         <img src="../assets/img/1.png" alt="Click to view image">
@@ -110,12 +103,12 @@
             password.</p>
         <form action="../function/sendemailController.php" method="POST">
             <div class="form-group">
-                <label for="email">Email address:</label>
+                <label for="email">Email Address</label>
                 <div class="input-group">
                     <span class="input-group-prepend">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required autofocus>
                 </div>
             </div>
 

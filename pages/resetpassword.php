@@ -123,7 +123,7 @@
 
         <div class="back-to-login">
             <a href="../pages/ForgotPass.php    ">
-                <i class="fas fa-arrow-left"></i>  << forgot password
+                <i class="fas fa-arrow-left"></i>  << Forgot Password
             </a>
         </div>
     </div>

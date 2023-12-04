@@ -22,7 +22,7 @@ try {
         
         header("Location: ../pages/resetpassword.php");
     } else {
-        echo "Kode OTP tidak valid atau sudah kadaluwarsa.";
+        echo '<script>alert("The code in invalid or has expired.");</script>';
     }
 } catch (Exception $e) {
     echo "Terjadi kesalahan: " . $e->getMessage();

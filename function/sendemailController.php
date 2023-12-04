@@ -64,10 +64,11 @@ if ($userResult->num_rows > 0) {
     $sql = "INSERT INTO verifications (UserId, otp, reset_password_expiry) VALUES ((SELECT UserId FROM users WHERE email = '$email'), '$otp', NOW() + INTERVAL 5 MINUTE)";
     $conn->query($sql);
 
+    echo '<script>alert("Email registered. Please check your inbox for the OTP.");</script>';
     header("Location: ../pages/otp.php");
     exit();
 } else {
-    echo "Email tidak terdaftar.";
+    echo '<script>alert("Email not registered.");</script>';
 }
 
 $conn->close();
