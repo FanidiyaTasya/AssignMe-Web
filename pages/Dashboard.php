@@ -38,6 +38,23 @@ require_once __DIR__ . '/../function/ProfileController.php';
   <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
 
+  <style>
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+  </style>
 </head>
 <body class="g-sidenav-show bg-gray-100">
   <!-- Sidebar -->

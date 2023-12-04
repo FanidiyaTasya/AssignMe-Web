@@ -21,6 +21,19 @@ require_once __DIR__ . '/../function/ProfileController.php';
         font-size: 20px; 
         margin-right: 8px; 
     }
+    .avatar {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
   </style>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
