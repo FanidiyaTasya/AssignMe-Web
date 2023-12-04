@@ -22,6 +22,19 @@
   input[type="file"] {
     display: none;
   }
+  .avatar {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
   </style>
 </head>
 <body>
