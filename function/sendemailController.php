@@ -13,7 +13,7 @@ function sendOTP($email, $otp) {
         $mail->isSMTP();
         $mail->Host       = 'smtp.gmail.com'; 
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'riovas1212@gmail.com'; 
+        $mail->Username   = 'riovas1212@gmail.com';     
         $mail->Password   = 'tqttkrvcryptdeer';
         $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
@@ -47,14 +47,10 @@ function generateOTP() {
 
 $email = $_POST['email'];
 
-// $conn = new mysqli("localhost", "root", "", "assignme");
-// if ($conn->connect_error) {
-//     die("Koneksi gagal: " . $conn->connect_error);
-// }
 $connect = new Connect();
-$conn = $connect->dbConn();
+$connection = $connect->dbConn();
 
-$userResult = $conn->query("SELECT UserId FROM users WHERE email = '$email'");
+$userResult = $connection->query("SELECT UserId FROM users WHERE email = '$email'");
 
 if ($userResult->num_rows > 0) {
     $otp = generateOTP();
@@ -63,7 +59,7 @@ if ($userResult->num_rows > 0) {
     sendOTP($email, $otp);
 
     $sql = "INSERT INTO verifications (UserId, otp, reset_password_expiry) VALUES ((SELECT UserId FROM users WHERE email = '$email'), '$otp', NOW() + INTERVAL 5 MINUTE)";
-    $conn->query($sql);
+    $connection->query($sql);
 
     echo '<script>alert("Email registered. Please check your inbox for the OTP.");</script>';
     header("Location: ../pages/otp.php");
@@ -72,5 +68,5 @@ if ($userResult->num_rows > 0) {
     echo '<script>alert("Email not registered.");</script>';
 }
 
-$conn->close();
+$connection->close();
 ?>
