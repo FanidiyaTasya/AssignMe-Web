@@ -37,7 +37,7 @@ class Task extends Connect {
         FROM task_submits
         INNER JOIN users ON task_submits.UserId = users.UserId
         WHERE task_submits.TaskId = $taskId 
-        ORDER BY task_submits.SubmitDate DESC";
+        ORDER BY task_submits.SubmitDate ASC";
         return $this->getResult();
     }
 
@@ -72,7 +72,7 @@ class Task extends Connect {
         JOIN task_submits ON tasks.TaskId = task_submits.TaskId
         JOIN user_classes ON task_submits.UserId = user_classes.UserId
         JOIN users ON user_classes.UserId = users.UserId
-        WHERE task_submits.Grade IS NOT NULL AND users.Role = 'Siswa' OR user_classes.UserId = $userId
+        WHERE (task_submits.Grade IS NOT NULL AND users.Role = 'Siswa') OR user_classes.UserId = $userId
         GROUP BY tasks.TaskId, classes.ClassId
         ORDER BY tasks.DueDate ASC";
         return $this->getResult();
