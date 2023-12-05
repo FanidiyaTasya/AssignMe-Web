@@ -1,18 +1,14 @@
 <?php
-require_once __DIR__ . ('/../database/Connect.php');
+require_once __DIR__ . '/../database/Connect.php';
 
 $otp = $_POST['otp'];
 
-// $conn = new mysqli("localhost", "root", "", "assignme");
-// if ($conn->connect_error) {
-//     die("Koneksi gagal: " . $conn->connect_error);
-// }
 $connect = new Connect();
-$conn = $connect->dbConn();
+$connection = $connect->dbConn();
 
 try {
     $sql = "SELECT * FROM verifications WHERE otp = ? AND reset_password_expiry > NOW() - INTERVAL 5 MINUTE";
-    $stmt = $conn->prepare($sql);
+    $stmt = $connection->prepare($sql);
     $stmt->bind_param("s", $otp);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -20,15 +16,21 @@ try {
     if ($result->num_rows > 0) {
         session_start();
         $_SESSION['otp'] = $otp;
-        
+
         header("Location: ../pages/resetpassword.php");
+        exit(); // Pastikan untuk keluar setelah mengarahkan pengguna
     } else {
-        echo '<script>alert("The code in invalid or has expired.");</script>';
+        echo '<script>alert("Kode tidak valid atau telah kadaluarsa.");</script>';
     }
 } catch (Exception $e) {
     echo "Terjadi kesalahan: " . $e->getMessage();
 } finally {
-    $stmt->close();
-    $conn->close();
+    // Pastikan untuk menutup statement dan koneksi di blok finally
+    if (isset($stmt)) {
+        $stmt->close();
+    }
+    if ($connection) {
+        $connection->close();
+    }
 }
 ?>
