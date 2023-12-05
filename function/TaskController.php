@@ -18,6 +18,7 @@ class TaskController extends Task {
             $result = $this->InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $uniqueName);
             if ($result) {
                 move_uploaded_file($attachment['tmp_name'], $uploadedFile);
+
             }
         }
     
@@ -34,7 +35,32 @@ class TaskController extends Task {
             }
         }
     }
-    
+
+    public function GetTaskId() {
+        $this->sql = "SELECT MAX(TaskId) FROM tasks";
+        $result = $this->getResult();
+        $taskId = $result->FetchArray()['MAX(TaskId)'];
+        return $taskId;
+    }    
+
+    public function InsertToDo($taskId, $userId) {
+        $this->sql = "INSERT INTO task_submits (TaskId, UserId, Status) VALUES ('$taskId', '$userId', 'To-Do')";
+        $result = $this->getResult();
+    }
+
+    public function GetSiswa($classId) { 
+        $this->sql = "SELECT users.Username, user_classes.UserId
+        FROM users
+        JOIN user_classes ON users.UserId = user_classes.UserId
+        WHERE user_classes.ClassId = $classId AND users.Role = 'Siswa'";
+        $result = $this->getResult();
+        if ($result) {
+            $userIds = $result->FetchAll(MYSQLI_ASSOC);
+            return $userIds;
+        } else {
+            return null;
+        }
+    }
   
     public function hapusFile($taskId) {
         try {

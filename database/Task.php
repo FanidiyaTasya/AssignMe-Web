@@ -9,31 +9,9 @@ class Task extends Connect {
     public function InsertTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment) {
         $this->sql = "INSERT INTO tasks (ClassId, TaskName, TaskDesc, StartDate, DueDate, Attachment) 
         VALUES ('$classId','$taskName','$taskDesc','$startDate','$dueDate','$attachment')";
-        return $this-> getResult();
-        // $this-> getResult();
-        // return $this->dbConn()->insert_id;
+        return $this->getResult();
+        
     }
-
-    public function InsertToDo($taskId, $userId) {
-        $this->sql = "INSERT INTO task_submits (TaskId, UserId, Status) VALUES ('$taskId', '$userId', 'To-Do')";
-        $this->getResult();
-    }
-
-    public function GetSiswa($classId) { 
-        $users = new Users();
-        return $users->ShowStudent($classId);
-        var_dump($users->ShowStudent);
-    }
-
-    // public function InsertToDo($taskId, $userId) {
-    //     $users = new Users();
-    //     $userIds = $users->ShowStudent($classId);
-    
-    //     foreach ($userIds as $userId) {
-    //         $this->sql = "INSERT INTO task_submits (TaskId, UserId, Status) VALUES ('$taskId', '$userId', 'To-Do')";
-    //         $this->getResult();
-    //     }
-    // }
 
     public function UpdateTask($taskId, $taskName, $taskDesc, $dueDate, $attachment) {
         $this->sql = "UPDATE tasks SET TaskName='$taskName', TaskDesc='$taskDesc', 
@@ -103,6 +81,11 @@ class Task extends Connect {
     public function getResult() {
         $this->result = $this->dbConn()->query($this->sql);
         return $this;
+    }
+
+    public function FetchAll() {
+        $row = $this->result->fetch_all();
+        return $row;
     }
 
     public function FetchArray() {

@@ -39,7 +39,6 @@ require_once __DIR__ . '/../function/ProfileController.php';
 
 
   <style>
-
 .avatar {
     width: 36px;
     height: 36px;
@@ -53,7 +52,6 @@ require_once __DIR__ . '/../function/ProfileController.php';
     object-fit: cover;
     border-radius: 50%;
 }
-
   </style>
 </head>
 <body class="g-sidenav-show bg-gray-100">

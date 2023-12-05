@@ -227,16 +227,42 @@ $_SESSION['ClassId'] = $classId;
           require_once __DIR__ . ('/../function/TaskController.php');
 
           $taskController = new TaskController();
-          if (isset($_POST['action']) && $_POST['action'] == 'create') {
-            $classId = $_SESSION['ClassId'];
-            $taskName = $_POST['taskname'];
-            $taskDesc = $_POST['taskdesc'];
-            $startDate = date('Y-m-d H:i:s');
-            $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
-            $attachment = isset($_FILES['attachment']) ? $_FILES['attachment'] : null;
+          try {
+            if (isset($_POST['action']) && $_POST['action'] == 'create') {
+              $classId = $_SESSION['ClassId'];
+              $taskName = $_POST['taskname'];
+                $taskDesc = $_POST['taskdesc'];
+                $startDate = date('Y-m-d H:i:s');
+              $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
+              $attachment = isset($_FILES['attachment']) ? $_FILES['attachment'] : null;
+  
+              $result = $taskController->createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment);
+              // if ($result === true) {
 
-            $message = $taskController->createTask($classId, $taskName, $taskDesc, $startDate, $dueDate, $attachment);
+              if (!empty($taskName) || !empty($dueDate)) {
+                $newTaskId = $taskController->GetTaskId();
+                // var_dump($newTaskId);
+                $userIds = $taskController->GetSiswa($classId);
+                // var_dump($userIds); 
+                
+                if (!is_null($userIds) && (is_array($userIds) || $userIds instanceof Traversable)) {
+                  foreach ($userIds as $user) {
+                    $userId = $user[1];
+                      $insertToDo = $taskController->InsertToDo($newTaskId, $userId);
+                      // var_dump($insertToDo);
+                  }
+              } else {
+                  echo 'Data siswa tidak ditemukan atau tidak valid.';
+              }
+                  //  echo 'Tugas baru berhasil dibuat!';
+                } else {
+                    echo 'Gagal membuat tugas. Silakan coba lagi.';
+              }
+            }
+          } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
           }
+          
           ?>
           <div class="modal fade" id="buatTugasModal" tabindex="-1" role="dialog" aria-labelledby="buattugasModalLabel"
             aria-hidden="true">
