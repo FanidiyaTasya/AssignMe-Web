@@ -2,13 +2,12 @@
 require_once __DIR__ . '/../database/Connect.php';
 
 $result = array();
-$connection = new Connect(); // Buat instance dari kelas Connect
-$con = $connection->dbConn(); // Panggil method dbConn untuk koneksi ke database
+$connection = new Connect(); 
+$con = $connection->dbConn(); 
 
 if ($con) {
     $email = $_POST['Email'];
 
-    // Query untuk mendapatkan UserId berdasarkan Email dari tabel users
     $sqlUserId = "SELECT UserId FROM users WHERE Email = ?";
     $stmtUserId = mysqli_prepare($con, $sqlUserId);
     mysqli_stmt_bind_param($stmtUserId, "s", $email);

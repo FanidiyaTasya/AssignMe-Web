@@ -5,7 +5,6 @@ if(!empty($_POST['Email']) && !empty($_POST['apiKey']) ){
     $email = $_POST['Email'];
     $apiKey = $_POST['apiKey'];
 
-    // Membuat instance dari kelas Connect
     $connection = new Connect();
     $con = $connection->dbConn();
     

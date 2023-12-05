@@ -64,6 +64,10 @@ $username = $_SESSION['Username'];
     .status-cell.overdue {
         color: red;
     }
+
+    .status-cell late {
+    color: red; 
+}
   </style>
 </head>
 
@@ -300,7 +304,6 @@ $username = $_SESSION['Username'];
                                         <!-- No Answer Available -->
                                     <?php endif; ?>
                                 </td>
-                                <!-- <td><= $row['Status']; ?></td> -->
                                 <td class="status-cell <?= strtolower($row['Status']); ?>">
                                     <?= $row['Status']; ?>
                                 </td>

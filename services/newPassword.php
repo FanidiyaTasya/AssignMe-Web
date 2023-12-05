@@ -5,7 +5,6 @@ if (!empty($_POST['Email']) && !empty($_POST['newPassword'])) {
     $email = $_POST['Email'];
     $newPassword = password_hash($_POST['newPassword'], PASSWORD_DEFAULT);
     
-    // Menggunakan kelas Connect untuk mendapatkan koneksi
     $connection = new Connect();
     $con = $connection->dbConn();
     
