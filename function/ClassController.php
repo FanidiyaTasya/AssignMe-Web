@@ -65,10 +65,10 @@ class ClassController extends Classes {
         }
         $result = $this->DeleteClass($classId, $userId);
         if ($result) {
-            $_SESSION['message'] = 'Success.';
+            $_SESSION['message'] = 'Successfully deleted the class.';
             $_SESSION['message_type'] = 'success';
         } else {
-            $_SESSION['message'] = 'Failed.';
+            $_SESSION['message'] = 'Failed to delete class.';
             $_SESSION['message_type'] = 'error';
         }
     }

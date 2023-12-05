@@ -221,7 +221,7 @@ class TaskController extends Task {
                 return $iconPath . 'png.png';
             
             default:
-                return $iconPath . 'default-file.png';
+                return '';
         }
     }
 

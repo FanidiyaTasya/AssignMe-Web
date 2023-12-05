@@ -48,6 +48,22 @@ $username = $_SESSION['Username'];
     width: 25px;
     height: 25px;
   }
+
+  .status-cell {
+        font-weight: bold;
+    }
+
+    .status-cell.todo {
+        color: blue;
+    }
+
+    .status-cell.completed {
+        color: green;
+    }
+
+    .status-cell.overdue {
+        color: red;
+    }
   </style>
 </head>
 
@@ -281,11 +297,23 @@ $username = $_SESSION['Username'];
                                     <?php if (isset($row['Answers'])) : ?>
                                         <a href="<?= $fileUrl; ?>" download><?= $originalName; ?></a>
                                     <?php else : ?>
-                                        No Answer Available
+                                        <!-- No Answer Available -->
                                     <?php endif; ?>
                                 </td>
-                                <td><?= $row['Status']; ?></td>
-                                <td><?= date('M j, Y g:i A', strtotime($row['SubmitDate'])); ?></td>
+                                <!-- <td><= $row['Status']; ?></td> -->
+                                <td class="status-cell <?= strtolower($row['Status']); ?>">
+                                    <?= $row['Status']; ?>
+                                </td>
+                                <td>
+                                <?php
+                                    if ($row['SubmitDate'] !== null) {
+                                        echo date('M j, Y g:i A', strtotime($row['SubmitDate']));
+                                    } else {
+                                        // echo 'Date not available';
+                                        echo '';
+                                    }
+                                ?>
+                                </td>
                                 <td>
                                     <form method="POST">
                                         <input type="hidden" name="taskId" value="<?= $taskId; ?>">

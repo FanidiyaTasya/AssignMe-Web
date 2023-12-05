@@ -258,12 +258,11 @@ require_once __DIR__ . '/../function/ProfileController.php';
         while ($row = $result->FetchArray()) :
         
         ?>
-
         <div class="col-lg-3 mb-4">
           <div class="card ">
             <div class="card-body text-left">
             <h4 class="mb-2">
-              <a href="ViewTask.php?taskId=<= $row['TaskId'] ?>">
+              <a href="ViewTask.php?taskId=<?= $row['TaskId'] ?>">
                 <i class="fas fa-book custom-icon"></i><?= $row['TaskName']; ?>
                 <h6 class="text-muted mb-1"><?= $row['ClassName']; ?></h6>
               </a>

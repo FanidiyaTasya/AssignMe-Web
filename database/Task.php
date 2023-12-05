@@ -37,7 +37,7 @@ class Task extends Connect {
         FROM task_submits
         INNER JOIN users ON task_submits.UserId = users.UserId
         WHERE task_submits.TaskId = $taskId 
-        ORDER BY task_submits.SubmitDate ASC";
+        ORDER BY task_submits.SubmitDate DESC";
         return $this->getResult();
     }
 
