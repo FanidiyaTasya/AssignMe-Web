@@ -65,9 +65,9 @@ $username = $_SESSION['Username'];
         color: red;
     }
 
-    .status-cell late {
-    color: red; 
-}
+    .late-text {
+    color: red;
+    }
   </style>
 </head>
 
@@ -232,6 +232,7 @@ $username = $_SESSION['Username'];
         $taskController = new TaskController();
         $result = $taskController->getTask($taskId, null);
         $row = $result->FetchArray();
+        $dueDate = $row['DueDate'];
 
         $combinedName = $row['Attachment'];
         $parts = explode('_', $combinedName);
@@ -248,8 +249,8 @@ $username = $_SESSION['Username'];
                     <i class="fas fa-book custom-icon"></i><?= $row['TaskName']; ?>
                   </h4>
                   <h6 class="text-muted mb-1"><?= $row['ClassName']; ?></h6>
-                  <p class="mb-0 text-right small">Due On <?php echo date('M j, Y ', strtotime($row['DueDate'])); ?></p>
-                  <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($row['DueDate'])); ?></p>
+                  <p class="mb-0 text-right small">Due On <?php echo date('M j, Y ', strtotime($dueDate)); ?></p>
+                  <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($dueDate)); ?></p>
                   <div class="modal-footer"></div>
                   <p class="mb-0 small"><?= $row['TaskDesc']; ?></p><br>
                   <p class="mb-0 small">
@@ -306,6 +307,11 @@ $username = $_SESSION['Username'];
                                 </td>
                                 <td class="status-cell <?= strtolower($row['Status']); ?>">
                                     <?= $row['Status']; ?>
+                                    <?php
+                                        if ($row['Status'] == 'Completed' && strtotime($row['SubmitDate']) > strtotime($dueDate)) {
+                                          echo '<br><span class="late-text">' . date_diff(date_create($dueDate), date_create($row['SubmitDate']))->format('%d days %H hours') . '</span>';
+                                        }
+                                    ?>
                                 </td>
                                 <td>
                                 <?php

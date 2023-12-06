@@ -54,26 +54,26 @@ class Task extends Connect {
     
     public function ShowReview($userId) { 
         $this->sql = "SELECT tasks.*, classes.ClassName
-        FROM tasks
-        JOIN classes ON tasks.ClassId = classes.ClassId
-        JOIN task_submits ON tasks.TaskId = task_submits.TaskId
-        JOIN user_classes ON task_submits.UserId = user_classes.UserId
+        FROM user_classes
+        JOIN tasks ON user_classes.ClassId = tasks.ClassId
+        JOIN classes ON user_classes.ClassId = classes.ClassId
+        LEFT JOIN task_submits ON tasks.TaskId = task_submits.TaskId AND user_classes.UserId = task_submits.UserId
         JOIN users ON user_classes.UserId = users.UserId
-        WHERE task_submits.Grade IS NULL AND users.Role = 'Siswa' OR user_classes.UserId = $userId
-        GROUP BY tasks.TaskId, classes.ClassId
+        WHERE (task_submits.Grade = '' OR task_submits.Grade IS NULL) AND users.Role = 'Siswa' AND user_classes.ClassId 
+        IN (SELECT ClassId FROM user_classes WHERE UserId = $userId)
+        GROUP BY tasks.TaskId, task_submits.Grade
         ORDER BY tasks.DueDate ASC";
         return $this->getResult();
     }
 
     public function ShowDone($userId) {
         $this->sql = "SELECT tasks.*, classes.ClassName
-        FROM tasks
-        JOIN classes ON tasks.ClassId = classes.ClassId
-        JOIN task_submits ON tasks.TaskId = task_submits.TaskId
-        JOIN user_classes ON task_submits.UserId = user_classes.UserId
-        JOIN users ON user_classes.UserId = users.UserId
-        WHERE (task_submits.Grade IS NOT NULL AND users.Role = 'Siswa') OR user_classes.UserId = $userId
-        GROUP BY tasks.TaskId, classes.ClassId
+        FROM user_classes
+        JOIN tasks ON user_classes.ClassId = tasks.ClassId
+        JOIN classes ON user_classes.ClassId = classes.ClassId
+        LEFT JOIN task_submits ON tasks.TaskId = task_submits.TaskId AND user_classes.UserId = task_submits.UserId
+        WHERE task_submits.Grade IS NOT NULL AND user_classes.ClassId IN (SELECT ClassId FROM user_classes WHERE UserId = $userId)
+        GROUP BY task_submits.TaskId
         ORDER BY tasks.DueDate ASC";
         return $this->getResult();
     }

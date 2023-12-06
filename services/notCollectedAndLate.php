@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../database/Connect.php';
 
 $result = array();
-$connection = new Connect(); 
+$connection = new Connect();
 $con = $connection->dbConn(); 
 
 if ($con) {
@@ -17,7 +17,6 @@ if ($con) {
     if (mysqli_num_rows($resultUserId) > 0) {
         $row = mysqli_fetch_assoc($resultUserId);
         $userId = $row['UserId']; 
-
     
         $sql = "SELECT 
         t.TaskId,
@@ -25,15 +24,15 @@ if ($con) {
         t.TaskDesc,
         t.DueDate,
         t.Attachment
-        FROM 
-            tasks t
-        JOIN 
-            user_classes uc ON t.ClassId = uc.ClassId
-        JOIN 
-            users u ON uc.UserId = u.UserId
-        LEFT JOIN 
-            task_submits ts ON t.TaskId = ts.TaskId AND u.UserId = ts.UserId
-        WHERE 
+    FROM 
+        tasks t
+    JOIN 
+        user_classes uc ON t.ClassId = uc.ClassId
+    JOIN 
+        users u ON uc.UserId = u.UserId
+    LEFT JOIN 
+        task_submits ts ON t.TaskId = ts.TaskId AND u.UserId = ts.UserId
+    WHERE 
         ts.SubmitId IS NULL 
         AND t.DueDate < NOW()
         AND u.UserId = ?";       

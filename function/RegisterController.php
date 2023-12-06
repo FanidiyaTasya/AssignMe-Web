@@ -34,16 +34,35 @@ class RegisterController extends Users {
     }
 
     public function isEmailUsed($email) {
-        $row = $this->SQLValidateEmail($email)->FetchArray();
-        return ($row['Email'] == $email);
+        $result = $this->SQLValidateEmail($email);
+
+        if ($result) {
+            $row = $result->FetchArray();
+            if ($row !== null && isset($row['Email'])) {
+                return ($row['Email'] == $email);
+            } else {
+                $this->message = "Email data not found in the result.";
+                return false;
+            }
+        } else {
+            $this->message = "Error validating email.";
+            return false;
+        }
     }
 
     public function Register() {
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
         $sql = $this->SQLRegister($this->username, $this->email, $hashedPassword);
-        $_SESSION['Email'] = $this->email;
-        $_SESSION['Password'] = $hashedPassword;    
-        header("Location: Login.php");
+        
+        if ($sql) {
+            $_SESSION['Email'] = $this->email;
+            $_SESSION['Password'] = $hashedPassword;
+            header("Location: Login.php");
+            exit();
+        } else {
+            $this->message = "Registration failed. Please try again.";
+            return $this->message;
+        }
     }    
 }
 ?>
