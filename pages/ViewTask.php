@@ -45,28 +45,28 @@ $username = $_SESSION['Username'];
     }
 
     .file-icon {
-    width: 25px;
-    height: 25px;
-  }
+      width: 25px;
+      height: 25px;
+    }
 
-  .status-cell {
-        font-weight: bold;
+    .status-cell {
+      font-weight: bold;
     }
 
     .status-cell.todo {
-        color: blue;
+      color: blue;
     }
 
     .status-cell.completed {
-        color: green;
+      color: green;
     }
 
     .status-cell.overdue {
-        color: red;
+      color: red;
     }
 
     .late-text {
-    color: red;
+      color: red;
     }
   </style>
 </head>
@@ -237,27 +237,38 @@ $username = $_SESSION['Username'];
         $combinedName = $row['Attachment'];
         $parts = explode('_', $combinedName);
         $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
-        $fileUrl = '../upload/file/' . $combinedName; 
+        $fileUrl = '../upload/file/' . $combinedName;
 
         $fileExtension = pathinfo($originalName, PATHINFO_EXTENSION);
         $iconPath = $taskController->getFileIcon($fileExtension);
         ?>
-      <div class="col-md-4">
+        <div class="col-md-4">
           <div class="card">
-              <div class="card-body text-left">
-                  <h4 class="mb-2">
-                    <i class="fas fa-book custom-icon"></i><?= $row['TaskName']; ?>
-                  </h4>
-                  <h6 class="text-muted mb-1"><?= $row['ClassName']; ?></h6>
-                  <p class="mb-0 text-right small">Due On <?php echo date('M j, Y ', strtotime($dueDate)); ?></p>
-                  <p class="mb-0 text-right small"><?php echo date('g:i A', strtotime($dueDate)); ?></p>
-                  <div class="modal-footer"></div>
-                  <p class="mb-0 small"><?= $row['TaskDesc']; ?></p><br>
-                  <p class="mb-0 small">
-                    <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
-                    <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>"><?= $originalName; ?></a>
-                  </p>
-              </div>
+            <div class="card-body text-left">
+              <h4 class="mb-2">
+                <i class="fas fa-book custom-icon"></i>
+                <?= $row['TaskName']; ?>
+              </h4>
+              <h6 class="text-muted mb-1">
+                <?= $row['ClassName']; ?>
+              </h6>
+              <p class="mb-0 text-right small">Due On
+                <?php echo date('M j, Y ', strtotime($dueDate)); ?>
+              </p>
+              <p class="mb-0 text-right small">
+                <?php echo date('g:i A', strtotime($dueDate)); ?>
+              </p>
+              <div class="modal-footer"></div>
+              <p class="mb-0 small">
+                <?= $row['TaskDesc']; ?>
+              </p><br>
+              <p class="mb-0 small">
+                <img src="<?= $iconPath; ?>" alt="<?= $fileExtension; ?>" class="file-icon">
+                <a href="<?= $fileUrl; ?>" download="<?= $originalName; ?>">
+                  <?= $originalName; ?>
+                </a>
+              </p>
+            </div>
           </div>
         </div>
 
@@ -365,43 +376,64 @@ $username = $_SESSION['Username'];
           </div>
         </div> -->
 
-      </div>
-    </div>
+            </div>
+          </div>
 
-    <!--   Core JS Files   -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+          <!--   Core JS Files   -->
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script src="../assets/js/tab-layout.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="../assets/js/tab-layout.js"></script>
+          <script src="../assets/js/tab-layout.js"></script>
+          <script src="../assets/js/core/popper.min.js"></script>
+          <script src="../assets/js/core/bootstrap.min.js"></script>
+          <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+          <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+          <script src="../assets/js/tab-layout.js"></script>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
-        var messageType = "<?php echo isset($_SESSION['message_type']) ? $_SESSION['message_type'] : 'info'; ?>";
+          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-        if (message !== '') {
-          Swal.fire({
-            icon: messageType,
-            text: message,
-          });
-        }
-        <?php
-        unset($_SESSION['message']);
-        unset($_SESSION['message_type']);
-        ?>
-      });
-    </script>
 
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+
+          <script>
+            $(document).ready(function () {
+              $('table tbody tr').click(function () {
+                var username = $(this).find('td:first').text();
+                var answer = $(this).find('td:eq(1)').text();
+                var status = $(this).find('td:eq(2)').text();
+
+                $('#modalUsername').text(username);
+                $('#modalAnswer').text(answer);
+                $('#modalStatus').text(status);
+
+                $('#gradeModal').modal('show');
+              });
+            });
+          </script>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              var message = "<?php echo isset($_SESSION['message']) ? $_SESSION['message'] : ''; ?>";
+              var messageType = "<?php echo isset($_SESSION['message_type']) ? $_SESSION['message_type'] : 'info'; ?>";
+
+              if (message !== '') {
+                Swal.fire({
+                  icon: messageType,
+                  text: message,
+                });
+              }
+              <?php
+              unset($_SESSION['message']);
+              unset($_SESSION['message_type']);
+              ?>
+            });
+          </script>
+
+          <!-- Github buttons -->
+          <script async defer src="https://buttons.github.io/buttons.js"></script>
+          <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+          <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
-
 </html>
