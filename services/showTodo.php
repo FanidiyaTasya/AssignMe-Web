@@ -36,10 +36,10 @@ if ($con) {
         LEFT JOIN 
             task_submits ts ON t.TaskId = ts.TaskId AND u.UserId = ts.UserId
         JOIN
-            classes c ON t.ClassId = c.ClassId  
+            classes c ON t.ClassId = c.ClassId 
         WHERE 
-        u.UserId = ?
-        AND ts.status = 'To-Do'";
+            u.UserId = ?
+            AND ts.status = 'To-Do'";
         $stmt = mysqli_prepare($con, $sql);
         mysqli_stmt_bind_param($stmt, "i", $userId);
         mysqli_stmt_execute($stmt);
