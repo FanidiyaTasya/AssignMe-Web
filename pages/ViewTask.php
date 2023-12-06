@@ -293,9 +293,15 @@ $username = $_SESSION['Username'];
                     <tbody>
                         <?php while ($row = $result->FetchArray()) :
                           $combinedName = $row['Answers'];
-                          $parts = explode('_', $combinedName);
-                          $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
-                          $fileUrl = '../upload/file/' . $combinedName;  ?>
+                          if ($combinedName !== null) {
+                            $parts = explode('_', $combinedName);
+                            $originalName = (isset($parts[1])) ? $parts[1] : $combinedName;
+                            $fileUrl = '../upload/file/' . $combinedName;
+                          } else {
+                              $originalName = '';
+                              $fileUrl = '';
+                          }
+                        ?>
                             <tr>
                                 <td><?= $row['Username']; ?></td>
                                 <td>
