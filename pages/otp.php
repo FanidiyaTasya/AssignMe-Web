@@ -68,7 +68,7 @@
             background-color: #363F71;
             color: #fff;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
@@ -121,7 +121,7 @@
 
         <div class="back-to-login">
             <a href="#">
-                <i class="fas fa-arrow-left"></i>  < forgot password
+                <i class="fas fa-arrow-left"></i>  < Forgot Password
             </a>
         </div>
     </div>

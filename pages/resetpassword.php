@@ -14,7 +14,7 @@
     <style>
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, 'Geneva', Verdana, sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             display: flex;

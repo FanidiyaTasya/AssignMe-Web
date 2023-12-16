@@ -9,15 +9,20 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
 
+    <!-- Font Awesome CSS -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-        
+
     <style>
-        *{ 
-            font-family: 'Poppins', sans-serif; 
+        * {
+            font-family: 'Poppins', sans-serif;
         }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
@@ -32,13 +37,13 @@
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
+            padding: 40px; 
+            width: 400px; 
             text-align: center;
         }
 
         .forgot-password-form h3 {
-            color: #506880;
+            color: #363F71;
             margin-bottom: 10px;
         }
 
@@ -57,12 +62,33 @@
             margin-bottom: 5px;
         }
 
+        .form-group .input-group {
+            position: relative;
+        }
+
+        .form-group .input-group i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 18px; /* Menyesuaikan posisi ikon di dalam kolom input */
+            color: #363F71; 
+        }
+
         .form-group input {
-            width: 100%;
-            padding: 8px;
+            width: calc(100% - 20px); /* Lebar input dikurangi margin kiri dan kanan ikon */
+            padding: 10px 30px 10px 30px; 
             box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff; /* Warna border saat input aktif/fokus */
+        }
+
+        .form-group input:focus + .input-group i {
+            color: #007bff; /* Memberikan warna ikon ketika kolom input aktif/fokus */
         }
 
         .form-group button {
@@ -86,7 +112,7 @@
 
         .back-to-login a {
             text-decoration: none;
-            color: #007bff;
+            color: #737373;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -97,43 +123,30 @@
         }
     </style>
 </head>
+
 <body>
     <div class="forgot-password-form">
-        <i class="fas fa-lock fa-3x" style="color: #007bff;"></i>
-        <img src="../assets/img/1.png" alt="Click to view image">
+        <i class="fas fa-lock fa-3x" style="color: #363F71;"></i>
         <h3>Forgot Password</h3>
-        <p class="form-description">Enter your email address and we'll send you an email with instructions to reset your
-            password.</p>
+        <p class="form-description">Enter your email address and we'll send you an email with instructions to reset your password.</p>
+
         <form action="../function/sendemailController.php" method="POST">
             <div class="form-group">
-                <label for="email">Email Address</label>
                 <div class="input-group">
-                    <span class="input-group-prepend">
-                        <i class="fas fa-envelope"></i>
-                    </span>
-                    <input type="email" id="email" name="email" required autofocus>
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required autofocus>
                 </div>
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">
-                    <i class="fas fa-key"></i> Submit
-                </button>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </div>
         </form>
 
         <div class="back-to-login">
-            <a href="Login.php">
-                <i class="fas fa-arrow-left"></i>
-                < Back to Login </a>
+            <a href="Login.php"> < Back to Login </a>
         </div>
     </div>
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"
-        integrity="sha384-pz3di4L0aiq/OIyzsIiCc5JnLUX1xezhl+kMOBrj2EEqGfNyg8O5iX4p5IK6Rf6P"
-        crossorigin="anonymous"></script>
-
 </body>
 
 </html>
