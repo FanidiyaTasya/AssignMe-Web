@@ -7,9 +7,6 @@ $con = $connect->dbConn();
 
 if (isset($_POST['ClassId']) && !empty($_POST['ClassId'])) {
     $classId = $_POST['ClassId'];
-    
-    // Perform proper sanitation/validation for $classId
-    // Here's an example with mysqli_real_escape_string for basic protection
     $classId = mysqli_real_escape_string($con, $classId);
 
     $sql = "SELECT * FROM users

@@ -3,7 +3,7 @@ require_once __DIR__ . '/../database/Connect.php';
 
 $result = array();
 $connection = new Connect(); 
-$con = $connection->dbConn(); 
+$con = $connection->dbConn();
 
 if ($con) {
     $email = $_POST['Email'];
