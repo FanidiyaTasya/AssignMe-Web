@@ -1,5 +1,5 @@
 <?php
-require_once _DIR_ . '/../database/Connect.php';
+require_once __DIR__ . '/../database/Connect.php';
 
 if (!empty($_POST['Email']) && !empty($_POST['TaskId'])) {
     $email = $_POST['Email'];
