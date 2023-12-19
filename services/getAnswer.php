@@ -1,14 +1,14 @@
 <?php
-require_once __DIR__ . '/../database/Connect.php';
+require_once _DIR_ . '/../database/Connect.php';
 
-if(!empty($_POST['Email']) && !empty($_POST['TaskId']) ){
+if (!empty($_POST['Email']) && !empty($_POST['TaskId'])) {
     $email = $_POST['Email'];
     $taskId = $_POST['TaskId'];
 
     $connection = new Connect();
     $con = $connection->dbConn();
-    
-    if($con){
+
+    if ($con) {
         $sql = "SELECT * FROM users WHERE Email = ?";
         $stmt = mysqli_prepare($con, $sql);
         mysqli_stmt_bind_param($stmt, "s", $email);
@@ -27,12 +27,18 @@ if(!empty($_POST['Email']) && !empty($_POST['TaskId']) ){
 
             if (mysqli_num_rows($res) != 0) {
                 $row = mysqli_fetch_assoc($res);
-                $result = array(
-                    "status" => "Success",
-                    "data" => array(
-                        "Answers" => $row['Answers']
-                    )
-                );
+                $answers = $row['Answers'];
+
+                if (!empty($answers) && $answers != ' ') {
+                    $result = array(
+                        "status" => "Success",
+                        "data" => array(
+                            "Answers" => $answers
+                        )
+                    );
+                } else {
+                    $result = array("status" => "Failed", "message" => "Answers is empty");
+                }
             } else {
                 $result = array("status" => "Failed", "message" => "No submission found for this user and task");
             }
@@ -40,10 +46,10 @@ if(!empty($_POST['Email']) && !empty($_POST['TaskId']) ){
             $result = array("status" => "Failed", "message" => "Unauthorized access");
         }
     } else {
-        $result = array("status"=>"Failed", "message"=>"Database connection failed");
+        $result = array("status" => "Failed", "message" => "Database connection failed");
     }
 } else {
-    $result = array("status"=>"Failed", "message"=>"All fields are required");
+    $result = array("status" => "Failed", "message" => "All fields are required");
 }
 
 echo json_encode($result, JSON_PRETTY_PRINT);
