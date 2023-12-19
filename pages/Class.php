@@ -231,8 +231,8 @@ $_SESSION['ClassId'] = $classId;
             if (isset($_POST['action']) && $_POST['action'] == 'create') {
               $classId = $_SESSION['ClassId'];
               $taskName = $_POST['taskname'];
-                $taskDesc = $_POST['taskdesc'];
-                $startDate = date('Y-m-d H:i:s');
+              $taskDesc = $_POST['taskdesc'];
+              $startDate = date('Y-m-d H:i:s');
               $dueDate = date('Y-m-d H:i:s', strtotime($_POST['deadline']));
               $attachment = isset($_FILES['attachment']) ? $_FILES['attachment'] : null;
   
