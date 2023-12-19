@@ -17,17 +17,12 @@ if ($con) {
         $row = mysqli_fetch_assoc($resultUserId);
         $userId = $row['UserId'];
 
-        $sql = "SELECT t.TaskId, t.TaskName, t.TaskDesc, t.DueDate, t.ClassId, t.Attachment
-                FROM tasks t
-                INNER JOIN user_classes uc ON t.ClassId = uc.ClassId
-                LEFT JOIN (
-                    SELECT TaskId
-                    FROM task_submits
-                    WHERE UserId = ? 
-                ) ts ON t.TaskId = ts.TaskId
-                WHERE uc.UserId = ? 
-                AND ts.TaskId IS NULL
-                AND t.DueDate < CURRENT_DATE()";       
+        $sql = "SELECT t.TaskId, t.TaskName, t.TaskDesc, t.DueDate, t.Attachment
+            FROM tasks t
+            JOIN user_classes uc ON t.ClassId = uc.ClassId
+            JOIN users u ON uc.UserId = u.UserId
+            LEFT JOIN task_submits ts ON t.TaskId = ts.TaskId AND u.UserId = ts.UserId
+            WHERE ts.SubmitId IS NULL AND t.DueDate < NOW() AND u.UserId = ?";  
         $stmt = mysqli_prepare($con, $sql);
         mysqli_stmt_bind_param($stmt, "ii", $userId, $userId);
         mysqli_stmt_execute($stmt);
