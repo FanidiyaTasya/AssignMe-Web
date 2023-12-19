@@ -17,7 +17,9 @@ if (!empty($_POST['Email']) && !empty($_POST['TaskId'])) {
             $row = mysqli_fetch_assoc($result);
             $userId = $row['UserId'];
             
-            $deleteQuery = "DELETE FROM task_submits WHERE UserId = '$userId' AND TaskId = '$taskId'";
+            $deleteQuery = "UPDATE task_submits 
+            SET Answers = '', SubmitDate = '', Status = 'To-Do'
+            WHERE UserId = '$userId' AND TaskId = '$taskId'";
             $deleteResult = mysqli_query($con, $deleteQuery);
             
             if ($deleteResult) {
