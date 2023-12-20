@@ -44,8 +44,7 @@ class TaskController extends Task {
     }    
 
     public function InsertToDo($taskId, $userId, $answer) {
-        $answer = '';
-        $this->sql = "INSERT INTO task_submits (TaskId, UserId, Answer, Status) VALUES ('$taskId', '$userId', '$answer', 'To-Do')";
+        $this->sql = "INSERT INTO task_submits (TaskId, UserId, Answers, Status) VALUES ('$taskId', '$userId', '$answer', 'To-Do')";
         $result = $this->getResult();
     }
 

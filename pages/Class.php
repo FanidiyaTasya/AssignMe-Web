@@ -248,8 +248,9 @@ $_SESSION['ClassId'] = $classId;
                 if (!is_null($userIds) && (is_array($userIds) || $userIds instanceof Traversable)) {
                   foreach ($userIds as $user) {
                     $userId = $user[1];
-                      $insertToDo = $taskController->InsertToDo($newTaskId, $userId, $answer);
-                      // var_dump($insertToDo);
+                    $answer = '';
+                    $insertToDo = $taskController->InsertToDo($newTaskId, $userId, $answer);
+                    // var_dump($insertToDo);
                   }
               } else {
                   echo 'Data siswa tidak ditemukan atau tidak valid.';

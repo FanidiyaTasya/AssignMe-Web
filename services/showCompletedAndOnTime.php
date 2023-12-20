@@ -16,7 +16,7 @@ if ($con) {
         $row = mysqli_fetch_assoc($resultUserId);
         $userId = $row['UserId'];
 
-        $sql = "SELECT ts.*, t.TaskName, t.TaskDesc, t.DueDate, t.ClassId, t.Attachment
+        $sql = "SELECT t.TaskName, t.TaskDesc, t.DueDate, t.ClassId, t.Attachment
         FROM users u
         JOIN user_classes uc ON u.UserId = uc.UserId
         JOIN tasks t ON uc.ClassId = t.ClassId

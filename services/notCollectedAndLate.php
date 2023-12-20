@@ -18,11 +18,11 @@ if ($con) {
         $userId = $row['UserId'];
 
         $sql = "SELECT t.TaskId, t.TaskName, t.TaskDesc, t.DueDate, t.Attachment
-            FROM tasks t
-            JOIN user_classes uc ON t.ClassId = uc.ClassId
-            JOIN users u ON uc.UserId = u.UserId
-            LEFT JOIN task_submits ts ON t.TaskId = ts.TaskId AND u.UserId = ts.UserId
-            WHERE ts.SubmitId IS NULL AND t.DueDate < NOW() AND u.UserId = ? AND ts.Status = 'Overdue'";  
+        FROM tasks t
+        JOIN user_classes uc ON t.ClassId = uc.ClassId
+        JOIN users u ON uc.UserId = u.UserId
+        LEFT JOIN task_submits ts ON t.TaskId = ts.TaskId AND u.UserId = ts.UserId
+        WHERE uc.UserId = ? AND (ts.Answers IS NULL OR ts.Answers = '') AND t.DueDate < CURRENT_DATE();";  
         $stmt = mysqli_prepare($con, $sql);
         mysqli_stmt_bind_param($stmt, "ii", $userId, $userId);
         mysqli_stmt_execute($stmt);
