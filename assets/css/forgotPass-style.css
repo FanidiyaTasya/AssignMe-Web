@@ -1,0 +1,141 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px; 
+    width: 400px; 
+    text-align: center;
+}
+
+.form h3 {
+    color: #363F71;
+    margin-bottom: 10px;
+}
+
+.form-description {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-group .input-group {
+    position: relative;
+}
+
+.form-group .input-group i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 18px; /* Menyesuaikan posisi ikon di dalam kolom input */
+    color: #363F71; 
+}
+
+.form-group input {
+    width: calc(100% - 20px); /* Lebar input dikurangi margin kiri dan kanan ikon */
+    padding: 10px 30px 10px 30px; 
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #007bff; /* Warna border saat input aktif/fokus */
+}
+
+.form-group input:focus + .input-group i {
+    color: #007bff; /* Memberikan warna ikon ketika kolom input aktif/fokus */
+}
+
+.form-group button {
+    width: 100%;
+    background-color: #363F71;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #B4B6B9;
+}
+
+.back-to-login {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.back-to-login a {
+    text-decoration: none;
+    color: #737373;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-to-login i {
+    margin-right: 5px;
+}
+
+/* FORM OTP */
+.code-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.code {
+    caret-color: transparent;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    border: 1px solid #EEE;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    text-align: center;
+    font-weight: 300;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+    .code-container {
+        flex-wrap: wrap;
+    }
+    .code {
+        font-size: 15px;
+        height: 50px;
+        max-width: 50px;
+        font-size: bold;
+    }
+}
+
+.code::-webkit-outer-spin-button,
+.code::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

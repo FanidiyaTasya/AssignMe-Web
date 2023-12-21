@@ -17,7 +17,7 @@ try {
         session_start();
         $_SESSION['otp'] = $otp;
 
-        header("Location: ../pages/resetpassword.php");
+        header("Location: ../pages/resetPassword.php");
         exit(); // Pastikan untuk keluar setelah mengarahkan pengguna
     } else {
         echo '<script>alert("Kode tidak valid atau telah kadaluarsa.");</script>';

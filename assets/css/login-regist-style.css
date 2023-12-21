@@ -88,7 +88,6 @@
     margin-top: 10px; 
 }
 
-/* Gaya saat tombol dihover */
 .common-button:hover {
     background-color: #B4B6B9;
     color: #fff;

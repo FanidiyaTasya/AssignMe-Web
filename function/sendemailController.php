@@ -65,7 +65,7 @@ if ($userResult->num_rows > 0) {
     $connection->query($sql);
 
     echo '<script>alert("Email registered. Please check your inbox for the OTP.");</script>';
-    header("Location: ../pages/otp.php");
+    header("Location: ../pages/OTP.php");
     exit();
 } else {
     echo '<script>alert("Email not registered.");</script>';
