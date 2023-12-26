@@ -21,38 +21,66 @@
 </head>
 <body>
     <div class="form">
-        <i class="fas fa-lock fa-3x" style="color: #363F71;"></i>
+        <i class="fa-solid fa-shield-halved fa-3x" style="color: #363F71;"></i>
         <h3>Create New Password</h3>
         <p class="form-description">Enter the OTP sent to your email address to verify your identity.</p>
 
-        <form method="POST" action="../function/resetController.php">
+        <form method="POST" action="../function/resetPassController.php" id="form">
             <div class="form-group">
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <!-- <i class="fas fa-key"></i> -->
-                    <input type="password" class="form-control is-valid" id="password" name="password" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
+                    <input type="password" class="form-control " id="password">
+                    <div class="invalid-feedback" id="passwordError"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="confirmPass" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control is-invalid" id="confirmPass" name="confirmPassword" aria-describedby="validationServer05Feedback" required>
-                    <div id="validationServer05Feedback" class="invalid-feedback">
-                        Passwords do not match.
-                    </div>
+                    <input type="password" class="form-control " id="confirmPass">
+                    <div class="invalid-feedback" id="confirmPassError"></div>
                 </div>
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+                <button type="submit" id="buttonReset" class="btn btn-primary btn-block">Reset Password</button>
             </div>
         </form>
 
         <div class="back-to-login">
-            <a href="../pages/ForgotPass.php"> < Forgot password</a>
+            <a class="d-inline text-decoration-none" href="../pages/ForgotPass.php"> < Forgot Password</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById('form').addEventListener('submit', function (event) {
+            const passwordInput = document.getElementById('password');
+            const confirmPassInput = document.getElementById('confirmPass');
+            const passwordError = document.getElementById('passwordError');
+            const confirmPassError = document.getElementById('confirmPassError');
+
+            if (passwordInput.value.length < 8) {
+                passwordInput.classList.add('is-invalid');
+                confirmPassInput.classList.add('is-invalid');
+                passwordError.textContent = 'Password must be at least 8 characters';
+                confirmPassError.style.display = 'block';
+                event.preventDefault(); // menghindari pengiriman formulir kl ada kesalahan
+            } else if (passwordInput.value !== confirmPassInput.value) {
+                passwordInput.classList.add('is-valid');
+                confirmPassInput.classList.add('is-invalid');
+                passwordError.textContent = '';  
+                confirmPassInput.setCustomValidity('Password doesn\'t match!');
+                confirmPassError.textContent = 'Password doesn\'t match!';
+                confirmPassError.style.display = 'block';
+                event.preventDefault(); 
+            } else {
+                passwordInput.classList.remove('is-invalid');
+                confirmPassInput.classList.remove('is-invalid');
+                passwordError.textContent = ''; 
+                confirmPassInput.setCustomValidity('');
+                passwordInput.classList.add('is-valid');
+                confirmPassInput.classList.add('is-valid');
+                confirmPassError.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>

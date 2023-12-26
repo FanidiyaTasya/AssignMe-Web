@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +10,7 @@
 
     <!-- Style CSS -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="../assets/css/forgotPass-style.css">
     
 
@@ -31,7 +30,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required autofocus>
+                    <input class="custom-input" type="email" id="email" name="email" placeholder="Enter your email" required autofocus>
                 </div>
             </div>
 

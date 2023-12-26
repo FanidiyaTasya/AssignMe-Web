@@ -9,7 +9,6 @@ $otp = $_SESSION['otp'];
 $newPassword = $_POST['new_password'];
 
 try {
-    // Hash kata sandi baru sebelum disimpan
     $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
     $sqlUpdatePassword = "UPDATE users SET Password = ? WHERE UserId = (SELECT UserId FROM verifications WHERE otp = ?)";
@@ -33,7 +32,6 @@ try {
 } catch (Exception $e) {
     echo "Terjadi kesalahan: " . $e->getMessage();
 } finally {
-    // Pastikan untuk menutup koneksi di blok finally
     if ($connection) {
         $connection->close();
     }

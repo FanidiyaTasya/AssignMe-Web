@@ -26,12 +26,12 @@
 
         <form action="../function/otpController.php" method="POST">
             <div class="code-container">
-                <input type="number" id="otp" name="otp" placeholder="0" class="code" min="0" max="9" required>
-                <input type="number" id="otp" name="otp" placeholder="0" class="code" min="0" max="9" required>
-                <input type="number" id="otp" name="otp" placeholder="0" class="code" min="0" max="9" required>
-                <input type="number" id="otp" name="otp" placeholder="0" class="code" min="0" max="9" required>
-                <input type="number" id="otp" name="otp" placeholder="0" class="code" min="0" max="9" required>
-                <input type="number" id="otp" name="otp" placeholder="0" class="code" min="0" max="9" required>
+                <input type="number" id="otp" name="otp[]" placeholder="0" class="code" min="0" max="9" required>
+                <input type="number" id="otp" name="otp[]" placeholder="0" class="code" min="0" max="9" required>
+                <input type="number" id="otp" name="otp[]" placeholder="0" class="code" min="0" max="9" required>
+                <input type="number" id="otp" name="otp[]" placeholder="0" class="code" min="0" max="9" required>
+                <input type="number" id="otp" name="otp[]" placeholder="0" class="code" min="0" max="9" required>
+                <input type="number" id="otp" name="otp[]" placeholder="0" class="code" min="0" max="9" required>
             </div>
 
             <div class="form-group">

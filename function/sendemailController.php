@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -9,67 +7,103 @@ use PHPMailer\PHPMailer\SMTP;
 require_once __DIR__ . '/../database/Connect.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
-function sendOTP($email, $otp) {
-    $mail = new PHPMailer(true);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['email'])) {
+        $email = $_POST['email'];
 
-    try {
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com'; 
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'riovas1212@gmail.com';     
-        $mail->Password   = 'tqttkrvcryptdeer';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port       = 587;
+        $connect = new Connect();
+        $connection = $connect->dbConn();
 
-        $mail->setFrom('riovas1212@gmail.com', 'Assignme');
-        $mail->addAddress($email);
+        $stmt = $connection->prepare("SELECT UserId FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        $mail->isHTML(true);
-        $mail->Subject = 'Verifikasi Kode OTP';
-        $mail->Body    = "Kode OTP Anda adalah: $otp";
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $userId = $row['UserId'];
 
-        $mail->send();
+            function generateOTP() {
+                $otpLength = 6;
+                $characters = '0123456789';
+                $otp = '';
 
-        echo 'Kode OTP telah dikirim ke email Anda.';
-    } catch (Exception $e) {
-        echo "Gagal mengirim email: {$mail->ErrorInfo}";
+                for ($i = 0; $i < $otpLength; $i++) {
+                    $otp .= $characters[rand(0, strlen($characters) - 1)];
+                }
+
+                return $otp;
+            }
+
+            function sendOTP($email, $otp) {
+                $mail = new PHPMailer(true);
+
+                try {
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com'; 
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'riovas1212@gmail.com';     
+                    $mail->Password   = 'tqttkrvcryptdeer';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port       = 587;
+
+                    $mail->setFrom('riovas1212@gmail.com', 'Assignme');
+                    $mail->addAddress($email);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Verifikasi Kode OTP';
+                    $mail->Body    = "Kode OTP Anda adalah: $otp";
+
+                    if (!$mail->smtpConnect()) {
+                        echo "Gagal terhubung ke server SMTP. Error: " . $mail->ErrorInfo;
+                        return;
+                    }
+                    $mail->send();
+
+                    echo '<script>alert("Kode OTP telah dikirim ke email Anda. Silakan cek inbox Anda untuk OTP.");</script>';
+                } catch (Exception $e) {
+                    echo "Gagal mengirim email: {$mail->ErrorInfo}";
+                }
+            }
+
+            $otp = generateOTP();
+            date_default_timezone_set('Asia/Jakarta');
+            $createdPass = date('Y-m-d H:i:s', time());
+            $expiryTime = time() + (1 * 60 * 60);
+            $expiredDate =  date('Y-m-d H:i:s', $expiryTime);
+            // $expiredDate = date('Y-m-d H:i:s', strtotime('+2 minutes'));
+
+            sendOTP($email, $otp);
+
+            $checkStmt = $connection->prepare("SELECT UserId FROM verifications WHERE UserId = ?");
+            $checkStmt->bind_param("s", $userId);
+            $checkStmt->execute();
+            $checkResult = $checkStmt->get_result();
+
+            if ($checkResult->num_rows > 0) {
+                $updateStmt = $connection->prepare("UPDATE verifications SET otp = ?, reset_password_created_at = ?, reset_password_expiry = ? WHERE UserId = ?");
+                $updateStmt->bind_param("ssss", $otp, $createdPass, $expiredDate, $userId);
+                $updateStmt->execute();
+            } else {
+                $insertStmt = $connection->prepare("INSERT INTO verifications (UserId, otp, reset_password_created_at, reset_password_expiry) VALUES (?, ?, ?, ?)");
+                $insertStmt->bind_param("ssss", $userId, $otp, $createdPass, $expiredDate);
+                $insertStmt->execute();
+            }
+            echo '<script>alert("Email terdaftar. Silakan cek inbox Anda untuk OTP.");</script>';
+            header("Location: ../pages/OTP.php");
+            exit();
+        } else {
+            echo '<script>alert("Email tidak terdaftar.");</script>';
+            header("Location: ../pages/ForgotPass.php");
+            exit();
+        }
+
+        $stmt->close();
+        $connection->close();
+    } else {
+        echo "Email tidak ditemukan.";
     }
-}
-
-function generateOTP() {
-    $otpLength = 6;
-    $characters = '0123456789';
-    $otp = '';
-
-    for ($i = 0; $i < $otpLength; $i++) {
-        $otp .= $characters[rand(0, strlen($characters) - 1)];
-    }
-
-    return $otp;
-}
-
-$email = $_POST['email'];
-
-$connect = new Connect();
-$connection = $connect->dbConn();
-
-$userResult = $connection->query("SELECT UserId FROM users WHERE email = '$email'");
-
-if ($userResult->num_rows > 0) {
-    $otp = generateOTP();
-    $expirationTime = date('Y-m-d H:i:s', strtotime('+5 minutes'));
-
-    sendOTP($email, $otp);
-
-    $sql = "INSERT INTO verifications (UserId, otp, reset_password_expiry) VALUES ((SELECT UserId FROM users WHERE email = '$email'), '$otp', NOW() + INTERVAL 5 MINUTE)";
-    $connection->query($sql);
-
-    echo '<script>alert("Email registered. Please check your inbox for the OTP.");</script>';
-    header("Location: ../pages/OTP.php");
-    exit();
 } else {
-    echo '<script>alert("Email not registered.");</script>';
+    echo "Akses langsung ke skrip tidak diizinkan.";
 }
-
-$connection->close();
 ?>

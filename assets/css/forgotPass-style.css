@@ -16,7 +16,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 40px; 
-    width: 400px; 
+    width: 500px; 
     text-align: center;
 }
 
@@ -36,8 +36,11 @@ body {
 
 .form-group label {
     display: block;
-    font-weight: bold;
     margin-bottom: 5px;
+    text-align: left;
+}
+
+.validation-feedback { /* form resetPass */
     text-align: left;
 }
 
@@ -49,25 +52,17 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 18px; /* Menyesuaikan posisi ikon di dalam kolom input */
+    left: 18px; 
     color: #363F71; 
 }
 
-.form-group input {
-    width: calc(100% - 20px); /* Lebar input dikurangi margin kiri dan kanan ikon */
+.form-group .custom-input {
+    width: calc(100% - 20px); /* lebar input dikurangi margin kiri dan kanan ikon */
     padding: 10px 30px 10px 30px; 
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: border-color 0.3s;
-}
-
-.form-group input:focus {
-    border-color: #007bff; /* Warna border saat input aktif/fokus */
-}
-
-.form-group input:focus + .input-group i {
-    color: #007bff; /* Memberikan warna ikon ketika kolom input aktif/fokus */
 }
 
 .form-group button {
