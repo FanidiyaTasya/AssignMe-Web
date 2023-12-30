@@ -29,13 +29,13 @@
             <div class="form-group">
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control " id="password">
+                    <input type="password" class="form-control " name="password" id="password" autofocus>
                     <div class="invalid-feedback" id="passwordError"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="confirmPass" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control " id="confirmPass">
+                    <input type="password" class="form-control " name="confirmPass" id="confirmPass">
                     <div class="invalid-feedback" id="confirmPassError"></div>
                 </div>
             </div>

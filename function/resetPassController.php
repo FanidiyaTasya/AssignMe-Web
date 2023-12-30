@@ -5,24 +5,30 @@ require_once __DIR__ . '/../database/Connect.php';
 $connect = new Connect();
 $connection = $connect->dbConn();
 
-$otp = isset($_SESSION['otp']) ? $_SESSION['otp'] : null;
-$password = isset($_POST['password']) ? $_POST['password'] : null;
-$confirmPassword = isset($_POST['confirmPass']) ? $_POST['confirmPass'] : null;
-
-var_dump($otp, $password);
-
 try {
+    if (isset($_SESSION['otp']) && isset($_POST['password']) && isset($_POST['confirmPass'])) {
+        $otp = $_SESSION['otp'];
+        $password = $_POST['password'];
+        $confirmPass = $_POST['confirmPass'];
 
-    $sql = "UPDATE users SET `Password` = ? WHERE UserId IN (SELECT UserId FROM verifications WHERE otp = ?)";
-    $stmtUpdatePassword = $connection->prepare($sql);
-    $stmtUpdatePassword->bind_param("ss", $password, $otp);
-    $stmtUpdatePassword->execute();
-    $stmtUpdatePassword->close();
+        // var_dump($otp, $password);
 
-    // Jika berhasil, arahkan ke halaman login
-    // header("Location: ../pages/Login.php");
-    // exit();
-} catch (\Throwable $th) {
-    echo "An error occurred: " . $th->getMessage();
+        $sql = "UPDATE users SET `Password` = ? WHERE UserId = (SELECT UserId FROM verifications WHERE otp = ?)";
+        $stmt = $connection->prepare($sql);
+        $stmt->bind_param("si", $password, $otp);
+        $stmt->execute();
+        $stmt->close();
+        // var_dump($stmt->execute()); 
+        // var_dump($stmt->affected_rows);
+
+        if ($stmt) {
+            header("Location: ../pages/Login.php");
+            exit();
+        } else {
+            echo "Gagal mereset password";
+        }
+    }
+} catch (Exception $e) {
+    error_log("An error occurred: " . $e->getMessage());
 }
 ?>
