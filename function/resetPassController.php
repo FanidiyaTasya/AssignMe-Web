@@ -9,13 +9,13 @@ try {
     if (isset($_SESSION['otp']) && isset($_POST['password']) && isset($_POST['confirmPass'])) {
         $otp = $_SESSION['otp'];
         $password = $_POST['password'];
-        $confirmPass = $_POST['confirmPass'];
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // var_dump($otp, $password);
 
         $sql = "UPDATE users SET `Password` = ? WHERE UserId = (SELECT UserId FROM verifications WHERE otp = ?)";
         $stmt = $connection->prepare($sql);
-        $stmt->bind_param("si", $password, $otp);
+        $stmt->bind_param("si", $hashedPassword, $otp);
         $stmt->execute();
         $stmt->close();
         // var_dump($stmt->execute()); 
