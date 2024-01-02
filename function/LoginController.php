@@ -25,23 +25,20 @@ class LoginController extends Users {
     
     public function Login() {
         $row = $this->SQLLogin($this->email)->FetchArray();
-    
-        if ($row !== null) {
-            if ($row['Role'] === 'Guru') {
-                if (password_verify($this->password, $row['Password']) || $this->password === $row['Password']) {
-                    $this->performLogin($row);
-                } else {
-                    return $this->message = 'Your email or password is incorrect! Please try again.';
-                }
-            } elseif ($row['Role'] === 'student') {
-                return $this->message = 'User not found!';
+
+        if ($row['Role'] === 'Guru') {
+            if (password_verify($this->password, $row['Password']) || $this->password === $row['Password']) {
+                $this->performLogin($row);
             } else {
-                return $this->message = 'Unknown user.';
+                return $this->message = 'Your email or password is incorrect! Please try again.';
             }
-        } else {
+        } elseif ($row['Role'] === 'Siswa') {
             return $this->message = 'User not found!';
+        } else {
+            return $this->message = 'Unknown user.';
         }
     }
+
     
     private function performLogin($row) {
         $_SESSION['UserId'] = $row['UserId'];
